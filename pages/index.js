@@ -1,7 +1,8 @@
-import { Button, Space, DatePicker, Card, Switch } from 'antd';
-import { CiCircleFilled } from '@ant-design/icons';
+import { Button, Space, DatePicker, Card, Switch } from "antd";
+import { CiCircleFilled } from "@ant-design/icons";
 import { useThemeSwitcher } from "react-css-theme-switcher";
-import { useState } from 'react';
+import { useState } from "react";
+import Layout from "../components/Layout/Layout.js";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState();
@@ -16,17 +17,18 @@ export default function Home() {
     return null;
   }
 
-  
   const onChange = () => {};
   return (
-    <div style={{ padding: 100 }}>
+    <Layout>
+      <div style={{ padding: 100 }}>
         <Switch checked={isDarkMode} onChange={toggleTheme} />
-      <Space direction="vertical">
-        <Button type="primary">Primary Button</Button>
-        <Button type="ghost">Ghost Button</Button>
-        <DatePicker onChange={onChange} />
-        <CiCircleFilled />
-      </Space>
-    </div>
+        <Space direction="vertical">
+          <Button type="primary">Primary Button</Button>
+          <Button type="ghost">Ghost Button</Button>
+          <DatePicker onChange={onChange} />
+          <CiCircleFilled />
+        </Space>
+      </div>
+    </Layout>
   );
 }
