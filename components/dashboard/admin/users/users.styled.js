@@ -21,4 +21,10 @@ export const UserWrapper = styled.div`
 			border: 5px solid lightgray !important;
 		}
 	}
+	.modal {
+		.ant-btn-primary {
+			background-color: #b4cd93 !important;
+			color: black;
+		}
+	}
 `;

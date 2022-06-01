@@ -124,16 +124,17 @@ const Users = () => {
 		<DashboardLayout>
 			<UserWrapper>
 				<Table columns={columns} dataSource={data} />
+				<Modal
+					title="User's Status"
+					visible={visible}
+					onOk={handleOk}
+					confirmLoading={confirmLoading}
+					onCancel={handleCancel}
+					className='modal'
+				>
+					<UserCard />
+				</Modal>
 			</UserWrapper>
-			<Modal
-				title="User's Status"
-				visible={visible}
-				onOk={handleOk}
-				confirmLoading={confirmLoading}
-				onCancel={handleCancel}
-			>
-				<UserCard />
-			</Modal>
 		</DashboardLayout>
 	);
 };
