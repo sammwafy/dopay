@@ -211,12 +211,7 @@ const Users = () => {
 			],
 			filteredValue: filteredInfo.status || null,
 			// to filter exact word ex active only not includes deactive
-			onFilter: (value, record) => {
-				let reg = new RegExp("\\b(" + value + ")\\b");
-				return record.status.includes(
-					record.status.match(reg) ? record.status.match(reg)[0] : false
-				);
-			},
+			onFilter: (value, record) => record.status === value,
 		},
 		{
 			title: "Email",
@@ -228,11 +223,13 @@ const Users = () => {
 			title: "Account",
 			dataIndex: "account",
 			key: "account",
+			width: "50",
 		},
 		{
 			title: "Payment",
 			dataIndex: "payment",
 			key: "payment",
+			width: "70",
 		},
 	];
 	const data = [
@@ -272,7 +269,12 @@ const Users = () => {
 	return (
 		<DashboardLayout>
 			<UserWrapper>
-				<Table columns={columns} dataSource={data} onChange={handleChange} />
+				<Table
+					columns={columns}
+					dataSource={data}
+					onChange={handleChange}
+					scroll={{ x: "100%" }}
+				/>
 			</UserWrapper>
 			<Modal
 				title="User's Status"

@@ -2,6 +2,34 @@
 	--mobile: flex;
 	--desktop: flex;
 } */
+@media screen and (max-width: 700px) {
+	.ant-drawer-body {
+		width: 100%;
+		height: calc(100vh- 70px);
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		margin: 30px 0;
+	}
+	.ant-drawer-body > button {
+		height: 50px;
+		margin-top: 5px;
+		padding: 0.5rem 1rem;
+		color: black;
+		border: 1px solid black;
+		padding: 12px 23px;
+		background-color: white;
+		border-radius: 8px;
+		font-size: 18px;
+	}
+	.ant-menu-inline .ant-menu-item::after {
+		border-right: 3px solid green !important;
+	}
+	.ant-drawer-body .ant-menu-item-selected {
+		background-color: #b4cd93 !important;
+		color: black !important;
+	}
+}
 
 @media (max-width: 700px) {
 	:root {

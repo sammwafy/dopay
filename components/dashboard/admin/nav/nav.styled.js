@@ -12,6 +12,7 @@ export const DashNav = styled.div`
 	align-items: center;
 	justify-content: flex-end;
 	display: flex;
+	gap: 10px;
 	@media screen and (max-width: 700px) {
 		justify-content: space-between;
 
@@ -30,6 +31,7 @@ export const DashNav = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
 		.pro {
 			border-radius: 50%;
 		}

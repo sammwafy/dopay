@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const UserWrapper = styled.div`
 	padding: 20px;
 	margin: 10px auto;
+	display: flex;
+	width: 100%;
+
 	.table-image {
 		display: flex;
 		align-items: center;

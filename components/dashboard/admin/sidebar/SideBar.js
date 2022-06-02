@@ -59,7 +59,7 @@ const SideBar = ({ showDrawer, setShowDrawer }) => {
 				items={items}
 				className='menu'
 				onClick={handleSelect}
-				// selectedKeys={active}
+				selectedKeys={active}
 			/>
 			<Menu
 				mode='inline'
@@ -93,6 +93,7 @@ const SideBar = ({ showDrawer, setShowDrawer }) => {
 					selectedKeys={active}
 					onClick={handleSelect}
 				/>
+				<button>Dark Mode</button>
 			</Drawer>
 		</DashSide>
 	);
