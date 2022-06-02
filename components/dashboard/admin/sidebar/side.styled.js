@@ -49,4 +49,23 @@ export const DashSide = styled.div`
 		border-radius: 8px;
 		font-size: 18px;
 	}
+	/* .drawer {
+		.menu {
+			.item {
+				&:hover,
+				&:active,
+				&:focus {
+					background-color: #b4cd93;
+					color: black;
+				}
+			}
+			.ant-menu-item-selected {
+				background-color: #b4cd93;
+				color: black;
+			}
+		}
+	}
+	.ant-menu-item::after {
+		border-right: 3px solid green;
+	} */
 `;

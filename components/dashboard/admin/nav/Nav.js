@@ -1,10 +1,17 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { DashNav } from "./nav.styled";
-import { BellOutlined, DownOutlined, SmileOutlined } from "@ant-design/icons";
-import { Menu, Dropdown, Space, Badge } from "antd";
+import {
+	BellOutlined,
+	DownOutlined,
+	SmileOutlined,
+	MenuOutlined,
+	CloseOutlined,
+} from "@ant-design/icons";
+import { Menu, Dropdown, Space, Badge, Drawer } from "antd";
 import Link from "next/link";
-const Nav = () => {
+import logo from "../../../../public/logo.svg";
+const Nav = ({ showDrawer, setShowDrawer }) => {
 	const menu = (
 		<Menu
 			items={[
@@ -45,21 +52,47 @@ const Nav = () => {
 
 	return (
 		<DashNav>
-			<Badge count={5}>
-				<BellOutlined style={{ fontSize: "30px", color: "black" }} />
+			{showDrawer && (
+				<CloseOutlined
+					style={{ display: "var(--desktop)", color: "black" }}
+					onClick={() => setShowDrawer(false)}
+				/>
+			)}
+			{showDrawer || (
+				<MenuOutlined
+					style={{ display: "var(--desktop)", color: "black" }}
+					onClick={() => setShowDrawer(true)}
+				/>
+			)}
+			<div style={{ display: "var(--desktop)" }} className='logo'>
+				<Image src={logo} alt='logo' width='100' height='60' />
+			</div>
+
+			<Badge count={5} style={{ display: "var(--mobile)" }}>
+				<BellOutlined
+					style={{ fontSize: "30px", color: "black", display: "var(--mobile)" }}
+				/>
 			</Badge>
 
-			<div className='profile'>
-				<Image
-					src='/admin.jpeg'
-					alt='logo'
-					width='50'
-					height='50'
-					className='pro'
+			<Dropdown
+				overlay={menu}
+				style={{ display: "var(--mobile)" }}
+				trigger={["click"]}
+			>
+				<div className='profile'>
+					<Image
+						src='/admin.jpeg'
+						alt='logo'
+						width='50'
+						height='50'
+						className='pro'
+					/>
+				</div>
+			</Dropdown>
+			<Dropdown overlay={menu} style={{ display: "var(--mobile)" }}>
+				<DownOutlined
+					style={{ fontSize: "30px", color: "black", display: "var(--mobile)" }}
 				/>
-			</div>
-			<Dropdown overlay={menu}>
-				<DownOutlined style={{ fontSize: "30px", color: "black" }} />
 			</Dropdown>
 		</DashNav>
 	);

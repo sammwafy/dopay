@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { DashSide } from "./side.styled";
 import logo from "../../../../public/logo.svg";
-import { Menu } from "antd";
+import { Menu, Drawer } from "antd";
 import {
 	AppstoreOutlined,
 	LogoutOutlined,
@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import Router from "next/router";
 
-const SideBar = () => {
+const SideBar = ({ showDrawer, setShowDrawer }) => {
 	// to handle on select over two menu
 	const [active, setActive] = useState("");
 	//to produce menus items objects
@@ -33,10 +33,11 @@ const SideBar = () => {
 			.concat(items2)
 			.filter((e) => e.key === key.key)[0].title;
 		console.log(current);
-		Router.push({ pathname: `${current}` }, undefined, { shallow: true });
+		// Router.push({ pathname: `${current}` }, undefined, { shallow: true });
 
-		// setActive(key.key);
+		setActive(key.key);
 	};
+
 	const items = [
 		getItem("Dashboard", "1", <AppstoreOutlined />, "item", "dashboard"),
 		getItem("Users", "2", <UserOutlined />, "item", "users"),
@@ -64,10 +65,35 @@ const SideBar = () => {
 				mode='inline'
 				items={items2}
 				className='menu'
-				// selectedKeys={active}
+				selectedKeys={active}
 				onClick={handleSelect}
 			/>
 			<button>Dark Mode</button>
+			<Drawer
+				title='Navigation'
+				placement='left'
+				width={200}
+				height={100}
+				onClose={() => setShowDrawer(false)}
+				visible={showDrawer}
+				style={{ top: "70px" }}
+				className='drawer'
+			>
+				<Menu
+					mode='inline'
+					items={items}
+					className='menu'
+					onClick={handleSelect}
+					selectedKeys={active}
+				/>
+				<Menu
+					mode='inline'
+					items={items2}
+					className='menu'
+					selectedKeys={active}
+					onClick={handleSelect}
+				/>
+			</Drawer>
 		</DashSide>
 	);
 };

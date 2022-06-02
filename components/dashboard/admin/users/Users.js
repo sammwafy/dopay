@@ -1,15 +1,135 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import DashboardLayout from "../../Layout/DashboardLayout";
-import { Space, Table, Tag } from "antd";
+import { Space, Table, Tag, Input } from "antd";
 import Image from "next/image";
 import { UserWrapper } from "./users.styled";
 import { Modal, Button } from "antd";
 import UserCard from "../usercard/UserCard";
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
+
 const Users = () => {
 	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [modalText, setModalText] = useState("Content of the modal");
 
+	//handle filtered by status.................
+	const [filteredInfo, setFilteredInfo] = useState({});
+	const handleChange = (pagination, filters) => {
+		console.log("Various parameters", pagination, filters);
+		setFilteredInfo(filters);
+	};
+	//end of filtered.................................
+
+	//search table................................................
+	const [searchText, setSearchText] = useState("");
+	const [searchedColumn, setSearchedColumn] = useState("");
+	const searchInput = useRef(null);
+	const handleSearch = (selectedKeys, confirm, dataIndex) => {
+		confirm();
+		setSearchText(selectedKeys[0]);
+		setSearchedColumn(dataIndex);
+	};
+
+	const handleReset = (clearFilters) => {
+		clearFilters();
+		setSearchText("");
+	};
+
+	const getColumnSearchProps = (dataIndex) => ({
+		filterDropdown: ({
+			setSelectedKeys,
+			selectedKeys,
+			confirm,
+			clearFilters,
+		}) => (
+			<div
+				style={{
+					padding: 8,
+				}}
+			>
+				<Input
+					ref={searchInput}
+					placeholder={`Search ${dataIndex}`}
+					value={selectedKeys[0]}
+					onChange={(e) =>
+						setSelectedKeys(e.target.value ? [e.target.value] : [])
+					}
+					onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+					style={{
+						marginBottom: 8,
+						display: "block",
+					}}
+				/>
+				<Space>
+					<Button
+						type='primary'
+						onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+						icon={<SearchOutlined />}
+						size='small'
+						style={{
+							width: 90,
+						}}
+					>
+						Search
+					</Button>
+					<Button
+						onClick={() => clearFilters && handleReset(clearFilters)}
+						size='small'
+						style={{
+							width: 90,
+						}}
+					>
+						Reset
+					</Button>
+					<Button
+						type='link'
+						size='small'
+						onClick={() => {
+							confirm({
+								closeDropdown: false,
+							});
+							setSearchText(selectedKeys[0]);
+							setSearchedColumn(dataIndex);
+						}}
+					>
+						Filter
+					</Button>
+				</Space>
+			</div>
+		),
+		filterIcon: (filtered) => (
+			<SearchOutlined
+				style={{
+					color: filtered ? "#1890ff" : undefined,
+				}}
+			/>
+		),
+		onFilter: (value, record) =>
+			record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+		onFilterDropdownVisibleChange: (visible) => {
+			if (visible) {
+				setTimeout(() => searchInput.current?.select(), 100);
+			}
+		},
+		render: (text) =>
+			searchedColumn === dataIndex ? (
+				<Highlighter
+					highlightStyle={{
+						backgroundColor: "#ffc069",
+						padding: 0,
+					}}
+					searchWords={[searchText]}
+					autoEscape
+					textToHighlight={text ? text.toString() : ""}
+				/>
+			) : (
+				text
+			),
+	});
+	// end of handle table search..........................
+
+	//handle user change state modal..................
 	const showModal = () => {
 		setVisible(true);
 	};
@@ -28,10 +148,11 @@ const Users = () => {
 		setVisible(false);
 	};
 
+	//table columns adding search tech.........................
 	const columns = [
 		{
 			title: "User",
-			dataIndex: "User",
+			dataIndex: "user",
 			key: "name",
 			render: (_, record) => (
 				<div className='table-image' onClick={showModal}>
@@ -50,9 +171,9 @@ const Users = () => {
 			title: "Status",
 			key: "status",
 			dataIndex: "status",
-			render: (_, { tags }) => {
+			render: (_, { status }) => {
 				let color;
-				switch (tags) {
+				switch (status) {
 					case "pending":
 						color = "black";
 						break;
@@ -67,13 +188,41 @@ const Users = () => {
 						break;
 				}
 
-				return <Tag color={color}>{tags.toUpperCase()}</Tag>;
+				return <Tag color={color}>{status.toUpperCase()}</Tag>;
+			},
+			// ...getColumnSearchProps("status"),
+			filters: [
+				{
+					text: "pending",
+					value: "pending",
+				},
+				{
+					text: "active",
+					value: "active",
+				},
+				{
+					text: "deactive",
+					value: "deactive",
+				},
+				{
+					text: "suspended",
+					value: "suspended",
+				},
+			],
+			filteredValue: filteredInfo.status || null,
+			// to filter exact word ex active only not includes deactive
+			onFilter: (value, record) => {
+				let reg = new RegExp("\\b(" + value + ")\\b");
+				return record.status.includes(
+					record.status.match(reg) ? record.status.match(reg)[0] : false
+				);
 			},
 		},
 		{
 			title: "Email",
 			dataIndex: "email",
 			key: "email",
+			...getColumnSearchProps("email"),
 		},
 		{
 			title: "Account",
@@ -93,7 +242,7 @@ const Users = () => {
 			account: 32,
 			payment: 32,
 			email: "john@gmail.com",
-			tags: "active",
+			status: "active",
 		},
 		{
 			key: "2",
@@ -101,7 +250,7 @@ const Users = () => {
 			payment: 42,
 			account: 32,
 			email: "jim@gmail.com",
-			tags: "deactive",
+			status: "deactive",
 		},
 		{
 			key: "3",
@@ -109,7 +258,7 @@ const Users = () => {
 			payment: 32,
 			account: 32,
 			email: "john@gmail.com",
-			tags: "suspended",
+			status: "suspended",
 		},
 		{
 			key: "4",
@@ -117,24 +266,27 @@ const Users = () => {
 			payment: 32,
 			account: 32,
 			email: "john@gmail.com",
-			tags: "pending",
+			status: "pending",
 		},
 	];
 	return (
 		<DashboardLayout>
 			<UserWrapper>
-				<Table columns={columns} dataSource={data} />
-				<Modal
-					title="User's Status"
-					visible={visible}
-					onOk={handleOk}
-					confirmLoading={confirmLoading}
-					onCancel={handleCancel}
-					className='modal'
-				>
-					<UserCard />
-				</Modal>
+				<Table columns={columns} dataSource={data} onChange={handleChange} />
 			</UserWrapper>
+			<Modal
+				title="User's Status"
+				visible={visible}
+				onOk={handleOk}
+				confirmLoading={confirmLoading}
+				onCancel={handleCancel}
+				okButtonProps={{
+					style: { backgroundColor: "#B4CD93", borderColor: "#B4CD93" },
+				}}
+				okText={"save"}
+			>
+				<UserCard />
+			</Modal>
 		</DashboardLayout>
 	);
 };

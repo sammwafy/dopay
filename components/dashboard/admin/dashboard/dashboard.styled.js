@@ -82,5 +82,8 @@ export const DashboardWrapper = styled.div`
 		padding: 20px;
 		border-radius: 5px;
 		flex: 1 0 200px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 `;

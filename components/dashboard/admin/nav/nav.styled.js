@@ -7,12 +7,19 @@ export const DashNav = styled.div`
 	height: 70px;
 	color: crimson;
 	font-size: 27px;
-	padding: 0.5em;
+	/* padding: 0.5em; */
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	gap: 10px;
 	display: flex;
+	@media screen and (max-width: 700px) {
+		justify-content: space-between;
+
+		.logo {
+			margin: 0 auto;
+			display: flex !important;
+		}
+	}
 
 	.profile {
 		width: 50px;
