@@ -1,11 +1,29 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { UserCardWrapper } from "./userCard.styled";
-import { Menu, Dropdown, Space } from "antd";
+import { Menu, Dropdown, Space, Tag, Typography } from "antd";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
-
+const { Title, Text } = Typography;
 const UserCard = () => {
 	const [status, setStatus] = useState("pending");
+	let color;
+	switch (status) {
+		case "pending":
+			color = "black";
+			break;
+		case "active":
+			color = "green";
+			break;
+		case "deactive":
+			color = "gray";
+			break;
+		case "suspended":
+			color = "red";
+			break;
+		default:
+			color = "";
+			break;
+	}
 
 	const handleSelect = (key) => {
 		console.log(key);
@@ -40,12 +58,39 @@ const UserCard = () => {
 				/>
 			</div>
 			<h1 className='user-title'>John Doe</h1>
+			<div style={{ display: "var(--desktab)" }}>
+				<Space>
+					<Text strong level={5}>
+						Email
+					</Text>
+					<Text>jim@gmail.com</Text>
+				</Space>
+			</div>
+			<div style={{ display: "var(--desktop)" }}>
+				<Space>
+					<Text strong level={5}>
+						Payment
+					</Text>
+					<Text>30000$</Text>
+				</Space>
+			</div>
+			<div style={{ display: "var(--desktop)" }}>
+				<Space>
+					<Text strong level={5}>
+						Number of Accounts
+					</Text>
+					<Text>5</Text>
+				</Space>
+			</div>
+
 			<div className='user-status'>
 				<span>Status</span>
 				<Dropdown overlay={menu}>
 					<Space>
-						{status}
-						<DownOutlined />
+						<Tag color={color}>
+							{status}
+							<DownOutlined />
+						</Tag>
 					</Space>
 				</Dropdown>
 			</div>

@@ -54,17 +54,17 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
 		<DashNav>
 			{showDrawer && (
 				<CloseOutlined
-					style={{ display: "var(--desktop)", color: "black" }}
+					style={{ display: "var(--desktab)", color: "black" }}
 					onClick={() => setShowDrawer(false)}
 				/>
 			)}
 			{showDrawer || (
 				<MenuOutlined
-					style={{ display: "var(--desktop)", color: "black" }}
+					style={{ display: "var(--desktab)", color: "black" }}
 					onClick={() => setShowDrawer(true)}
 				/>
 			)}
-			<div style={{ display: "var(--desktop)" }} className='logo'>
+			<div style={{ display: "var(--desktab)" }} className='logo'>
 				<Image src={logo} alt='logo' width='100' height='60' />
 			</div>
 

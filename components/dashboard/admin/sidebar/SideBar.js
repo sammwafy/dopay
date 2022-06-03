@@ -1,7 +1,7 @@
 /** @format */
 import Image from "next/image";
 import React, { useState } from "react";
-import { DashSide } from "./side.styled";
+import { DashSide, DashSideDrawer } from "./side.styled";
 import logo from "../../../../public/logo.svg";
 import { Menu, Drawer } from "antd";
 import {
@@ -79,21 +79,23 @@ const SideBar = ({ showDrawer, setShowDrawer }) => {
 				style={{ top: "70px" }}
 				className='drawer'
 			>
-				<Menu
-					mode='inline'
-					items={items}
-					className='menu'
-					onClick={handleSelect}
-					selectedKeys={active}
-				/>
-				<Menu
-					mode='inline'
-					items={items2}
-					className='menu'
-					selectedKeys={active}
-					onClick={handleSelect}
-				/>
-				<button>Dark Mode</button>
+				<DashSideDrawer>
+					<Menu
+						mode='inline'
+						items={items}
+						className='menu'
+						onClick={handleSelect}
+						selectedKeys={active}
+					/>
+					<Menu
+						mode='inline'
+						items={items2}
+						className='menu'
+						selectedKeys={active}
+						onClick={handleSelect}
+					/>
+					<button>Dark Mode</button>
+				</DashSideDrawer>
 			</Drawer>
 		</DashSide>
 	);

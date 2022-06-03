@@ -3,11 +3,11 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import { Space, Table, Tag, Input } from "antd";
 import Image from "next/image";
 import { AccountsWrapper } from "./accounts.styled";
-import { Modal, Button } from "antd";
+import { Modal, Button, Typography } from "antd";
 import AccountsCard from "../accounts/accountsCard";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
-
+const { Text } = Typography;
 const Accounts = () => {
 	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
@@ -154,7 +154,12 @@ const Accounts = () => {
 			title: "Account Number",
 			dataIndex: "accountNumber",
 			key: "accountNumber",
-			width: "70",
+			width: "200",
+			render: (_, record) => (
+				<div onClick={showModal}>
+					<Text>{record.accountNumber}</Text>
+				</div>
+			),
 		},
 		{
 			title: "Status",
@@ -219,12 +224,14 @@ const Accounts = () => {
 					<div className='btn-view'>{record.name}</div>
 				</div>
 			),
+			responsive: ["md"],
 		},
 		{
 			title: "Balance",
 			dataIndex: "balance",
 			key: "balance",
 			width: "70",
+			responsive: ["lg"],
 		},
 	];
 	const data = [

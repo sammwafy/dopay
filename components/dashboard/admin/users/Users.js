@@ -218,18 +218,21 @@ const Users = () => {
 			dataIndex: "email",
 			key: "email",
 			...getColumnSearchProps("email"),
+			responsive: ["md"],
 		},
 		{
 			title: "Account",
 			dataIndex: "account",
 			key: "account",
 			width: "50",
+			responsive: ["lg"],
 		},
 		{
 			title: "Payment",
 			dataIndex: "payment",
 			key: "payment",
 			width: "70",
+			responsive: ["lg"],
 		},
 	];
 	const data = [
