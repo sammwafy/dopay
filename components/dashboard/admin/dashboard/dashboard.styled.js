@@ -20,6 +20,9 @@ export const DashboardWrapper = styled.div`
 		padding: 20px;
 		border-radius: 5px;
 		flex: 2;
+		@media screen and (max-width: 700px) {
+			order: 4;
+		}
 	}
 	.title-card {
 		flex: 1 0 400px;
@@ -31,6 +34,9 @@ export const DashboardWrapper = styled.div`
 		background-color: #2bebc8;
 		padding: 20px;
 		border-radius: 5px;
+		@media screen and (max-width: 700px) {
+			order: 1;
+		}
 	}
 	.widget-container {
 		flex: 1 0 100%;
@@ -42,9 +48,9 @@ export const DashboardWrapper = styled.div`
 
 		@media screen and (max-width: 700px) {
 			flex-direction: column;
-
 			justify-content: center;
 			width: 100%;
+			order: 2;
 		}
 		.widget {
 			width: 30%;
@@ -85,5 +91,8 @@ export const DashboardWrapper = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		@media screen and (max-width: 700px) {
+			order: 3;
+		}
 	}
 `;
