@@ -265,7 +265,7 @@ const Accounts = () => {
 		},
 	];
 	return (
-		<DashboardLayout>
+		<>
 			<AccountsWrapper>
 				<Table
 					columns={columns}
@@ -287,7 +287,7 @@ const Accounts = () => {
 			>
 				<AccountsCard />
 			</Modal>
-		</DashboardLayout>
+		</>
 	);
 };
 

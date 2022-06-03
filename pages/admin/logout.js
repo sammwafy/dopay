@@ -1,7 +1,7 @@
 import DashboardLayout from "../../components/dashboard/Layout/DashboardLayout";
 
 const logout = () => {
-	return <DashboardLayout>logout</DashboardLayout>;
+	return <div>logout</div>;
 };
 
 export default logout;

@@ -270,15 +270,13 @@ const Users = () => {
 		},
 	];
 	return (
-		<DashboardLayout>
-			<UserWrapper>
-				<Table
-					columns={columns}
-					dataSource={data}
-					onChange={handleChange}
-					scroll={{ x: "100%" }}
-				/>
-			</UserWrapper>
+		<UserWrapper>
+			<Table
+				columns={columns}
+				dataSource={data}
+				onChange={handleChange}
+				scroll={{ x: "100%" }}
+			/>
 			<Modal
 				title="User's Status"
 				visible={visible}
@@ -292,7 +290,7 @@ const Users = () => {
 			>
 				<UserCard />
 			</Modal>
-		</DashboardLayout>
+		</UserWrapper>
 	);
 };
 

@@ -1,7 +1,7 @@
 import DashboardLayout from "../../components/dashboard/Layout/DashboardLayout";
 
 const setting = () => {
-	return <DashboardLayout>setting</DashboardLayout>;
+	return <div>setting</div>;
 };
 
 export default setting;

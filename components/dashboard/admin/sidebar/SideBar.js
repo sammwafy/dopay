@@ -33,7 +33,9 @@ const SideBar = ({ showDrawer, setShowDrawer }) => {
 			.concat(items2)
 			.filter((e) => e.key === key.key)[0].title;
 		console.log(current);
-		// Router.push({ pathname: `${current}` }, undefined, { shallow: true });
+		Router.push({ pathname: `/admin/${current}` }, undefined, {
+			shallow: true,
+		});
 
 		setActive(key.key);
 	};
