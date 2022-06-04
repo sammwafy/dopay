@@ -1,9 +1,9 @@
 import React from "react";
 import Accounts from "../../components/dashboard/admin/accounts/accounts";
-import DashboardLayout from "../../components/dashboard/Layout/DashboardLayout";
+import { getLayout } from "../../components/dashboard/Layout/DashboardLayout";
 
 const accounts = () => {
 	return <Accounts />;
 };
-
+accounts.getLayout = getLayout;
 export default accounts;

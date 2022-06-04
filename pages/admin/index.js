@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import DashboardLayout from "../../components/dashboard/Layout/DashboardLayout";
+import { getLayout } from "../../components/dashboard/Layout/DashboardLayout";
 
 const Index = () => {
 	const router = useRouter();
@@ -11,7 +11,7 @@ const Index = () => {
 	// 	}, 4000);
 	// }, []);
 
-	return <DashboardLayout>index</DashboardLayout>;
+	return <div>index</div>;
 };
-
+Index.getLayout = getLayout;
 export default Index;
