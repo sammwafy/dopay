@@ -22,7 +22,7 @@ const DashboardLayout = ({ children }) => {
 				>
 					<Nav showDrawer={showDrawer} setShowDrawer={setShowDrawer} />
 				</Header>
-				<Content style={{ overflow: "scroll" }}>{children}</Content>
+				<Content style={{ overflow: "scroll",}}>{children}</Content>
 			</Layout>
 		</Layout>
 	);

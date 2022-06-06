@@ -34,24 +34,28 @@
 @media (max-width: 482px) {
 	:root {
 		--mobile: none;
+		--top:'top';
 	}
 }
 /* tablet */
 @media (min-width: 482px) and (max-width: 776px) {
 	:root {
 		--tablet: none;
+
 	}
 }
 
 @media (min-width: 482px) {
 	:root {
 		--desktab: none;
+		
 	}
 }
 
 @media (min-width: 776px) {
 	:root {
 		--desktop: none;
+		
 	}
 }
 
