@@ -1,6 +1,5 @@
 import { ContactStyle } from "./styles/ContactUs.styled";
 import { Form, Input, Select, Checkbox, Button } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
