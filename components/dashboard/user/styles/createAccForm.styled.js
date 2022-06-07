@@ -38,4 +38,13 @@ export const CreateAccFormStyle = styled.div`
   .ptn {
     margin: 0 auto;
   }
+  .label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #8c8c8c;
+  }
 `;

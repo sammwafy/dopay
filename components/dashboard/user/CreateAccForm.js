@@ -32,7 +32,10 @@ const CreateAccForm = () => {
         autoComplete="off"
         className="formClass"
       >
-        <Form.Item name="radio-group" label="Bank Account Type">
+        <Form.Item
+          name="radio-group"
+          label={<h3 className="label">Bank Account Type</h3>}
+        >
           <Radio.Group className="radio">
             <Radio value="a">Personal</Radio>
             <Radio value="b">Business</Radio>
@@ -40,7 +43,7 @@ const CreateAccForm = () => {
         </Form.Item>
         <Form.Item
           name="select1"
-          label="Country"
+          label={<h3 className="label">country</h3>}
           hasFeedback
           rules={[
             {
@@ -56,7 +59,7 @@ const CreateAccForm = () => {
         </Form.Item>
         <Form.Item
           name="select2"
-          label="Bank Name"
+          label={<h3 className="label">bank name</h3>}
           hasFeedback
           rules={[
             {
@@ -72,7 +75,7 @@ const CreateAccForm = () => {
         </Form.Item>
         <Form.Item
           name="Account Holder Name"
-          label="Account Holder Name"
+          label={<h3 className="label">Account Holder Name</h3>}
           rules={[
             {
               required: true,
@@ -84,7 +87,7 @@ const CreateAccForm = () => {
         </Form.Item>
         <Form.Item
           name="IBAN"
-          label="IBAN"
+          label={<h3 className="label">IBAN</h3>}
           rules={[
             {
               required: true,
