@@ -14,10 +14,11 @@ const themes = {
 
 function DoPay({ Component, pageProps }) {
   // const {store, props} = wrapper.useWrappedStore(rest);
+  const getLayout = Component?.getLayout || ((page) => page);
   return (
     <CookiesProvider>
       <ThemeSwitcherProvider themeMap={themes} defaultTheme="light">
-        <Component {...pageProps} />
+      {getLayout(<Component {...pageProps}/>)}
       </ThemeSwitcherProvider>
     </CookiesProvider>
   );
