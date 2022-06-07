@@ -3,7 +3,7 @@ import MainBanner from "./landingSections/mainBanner/mainBanner.js";
 
 const LandingHome = () => {
   return (
-    <Layout>
+    <>
       <section>
         <MainBanner />
       </section>
@@ -13,7 +13,7 @@ const LandingHome = () => {
       <section>our partners</section>
       <section>works on mobile too</section>
       <section>CTA user count</section>
-    </Layout>
+    </>
   );
 };
 
