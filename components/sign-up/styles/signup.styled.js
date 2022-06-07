@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignInWrapper = styled.div`
+export const SignUpWrapper = styled.div`
   .rightContent {
     display: flex;
     flex-direction: column;
@@ -73,21 +73,21 @@ export const SignInWrapper = styled.div`
       .facebook {
         padding: 7%;
         font-size: 30px;
-        width: 25%;
+        width: 30%;
         text-align: center;
         border-radius: 50%;
       }
       .twitter {
         padding: 7%;
         font-size: 30px;
-        width: 25%;
+        width: 30%;
         text-align: center;
         border-radius: 50%;
       }
       .google {
         padding: 7%;
         font-size: 30px;
-        width: 25%;
+        width: 30%;
         text-align: center;
         border-radius: 50%;
       }
@@ -120,6 +120,7 @@ export const SignInWrapper = styled.div`
         text-align: center;
         border-radius: 50%;
       }
+
       .twitter {
         padding: 7%;
         font-size: 30px;

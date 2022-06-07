@@ -14,18 +14,18 @@ const { Title } = Typography;
 import {
   UserOutlined,
   LockOutlined,
-  GooglePlusCircleFilled,
   FacebookFilled,
   TwitterOutlined,
+  GooglePlusCircleFilled,
 } from "@ant-design/icons";
-import { SignInWrapper } from "./styles/signin.styled";
-const SignIn = () => {
+import { SignUpWrapper } from "./styles/signup.styled";
+const SignUp = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
   const password = false;
   return (
-    <SignInWrapper>
+    <SignUpWrapper>
       <Row className="signContainer" gutter={100}>
         <Col>
           <Card
@@ -45,7 +45,7 @@ const SignIn = () => {
               onFinish={onFinish}
             >
               <Title level={4} style={{ color: "green", textAlign: "center" }}>
-                Login to your account{" "}
+                Create Your Account{" "}
               </Title>
               <Row
                 style={{
@@ -55,18 +55,18 @@ const SignIn = () => {
                 }}
               >
                 <button className="facebook">
-                  <FacebookFilled />
-                  <span className="facebookText">Facebook</span>
+                  <FacebookFilled />{" "}
+                  <span className="facebookText"> Facebook</span>
                 </button>
                 <button className="twitter">
                   {" "}
-                  <TwitterOutlined />
-                  <span className="twitterText">Twitter</span>
+                  <TwitterOutlined />{" "}
+                  <span className="twitterText"> Twitter</span>
                 </button>
                 <button className="google">
                   {" "}
                   <GooglePlusCircleFilled />{" "}
-                  <span className="googleText">Google+</span>
+                  <span className="googleText"> Google+</span>
                 </button>
               </Row>
               <div style={{ textAlign: "center", margin: "7% auto" }}>
@@ -78,7 +78,7 @@ const SignIn = () => {
                     display: "inline-block",
                   }}
                 ></hr>
-                <pre className="spanText"> Or Login with Email </pre>
+                <pre className="spanText"> Or Register with Email </pre>
                 <hr
                   style={{
                     width: "calc(15%)",
@@ -89,50 +89,95 @@ const SignIn = () => {
                 ></hr>
               </div>
               <Form.Item
-                name="username"
+                name="name"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Username!",
+                    message: "Please input your Name!",
                   },
                 ]}
               >
-                <Input
-                  prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="Username"
-                />
+                <Input placeholder="Name" />
               </Form.Item>
               <Form.Item
-                name="password"
+                name="email"
                 rules={[
                   {
+                    type: "email",
+                    message: "The input is not valid E-mail!",
+                  },
+                  {
                     required: true,
-                    message: "Please input your Password!",
+                    message: "Please input your E-mail!",
                   },
                 ]}
               >
-                <Input
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  type="password"
-                  placeholder="Password"
-                />
+                <Input placeholder="Email" />
               </Form.Item>
-              <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                  <Checkbox>Remember me</Checkbox>
-                </Form.Item>
+              <Row gutter={8}>
+                <Col span={12}>
+                  <Form.Item
+                    name="password"
+                    //label="Password"
 
-                <a
-                  style={{
-                    float: "right",
-                  }}
-                  className="login-form-forgot"
-                  href=""
-                >
-                  Forgot password
-                </a>
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your password!",
+                      },
+                    ]}
+                    hasFeedback
+                  >
+                    <Input.Password placeholder=" Password" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="confirm"
+                    dependencies={["password"]}
+                    hasFeedback
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please confirm your password!",
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(_, value) {
+                          if (!value || getFieldValue("password") === value) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(
+                            new Error(
+                              "The two passwords that you entered do not match!"
+                            )
+                          );
+                        },
+                      }),
+                    ]}
+                  >
+                    <Input.Password placeholder="Confirm Password" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Form.Item
+                name="agreement"
+                valuePropName="checked"
+                rules={[
+                  {
+                    validator: (_, value) =>
+                      value
+                        ? Promise.resolve()
+                        : Promise.reject(
+                            new Error("Should accept Service & privacy policy")
+                          ),
+                  },
+                ]}
+              >
+                <Checkbox>
+                  I have read and accept the terms of{" "}
+                  <a href="">Service & privacy policy</a>
+                </Checkbox>
               </Form.Item>
-
               <Form.Item>
                 <Button
                   type="primary"
@@ -142,11 +187,8 @@ const SignIn = () => {
                     width: "100%",
                   }}
                 >
-                  Log in
+                  Register
                 </Button>
-                {/* {!password && (
-                  <Alert message="password incorrect" type="error" showIcon />
-                )} */}
               </Form.Item>
             </Form>
           </Card>
@@ -154,7 +196,7 @@ const SignIn = () => {
         <Col>
           <div className="rightContent">
             <div>
-              <Title style={{ color: "green" }}> Welcome back</Title>
+              <Title style={{ color: "green" }}> Create a free account</Title>
               <p
                 style={{
                   fontFamily: "Montserrat",
@@ -165,19 +207,19 @@ const SignIn = () => {
                   color: "grey",
                 }}
               >
-                Ready for the next payment !
+                and begin sending or recieving money
               </p>
             </div>
             <img
               style={{
                 width: "70%",
               }}
-              src="login.jpg"
+              src="Register.jpg"
             ></img>
           </div>
         </Col>
       </Row>
-    </SignInWrapper>
+    </SignUpWrapper>
   );
 };
-export default SignIn;
+export default SignUp;
