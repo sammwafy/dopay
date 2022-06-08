@@ -63,16 +63,6 @@ background:white;
 }
 
 }
-.notification{
-   @media screen and (max-width: 700px) {
-      flex-direction: column;
-    .right{
-      @media screen and (max-width: 700px) {
-      margin-top:20px;
-    }
-      
-}
 
-}
 
 `

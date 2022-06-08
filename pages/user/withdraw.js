@@ -1,7 +1,11 @@
-const Withdraw = () => {
+
+import Withdraw from './../../components/dashboard/user/withdraw/withdraw';
+
+
+const Withdrawpage = () => {
     return (
-      <div> withdraw</div>
+      <Withdraw/>
     )
   }
   
-  export default Withdraw
+  export default Withdrawpage

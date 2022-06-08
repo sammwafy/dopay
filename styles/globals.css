@@ -34,7 +34,7 @@
 @media (max-width: 482px) {
 	:root {
 		--mobile: none;
-		--top:'top';
+		
 	}
 }
 /* tablet */

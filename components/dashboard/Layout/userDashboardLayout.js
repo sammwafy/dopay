@@ -23,7 +23,7 @@ const UserDashboardLayout = ({ children }) => {
 				>
 					<UserNav showDrawer={showDrawer} setShowDrawer={setShowDrawer} />
 				</Header>
-				<Content style={{ backgroundColor: "#F5F5F5",  overflow: 'autO' }}>{children}</Content>
+				<Content style={{ backgroundColor: "#F5F5F5",  overflow: 'autO' ,display:"flex",alignItems:"center",justifyContent:"center",}}>{children}</Content>
 			</Layout>
 		</Layout>
 	);

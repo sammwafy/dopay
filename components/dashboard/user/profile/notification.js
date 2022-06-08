@@ -1,31 +1,34 @@
 import React from 'react'
-import {Space,Switch,Button} from 'antd'
+import {Space,Switch,Button ,Row,Col} from 'antd'
 import { Container } from './userProfile.styled';
 const Notification = () => {
     const onChange = (checked) => {
         console.log(`switch to ${checked}`);
       };
   return (
-    <Container>
     
+    <Space direction='vertical' size='large'>
         <h2>Notifications</h2>
-        <div  style={{display:'flex',width:'200%',justifyContent:"space-between"}} className='notification'  >
-            <div className='left'> 
+        <Row >
+            <Col xs={24} xl={11} > 
                 <h4> Allow email notification </h4>
                 <Switch defaultChecked onChange={onChange}  style={{backgroundColor:"#B4CD93 "}}/>
-            </div>
-            <div className='right'> 
+              
+            </Col>
+            <Col xs={24} xl={11}> 
                 <h4> Allow website notification  </h4>
                 <Switch defaultChecked  style={{backgroundColor:"#B4CD93"}}/>
-            </div>
-            </div>
-            <Button type="primary" htmlType="submit"  style={{backgroundColor:" # B4CD93",marginTop:"100px"}} >
+            </Col>
+          
+            
+</Row>
+<Button type="primary" htmlType="submit"  style={{backgroundColor:" # B4CD93",marginTop:"100px"}} >
           Submit
         </Button>
 
+        </Space>
+        
     
-    </Container>
   )
 }
-
 export default Notification
