@@ -1,44 +1,27 @@
 import "../styles/globals.css";
 // require("../styles/variables.less");
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-import DashboardLayout from "../components/dashboard/Layout/DashboardLayout";
-import UserDashboardLayout from "../components/dashboard/Layout/userDashboardLayout";
+
+// redux import
+import { wrapper } from "../store/store";
+// import { Provider as ReduxStoreProvider } from "react-redux";
+import { CookiesProvider } from "react-cookie";
+
 const themes = {
 	dark: "./dark.css",
 	light: "./light.css",
 };
 
-function DoPay({ Component, pageProps, router }) {
-	if (router.pathname.startsWith("/admin/")) {
-		return (
-			<ThemeSwitcherProvider themeMap={themes} defaultTheme='light'>
-				<>
-					<DashboardLayout>
-						<Component {...pageProps}></Component>
-					</DashboardLayout>
-				</>
-			</ThemeSwitcherProvider>
-		);
-	}
-
-	if (router.pathname.startsWith("/user/")) {
-		return (
-			<ThemeSwitcherProvider themeMap={themes} defaultTheme='light'>
-				<>
-					<UserDashboardLayout>
-						<Component {...pageProps}></Component>
-					</UserDashboardLayout>
-				</>
-			</ThemeSwitcherProvider>
-		);
-	}
-	return (
-		<ThemeSwitcherProvider themeMap={themes} defaultTheme='light'>
-			{/* <SiteLayout> */}
-			<Component {...pageProps}></Component>
-			{/* </SiteLayout> */}
-		</ThemeSwitcherProvider>
-	);
+function DoPay({ Component, pageProps }) {
+  // const {store, props} = wrapper.useWrappedStore(rest);
+  const getLayout = Component?.getLayout || ((page) => page);
+  return (
+    <CookiesProvider>
+      <ThemeSwitcherProvider themeMap={themes} defaultTheme="light">
+      {getLayout(<Component {...pageProps}/>)}
+      </ThemeSwitcherProvider>
+    </CookiesProvider>
+  );
 }
 
-export default DoPay;
+export default wrapper.withRedux(DoPay);

@@ -18,20 +18,22 @@ export default function Home() {
   //   return null;
   // }
 
-//   <Layout>
-//   <div style={{ padding: 100 }}>
-//     <Switch checked={isDarkMode} onChange={toggleTheme} />
-//     <Space direction="vertical">
-//       <Button type="primary">Primary Button</Button>
-//       <Button type="ghost">Ghost Button</Button>
-//       <DatePicker onChange={onChange} />
-//       <CiCircleFilled />
-//     </Space>
-//   </div>
-// </Layout>
+  //   <Layout>
+  //   <div style={{ padding: 100 }}>
+  //     <Switch checked={isDarkMode} onChange={toggleTheme} />
+  //     <Space direction="vertical">
+  //       <Button type="primary">Primary Button</Button>
+  //       <Button type="ghost">Ghost Button</Button>
+  //       <DatePicker onChange={onChange} />
+  //       <CiCircleFilled />
+  //     </Space>
+  //   </div>
+  // </Layout>
 
   const onChange = () => {};
   return (
-      <LandingHome/>
+    <Layout>
+      <LandingHome />
+    </Layout>
   );
 }
