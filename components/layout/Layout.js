@@ -12,5 +12,5 @@ const Layout = ({ children, noContainer }) => {
     </LayoutANT>
   );
 };
-
+export const getLayout = (page) => <Layout>{page}</Layout>;
 export default Layout;

@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import DashboardLayout from "../../Layout/DashboardLayout";
 import { Space, Table, Tag, Input } from "antd";
 import Image from "next/image";
 import { UserWrapper } from "./users.styled";

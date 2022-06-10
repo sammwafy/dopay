@@ -27,5 +27,5 @@ const DashboardLayout = ({ children }) => {
 		</Layout>
 	);
 };
-
+export const getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 export default DashboardLayout;

@@ -8,8 +8,8 @@ import { wrapper } from "../store/store";
 import { CookiesProvider } from "react-cookie";
 
 const themes = {
-	dark: "./dark.css",
-	light: "./light.css",
+  dark: "./dark.css",
+  light: "./light.css",
 };
 
 function DoPay({ Component, pageProps }) {
