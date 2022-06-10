@@ -56,7 +56,7 @@ background:white;
    
 }
 .userform{
- width: 170%;
+ width: 100%;
  @media screen and (max-width: 700px) {
       width:100%;
       

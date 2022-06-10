@@ -1,10 +1,10 @@
 
 import {Wrapper} from './pay.styled'
 import React from 'react'
-import { Button,Form, Input , Typography,Select} from 'antd';
+
 import Image from "next/image";
 import label from '../../../../public/label.svg';
-
+import { Button,Form, Input , Typography,Select} from 'antd';
 const { Option } = Select;
 const { Title } = Typography;
 const Transfer = ({setShow}) => {

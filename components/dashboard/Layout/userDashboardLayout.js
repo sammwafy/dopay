@@ -30,4 +30,4 @@ const UserDashboardLayout = ({ children }) => {
 };
 
 export default UserDashboardLayout;
-//export const getLayout = (page) => <UserDashboardLayout> {page}</UserDashboardLayout> 
+export const getLayout = (page) => <UserDashboardLayout> {page}</UserDashboardLayout> 
