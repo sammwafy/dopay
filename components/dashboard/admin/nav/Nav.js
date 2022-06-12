@@ -85,35 +85,15 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
 
 		//get users logged to the site from server event "getNotification"....
 		socket.on("getNotification", (msg) => {
-			dispatch(addNotification(msg));
+			console.log(msg);
 		});
 	};
 	useEffect(() => {
 		socketInitializer();
 	}, []);
 
-	const onChange = (e) => {
-		e.preventDefault();
-		setUserName(e.target.value);
-	};
-
-	const onClick = (e) => {
-		e.preventDefault();
-		//let server know the userName login through event "login"......
-		socket.emit("login", userName);
-	};
-
-	console.log("notification is ", notification);
-	console.log(userName);
-
 	return (
 		<DashNav>
-			<div
-				style={{ display: "flex", flexDirection: "column", padding: "20px" }}
-			>
-				<input type='text' onChange={onChange} />
-				<Button onClick={onClick}>login</Button>
-			</div>
 			{showDrawer && (
 				<CloseOutlined
 					style={{ display: "var(--desktab)", color: "black" }}
