@@ -2,7 +2,7 @@ const { User } = require("../../../db/models/user");
 const { dbConnect } = require("../../../db/middleware/mongodb");
 
 const bcrypt = require("bcrypt");
-import * as jose from 'jose';
+import * as jose from "jose";
 
 export default async function login(req, res) {
   await dbConnect().then(console.log("connected"));
@@ -12,14 +12,12 @@ export default async function login(req, res) {
 
     const { email, password } = req.body;
     if (email && password) {
-   
       try {
         const foundUser = await User.findOne({ email: email }).exec();
 
         if (!foundUser) return res.status(401).send("Unauthorized"); //Unauthorized
         const match = await bcrypt.compare(password, foundUser.password);
-        if (foundUser.password === password) {
-
+        if (match) {
           const accessToken = await new jose.SignJWT({
             UserInfo: {
               email: foundUser.email,
@@ -30,11 +28,10 @@ export default async function login(req, res) {
             .setExpirationTime("30d")
             .sign(new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET));
 
-  
           // Send authorization roles and access token to user
           res.json({ email, accessToken });
         } else {
-          res.status(401).send("password is incorrect!");
+          res.status(401).send("Wrong Credentials!");
         }
       } catch (err) {
         console.log(err);

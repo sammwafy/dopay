@@ -19,9 +19,29 @@ import {
   GooglePlusCircleFilled,
 } from "@ant-design/icons";
 import { SignUpWrapper } from "./styles/signup.styled";
+import {
+  selectCurrentUser,
+  selectCurrentToken,
+  setCredentials,
+} from "../../store/auth/authSlice.js";
+import { useRegisterMutation } from "../../store/api/registerApiSlice";
+import { useDispatch } from "react-redux";
+// import { useCookies } from "react-cookie";
 const SignUp = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+  const [register, { isLoading }] = useRegisterMutation();
+  const dispatch = useDispatch();
+ // const [cookies, setCookie, removeCookie] = useCookies(['']);
+  const handleSubmit = async (values) => {
+    try {
+      const userData = await register(values).unwrap();
+
+      dispatch(setCredentials({ ...userData }));
+      // const { email, accessToken } = userData;
+      // setCookie("email", email);
+      // setCookie("token", accessToken);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const password = false;
   return (
@@ -42,7 +62,7 @@ const SignUp = () => {
               initialValues={{
                 remember: true,
               }}
-              onFinish={onFinish}
+              onFinish={handleSubmit}
             >
               <Title level={4} style={{ color: "green", textAlign: "center" }}>
                 Create Your Account{" "}
@@ -89,22 +109,22 @@ const SignUp = () => {
                 ></hr>
               </div>
               <Form.Item
-                name="name"
+                name="fullname"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Name!",
+                    message: "Please input your Full Name!",
                   },
                 ]}
               >
-                <Input placeholder="Name" />
+                <Input placeholder=" Full Name" />
               </Form.Item>
               <Form.Item
                 name="email"
                 rules={[
                   {
                     type: "email",
-                    message: "The input is not valid E-mail!",
+                    message: "The E-mail is not valid !",
                   },
                   {
                     required: true,
@@ -117,7 +137,7 @@ const SignUp = () => {
               <Row gutter={8}>
                 <Col span={12}>
                   <Form.Item
-                    name="password"
+                    name="userPassword"
                     //label="Password"
 
                     rules={[
@@ -134,7 +154,7 @@ const SignUp = () => {
                 <Col span={12}>
                   <Form.Item
                     name="confirm"
-                    dependencies={["password"]}
+                    dependencies={["userPassword"]}
                     hasFeedback
                     rules={[
                       {
@@ -143,7 +163,7 @@ const SignUp = () => {
                       },
                       ({ getFieldValue }) => ({
                         validator(_, value) {
-                          if (!value || getFieldValue("password") === value) {
+                          if (!value || getFieldValue("userPassword") === value) {
                             return Promise.resolve();
                           }
                           return Promise.reject(

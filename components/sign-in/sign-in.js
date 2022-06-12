@@ -74,7 +74,7 @@ const SignIn = () => {
               initialValues={{
                 remember: true,
               }}
-              onFinish={onFinish}
+              onFinish={handleSubmit}
             >
               <Title level={4} style={{ color: "green", textAlign: "center" }}>
                 Login to your account{" "}
@@ -121,18 +121,21 @@ const SignIn = () => {
                 ></hr>
               </div>
               <Form.Item
-                name="username"
+                name="email"
                 rules={[
                   {
+                    type: "email",
+                    message: "The E-mail is not valid !",
+                  },
+                  {
                     required: true,
-                    message: "Please input your Username!",
+                    message: "Please input your E-mail!",
                   },
                 ]}
               >
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="Username"
-                />
+                   placeholder="Email" />
               </Form.Item>
               <Form.Item
                 name="password"
@@ -209,65 +212,6 @@ const SignIn = () => {
           </div>
         </Col>
       </Row>
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={handleSubmit}
-      >
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email!",
-            },
-          ]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="email"
-            type="email"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Password!",
-            },
-          ]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
-            Log in
-          </Button>
-          Or <a href="">register now!</a>
-        </Form.Item>
-      </Form>
     </SignInWrapper>
   );
 };
