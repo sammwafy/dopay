@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
-import { Space, Table, Tag, Input } from "antd";
+import { Space, Tag, Input, Table } from "antd";
 import Image from "next/image";
-import { UserWrapper } from "./users.styled";
-import { Modal, Button } from "antd";
+import { Button, Modal } from "antd";
 import UserCard from "../usercard/UserCard";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
+
+import { UserWrapper } from "./users.styled";
 
 const Users = () => {
 	const [visible, setVisible] = useState(false);
@@ -268,6 +269,7 @@ const Users = () => {
 			status: "pending",
 		},
 	];
+
 	return (
 		<UserWrapper>
 			<Table

@@ -7,3 +7,10 @@ const accounts = () => {
 };
 accounts.getLayout = getLayout;
 export default accounts;
+export const getStaticProps = async (ctx) => {
+	return {
+		props: {
+			data: null,
+		},
+	};
+};
