@@ -61,7 +61,7 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
 	const dispatch = useDispatch();
 	const notification = useSelector((state) => state.notification);
 	const [userName, setUserName] = useState(null);
-	const menuItems = input?.map((e, i) => {
+	const menuItems = notification?.map((e, i) => {
 		return {
 			key: i,
 			label: (
@@ -104,7 +104,6 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
 	};
 
 	console.log("notification is ", notification);
-	console.log("input is ", input);
 	console.log(userName);
 
 	return (
