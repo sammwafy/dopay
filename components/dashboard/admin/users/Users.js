@@ -27,6 +27,7 @@ const Users = () => {
 	const [users, { isLoading }] = useUsersMutation();
 	const dispatch = useDispatch();
 
+	const [visible, setVisible] = useState(false);
 	useEffect(() => {
 		try {
 			const apiUsers = async () => {
@@ -38,9 +39,8 @@ const Users = () => {
 		} catch (error) {
 			console.log(error);
 		}
-	}, []);
+	}, [visible]);
 
-	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [modalText, setModalText] = useState("Content of the modal");
 
@@ -169,7 +169,6 @@ const Users = () => {
 	};
 
 	const handleOk = () => {
-		setModalText("The modal will be closed after two seconds");
 		setConfirmLoading(true);
 		setTimeout(() => {
 			setVisible(false);
@@ -178,7 +177,6 @@ const Users = () => {
 	};
 
 	const handleCancel = () => {
-		console.log("Clicked cancel button");
 		setVisible(false);
 	};
 
@@ -277,6 +275,17 @@ const Users = () => {
 				dataSource={data}
 				onChange={handleChange}
 				scroll={{ x: "100%" }}
+				onRow={(record, rowIndex) => {
+					return {
+						onClick: (event) => {
+							showModal(record.key);
+						}, // click row
+						//   onDoubleClick: event => {}, // double click row
+						//   onContextMenu: event => {}, // right button click row
+						//   onMouseEnter: event => {}, // mouse enter row
+						//   onMouseLeave: event => {}, // mouse leave row
+					};
+				}}
 			/>
 			<Modal
 				title="User's Status"

@@ -11,9 +11,10 @@ const UserCard = ({ user }) => {
 
 	console.log(user);
 	const { fullname, status, email } = user;
+	const [stat, setStat] = useState(status);
 
 	let color;
-	switch (status) {
+	switch (stat) {
 		case "pending":
 			color = "black";
 			break;
@@ -32,13 +33,12 @@ const UserCard = ({ user }) => {
 	}
 
 	const handleSelect = async (key) => {
-		console.log(key);
 		let current = items.filter((e) => e.key === key.key)[0].label;
 		const newStatus = await updateUser({
 			email: email,
 			status: current,
 		});
-
+		setStat(current);
 		console.log(current);
 		console.log(newStatus);
 	};
@@ -101,7 +101,7 @@ const UserCard = ({ user }) => {
 				<Dropdown overlay={menu}>
 					<Space>
 						<Tag color={color}>
-							{status || ""}
+							{stat || ""}
 							<DownOutlined />
 						</Tag>
 					</Space>

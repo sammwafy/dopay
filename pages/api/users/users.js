@@ -21,6 +21,7 @@ export default async function users(req, res) {
 			let doc = await User.findOneAndUpdate(filter, update, {
 				new: true,
 			});
+			console.log(doc);
 			res.json(doc);
 		} catch (error) {
 			console.log(error);
