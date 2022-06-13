@@ -1,13 +1,13 @@
-const { User } = require("../../../db/models/user");
+const { Account } = require("../../../db/models/account");
 const { dbConnect } = require("../../../db/middleware/mongodb");
 
-export default async function users(req, res) {
+export default async function accounts(req, res) {
 	await dbConnect().then(console.log("connected"));
 
 	if (req.method === "GET") {
 		try {
-			const users = await User.find().exec();
-			res.json(users);
+			const accounts = await Account.find().exec();
+			res.json(accounts);
 		} catch (err) {
 			console.log(err);
 		}
@@ -18,10 +18,9 @@ export default async function users(req, res) {
 		try {
 			// `doc` is the document _after_ `update` was applied because of
 			// `new: true`
-			let doc = await User.findOneAndUpdate(filter, update, {
+			let doc = await Account.findOneAndUpdate(filter, update, {
 				new: true,
 			});
-			console.log(doc);
 			res.json(doc);
 		} catch (error) {
 			console.log(error);

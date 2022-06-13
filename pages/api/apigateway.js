@@ -57,6 +57,23 @@ export default async function handler(req, res) {
 
 			break;
 
+		case "accounts":
+			try {
+				let response = await fetch(`${server}/api/accounts/accounts/`, {
+					method: "GET",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					},
+				});
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+
+			break;
+
 		default:
 			return null;
 	}
