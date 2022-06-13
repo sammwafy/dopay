@@ -53,7 +53,7 @@ const baseQuery = fetchBaseQuery({
 // we will extend this later in authApiSlice file
 
 export const api = createApi({
-  baseQuery: baseQuery, // use the one with refresh token function
+  baseQuery: baseQuery, 
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
       return action.payload[reducerPath];

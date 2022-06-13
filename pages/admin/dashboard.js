@@ -1,7 +1,7 @@
 import React from "react";
 import Dashboard from "../../components/dashboard/admin/dashboard/Dashboard";
 import {
-	getLayout,
+	getLayout
 } from "../../components/dashboard/Layout/DashboardLayout";
 
 const dashboard = () => {

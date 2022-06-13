@@ -4,21 +4,30 @@ import { useThemeSwitcher } from "react-css-theme-switcher";
 import { useState } from "react";
 import Layout, { getLayout } from "../components/Layout/Layout.js";
 import LandingHome from "../components/landingPage/landingHome.js";
+import { useRouter } from "next/router";
 
 export default function Home() {
-	// const [isDarkMode, setIsDarkMode] = useState();
-	// const { switcher, currentTheme, status, themes } = useThemeSwitcher();
+	const router = useRouter();
+	const handleClick = (e) => {
+		e.preventDefault();
+		router.push(`/admin/users`);
+	};
+	const [isDarkMode, setIsDarkMode] = useState();
+	const { switcher, currentTheme, status, themes } = useThemeSwitcher();
 
-	// const toggleTheme = (isChecked) => {
-	//   setIsDarkMode(isChecked);
-	//   switcher({ theme: isChecked ? themes.dark : themes.light });
-	// };
+	const toggleTheme = (isChecked) => {
+		setIsDarkMode(isChecked);
+		switcher({ theme: isChecked ? themes.dark : themes.light });
+	};
 
-	// if (status === "loading") {
-	//   return null;
-	// }
+	if (status === "loading") {
+		return null;
+	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5c1e3ed853d1e3deb1944110511408b30f983102
 	//   <Layout>
 	//   <div style={{ padding: 100 }}>
 	//     <Switch checked={isDarkMode} onChange={toggleTheme} />
@@ -32,6 +41,7 @@ export default function Home() {
 	// </Layout>
 
 	const onChange = () => {};
+<<<<<<< HEAD
 	return <LandingHome />;
 =======
   //   <Layout>
@@ -53,6 +63,13 @@ export default function Home() {
     </Layout>
   );
 >>>>>>> ade7280a5a6981d830540ec0a736d6a54df4e632
+=======
+	return (
+		<Layout>
+			<LandingHome />
+		</Layout>
+	);
+>>>>>>> 5c1e3ed853d1e3deb1944110511408b30f983102
 }
 
-Home.getLayout = getLayout;
+// Home.getLayout = getLayout;

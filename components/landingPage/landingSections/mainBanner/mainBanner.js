@@ -1,6 +1,6 @@
 import { Col, Row, Button, Typography, Image } from "antd";
 const { Title } = Typography;
-import styled from "styled-components";
+import { BannerWrapper } from "./styles/mainBanner.styled.js";
 
 const MainBanner = () => {
   return (
@@ -36,6 +36,9 @@ const MainBanner = () => {
             src="/imgs/landing/mainBanner.svg"
             alt="banner"
             layout="fill"
+            preview={{
+              visible: false,
+            }}
           />
         </Col>
       </Row>
@@ -43,57 +46,6 @@ const MainBanner = () => {
   );
 };
 
-const BannerWrapper = styled.div`
-  .bannerTitle {
-    font-size: 62px;
-    font-weight: 600;
-    white-space: pre-line;
-  }
-  .bannerBTNS {
-    align-self: flex-start;
-  }
-  .bannerIMG {
-    display: flex;
-    justify-content: flex-end;
 
-    .ant-image-img {
-      width: 615px;
-      height: 435px;
-    }
-  }
-
-  @media screen and (max-width: 482px) {
-    .BannerRow {
-      flex-direction: column;
-      gap: 45px;
-
-      > .ant-col {
-        position: unset;
-      }
-    }
-    .bannerTitle {
-      font-size: 35px;
-      text-align: center;
-    }
-    h4 {
-      text-align: center;
-    }
-    .bannerBTNS {
-      align-self: center;
-      margin: 25px 0;
-      position: absolut e;
-      bottom:0;
-    }
-    .bannerIMG {
-      justify-content: center;
-      margin-bottom: 80px;
-      .ant-image-img {
-        justify-self: center;
-        width: 237px !important;
-        height: 168px !important;
-      }
-    }
-  }
-`;
 
 export default MainBanner;

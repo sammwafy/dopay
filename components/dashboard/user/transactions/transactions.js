@@ -1,14 +1,12 @@
-import React, { useState, useRef } from "react";
-import { Space, Tag, Input, Table } from "antd";
+import React, { useRef, useState } from "react";
+import { TransactionWrapper } from "./transactions.styled";
+import { Button, Input, Modal, Space, Table, Tag, Typography } from "antd";
+import TransactionCard from "./transactionCard";
 import Image from "next/image";
-import { Button, Modal } from "antd";
-import UserCard from "../usercard/UserCard";
+import { FileOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
-
-import { UserWrapper } from "./users.styled";
-
-const Users = () => {
+const { Text, Title } = Typography;
+const Transactions = () => {
 	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [modalText, setModalText] = useState("Content of the modal");
@@ -151,54 +149,55 @@ const Users = () => {
 	//table columns adding search tech.........................
 	const columns = [
 		{
-			title: "User",
-			dataIndex: "user",
-			key: "name",
+			title: "Date",
+			dataIndex: "date",
+			key: "date",
+			width: "200",
 			render: (_, record) => (
-				<div className='table-image' onClick={showModal}>
-					<Image
-						src='/admin.jpeg'
-						alt='profile'
-						width='50'
-						height='50'
-						className='pro'
-					/>
-					<div className='btn-view'>{record.name}</div>
+				<div onClick={showModal}>
+					{/* <Text>{record.date}</Text> */}
+					<Text>{new Date().toISOString()}</Text>
 				</div>
 			),
 		},
 		{
-			title: "Status",
-			key: "status",
-			dataIndex: "status",
-			render: (_, { status }) => {
+			title: "Type",
+			key: "type",
+			dataIndex: "type",
+			render: (_, { type }) => {
 				let color;
-				switch (status) {
-					case "pending":
+				switch (type) {
+					case "refused":
 						color = "black";
 						break;
-					case "active":
+					case "Amount Add":
 						color = "green";
 						break;
 					case "deactive":
 						color = "";
+						break;
+					case "received":
+						color = "yellow";
+						break;
+					case "Payment":
+						color = "brown";
 						break;
 					default:
 						color = "red";
 						break;
 				}
 
-				return <Tag color={color}>{status.toUpperCase()}</Tag>;
+				return <Tag color={color}>{type.toUpperCase()}</Tag>;
 			},
-			// ...getColumnSearchProps("status"),
+			// ...getColumnSearchProps("type"),
 			filters: [
 				{
 					text: "pending",
 					value: "pending",
 				},
 				{
-					text: "active",
-					value: "active",
+					text: "verified",
+					value: "verified",
 				},
 				{
 					text: "deactive",
@@ -209,28 +208,33 @@ const Users = () => {
 					value: "suspended",
 				},
 			],
-			filteredValue: filteredInfo.status || null,
+			filteredValue: filteredInfo.type || null,
 			// to filter exact word ex active only not includes deactive
-			onFilter: (value, record) => record.status === value,
+			onFilter: (value, record) => record.type === value,
 		},
 		{
-			title: "Email",
-			dataIndex: "email",
-			key: "email",
-			...getColumnSearchProps("email"),
-			responsive: ["md"],
-		},
-		{
-			title: "Account",
-			dataIndex: "account",
-			key: "account",
-			width: "50",
+			title: "Description",
+			dataIndex: "description",
+			key: "description",
+			width: "70",
 			responsive: ["lg"],
 		},
 		{
-			title: "Payment",
-			dataIndex: "payment",
-			key: "payment",
+			title: "Print",
+			dataIndex: "print",
+			key: "print",
+			width: "70",
+			render: (_, record) => (
+				<div onClick={showModal}>
+					<FileOutlined />
+				</div>
+			),
+			responsive: ["lg"],
+		},
+		{
+			title: "Amount",
+			dataIndex: "amount",
+			key: "amount",
 			width: "70",
 			responsive: ["lg"],
 		},
@@ -238,48 +242,64 @@ const Users = () => {
 	const data = [
 		{
 			key: "1",
-			name: "John Brown",
-			account: 32,
-			payment: 32,
-			email: "john@gmail.com",
-			status: "active",
+			description: "John Brown",
+			date: "3223 1233 1233 1233",
+			amount: "$320000",
+			type: "refused",
 		},
 		{
 			key: "2",
-			name: "Jim Green",
-			payment: 42,
-			account: 32,
-			email: "jim@gmail.com",
-			status: "deactive",
+			description: "Jim Green",
+			date: "4223 1233 1233 1233",
+			amount: "$3000000",
+			type: "Payment",
 		},
 		{
 			key: "3",
-			name: "Joe Black",
-			payment: 32,
-			account: 32,
-			email: "john@gmail.com",
-			status: "suspended",
+			description: "Joe Black",
+			date: "3223 1233 1233 1233",
+			amount: "$320000000",
+			type: "deactive",
 		},
 		{
 			key: "4",
-			name: "Joe brown",
-			payment: 32,
-			account: 32,
-			email: "john@gmail.com",
-			status: "pending",
+			description: "Joe brown",
+			date: "3223 1233 1233 1233",
+			amount: "$3000000002",
+			type: "received",
+			print: "pending",
 		},
 	];
-
 	return (
-		<UserWrapper>
-			<Table
-				columns={columns}
-				dataSource={data}
-				onChange={handleChange}
-				scroll={{ x: "100%" }}
-			/>
+		<>
+			<TransactionWrapper>
+				<Title level={3} style={{ color: "#afafaf" }}>
+					{"transactions log".toUpperCase()}
+				</Title>
+				<Text style={{ color: "gray" }}>
+					{" "}
+					{"monitor all account activity".toUpperCase()}
+				</Text>
+				<Table
+					columns={columns}
+					dataSource={data}
+					onChange={handleChange}
+					scroll={{ x: "100%" }}
+					onRow={(record, rowIndex) => {
+						return {
+							onClick: (event) => {
+								showModal();
+							}, // click row
+							//   onDoubleClick: event => {}, // double click row
+							//   onContextMenu: event => {}, // right button click row
+							//   onMouseEnter: event => {}, // mouse enter row
+							//   onMouseLeave: event => {}, // mouse leave row
+						};
+					}}
+				/>
+			</TransactionWrapper>
 			<Modal
-				title="User's Status"
+				title='Transaction'
 				visible={visible}
 				onOk={handleOk}
 				confirmLoading={confirmLoading}
@@ -287,12 +307,12 @@ const Users = () => {
 				okButtonProps={{
 					style: { backgroundColor: "#B4CD93", borderColor: "#B4CD93" },
 				}}
-				okText={"save"}
+				okText={"Print"}
 			>
-				<UserCard />
+				<TransactionCard />
 			</Modal>
-		</UserWrapper>
+		</>
 	);
 };
 
-export default Users;
+export default Transactions;
