@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@fullpage/react-fullpage": "^0.1.26",
     "@reduxjs/toolkit": "^1.8.2",
     "antd": "^4.20.6",
     "autoprefixer": "^10.4.7",
@@ -25,7 +26,6 @@
     "next": "12.1.6",
     "next-plugin-antd-less": "^1.8.0",
     "next-redux-wrapper": "^7.0.5",
-    "pageable": "^0.6.8",
     "react": "18.1.0",
     "react-cookie": "^4.1.1",
     "react-css-theme-switcher": "^0.3.0",

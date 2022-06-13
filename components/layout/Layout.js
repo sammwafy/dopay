@@ -1,10 +1,13 @@
 import { Layout as LayoutANT } from "antd";
+// import MainHeader from "./header/header.js";
 const { Header, Footer, Sider, Content } = LayoutANT;
 
 const Layout = ({ children, noContainer }) => {
   return (
     <LayoutANT>
-      <Header>Header</Header>
+      <Header style={{marginBottom: '50px'}}>
+        {/* <MainHeader/> */}
+      </Header>
       <Content>
         <div className={noContainer ? null : "container"}>{children}</div>
       </Content>
