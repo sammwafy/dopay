@@ -3,9 +3,15 @@ import React, { useState } from "react";
 import { UserCardWrapper } from "./userCard.styled";
 import { Menu, Dropdown, Space, Tag, Typography } from "antd";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
-const { Title, Text } = Typography;
-const UserCard = () => {
-	const [status, setStatus] = useState("pending");
+import { useUsersMutation } from "../../../../store/api/usersApiSlice";
+import { useUpdateUserMutation } from "../../../../store/api/updateUserApiSlice";
+const { Text } = Typography;
+const UserCard = ({ user }) => {
+	const [updateUser, { isLoading }] = useUpdateUserMutation();
+
+	console.log(user);
+	const { fullname, status, email } = user;
+
 	let color;
 	switch (status) {
 		case "pending":
@@ -25,11 +31,18 @@ const UserCard = () => {
 			break;
 	}
 
-	const handleSelect = (key) => {
+	const handleSelect = async (key) => {
 		console.log(key);
 		let current = items.filter((e) => e.key === key.key)[0].label;
-		setStatus(current);
+		const newStatus = await updateUser({
+			email: email,
+			status: current,
+		});
+
+		console.log(current);
+		console.log(newStatus);
 	};
+
 	const items = [
 		{
 			key: "1",
@@ -57,13 +70,13 @@ const UserCard = () => {
 					className='img'
 				/>
 			</div>
-			<h1 className='user-title'>John Doe</h1>
+			<h1 className='user-title'>{fullname || ""}</h1>
 			<div style={{ display: "var(--desktab)" }}>
 				<Space>
 					<Text strong level={5}>
 						Email
 					</Text>
-					<Text>jim@gmail.com</Text>
+					<Text>{email || ""}</Text>
 				</Space>
 			</div>
 			<div style={{ display: "var(--desktop)" }}>
@@ -88,7 +101,7 @@ const UserCard = () => {
 				<Dropdown overlay={menu}>
 					<Space>
 						<Tag color={color}>
-							{status}
+							{status || ""}
 							<DownOutlined />
 						</Tag>
 					</Space>

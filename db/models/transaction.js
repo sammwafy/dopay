@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const user = new Schema({
+const transaction = new Schema({
 	fullname: {
 		type: String,
 		required: true,
@@ -38,4 +38,4 @@ const user = new Schema({
 
 mongoose.models = {};
 
-export const User = mongoose.model("User", user);
+export const Transaction = mongoose.model("Transaction", transaction);

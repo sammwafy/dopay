@@ -77,15 +77,15 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
 		await fetch("/api/socket");
 		socket = io();
 
-		console.log(socket);
+		// console.log(socket);
 
 		socket.on("connect", () => {
-			console.log("connected");
+			// console.log("connected");
 		});
 
 		//get users logged to the site from server event "getNotification"....
 		socket.on("getNotification", (msg) => {
-			console.log(msg);
+			// console.log(msg);
 		});
 	};
 	useEffect(() => {
