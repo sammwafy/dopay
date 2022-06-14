@@ -1,5 +1,5 @@
-const { User } = require("../../../db/models/user");
-const { dbConnect } = require("../../../db/middleware/mongodb");
+const { User } = require("../../../../db/models/user");
+const { dbConnect } = require("../../../../db/middleware/mongodb");
 
 const bcrypt = require("bcrypt");
 import * as jose from "jose";

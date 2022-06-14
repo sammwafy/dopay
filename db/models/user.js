@@ -18,7 +18,7 @@ const user = new Schema({
 	status: {
 		type: String,
 		required: true,
-		default: "active",
+		default: "pending",
 	},
 	country: {
 		type: String,
@@ -34,6 +34,7 @@ const user = new Schema({
 		webNotify: { type: Boolean, default: true },
 	},
 	notification: { type: [String] },
+	accounts: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 });
 
 mongoose.models = {};

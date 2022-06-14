@@ -6,47 +6,38 @@ export default async function handler(req, res) {
 	switch (APIEND) {
 		case "login":
 			try {
-				let response = await fetch(`${server}/api/login/login/`, {
+				let response = await fetch(`${server}/api/microservices/login/login/`, {
 					method: "POST",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-					},
+					headers: req.headers,
 					body: JSON.stringify(req.body),
 				});
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				console.log(err);
+				res.status(401).send(err);
 			}
 
 			break;
 
 		case "users":
 			try {
-				let response = await fetch(`${server}/api/users/users/`, {
+				let response = await fetch(`${server}/api/microservices/users/users/`, {
 					method: "GET",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-					},
+					headers: req.headers,
 				});
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				console.log(err);
+				res.status(401).send("not authorized");
 			}
 
 			break;
 
 		case "updateUser":
 			try {
-				let response = await fetch(`${server}/api/users/users/`, {
+				let response = await fetch(`${server}/api/microservices/users/users/`, {
 					method: "PUT",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-					},
+					headers: req.headers,
 					body: JSON.stringify(req.body),
 				});
 				const data = await response.json();
@@ -59,13 +50,13 @@ export default async function handler(req, res) {
 
 		case "accounts":
 			try {
-				let response = await fetch(`${server}/api/accounts/accounts/`, {
-					method: "GET",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-					},
-				});
+				let response = await fetch(
+					`${server}/api/microservices/accounts/accounts/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {

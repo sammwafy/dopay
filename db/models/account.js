@@ -2,12 +2,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const account = new Schema({
-	userId: {
-		type: mongoose.ObjectId,
-		required: true,
-	},
+	userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
 	balance: {
-		type: Numbeer,
+		type: Number,
 		required: true,
 		unique: true,
 	},
@@ -18,7 +15,7 @@ const account = new Schema({
 	status: {
 		type: String,
 		required: true,
-		default: "active",
+		default: "pending",
 	},
 });
 

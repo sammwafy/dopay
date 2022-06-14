@@ -2,11 +2,9 @@ import React from "react";
 import { CardWrapper, NewAccountWrapper } from "./newAccount.styled";
 import NewAccountCard from "./NewAccountCard";
 import { Image, Typography } from "antd";
-
-import logo from "../../../../public/account.svg";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-const { Text, Title } = Typography;
+const { Title } = Typography;
 const NewAccount = () => {
 	const [myAccounts, setMyAccounts] = useState([
 		{ id: "1", amount: "123445 $", name: "ahly", number: "23840950hfjbvk" },

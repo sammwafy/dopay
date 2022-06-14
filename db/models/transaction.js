@@ -2,38 +2,14 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const transaction = new Schema({
-	fullname: {
-		type: String,
-		required: true,
-	},
-	email: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	password: {
-		type: String,
-		required: true,
-	},
+	userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+	accountID: { type: Schema.Types.ObjectId, ref: "Account", required: true },
 	status: {
 		type: String,
 		required: true,
-		default: "active",
+		default: "pending",
 	},
-	country: {
-		type: String,
-	},
-	city: {
-		type: String,
-	},
-	phoneNumber: {
-		type: Number,
-	},
-	notificationSettings: {
-		emailNotify: { type: Boolean, default: true },
-		webNotify: { type: Boolean, default: true },
-	},
-	notification: { type: [String] },
+	type: { type: String, default: "personal" },
 });
 
 mongoose.models = {};
