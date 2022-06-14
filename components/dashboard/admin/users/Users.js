@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Space, Tag, Input, Table } from "antd";
 import Image from "next/image";
 import { Button, Modal } from "antd";
@@ -7,9 +7,40 @@ import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 
 import { UserWrapper } from "./users.styled";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useUsersMutation } from "../../../../store/api/usersApiSlice";
+import { getUsers } from "../../../../store/users/usersSlice";
 const Users = () => {
+	const [selectedUser, setSelectedUser] = useState(null);
+	const allUsers = useSelector((state) => state.users);
+	console.log(allUsers);
+
+	const data = allUsers.map((user) => ({
+		key: user._id,
+		name: user.fullname,
+		account: 0,
+		payment: 0,
+		email: user.email,
+		status: user.status,
+	}));
+
+	const [users, { isLoading }] = useUsersMutation();
+	const dispatch = useDispatch();
+
 	const [visible, setVisible] = useState(false);
+	useEffect(() => {
+		try {
+			const apiUsers = async () => {
+				const fetchedUsers = await users().unwrap();
+				console.log(fetchedUsers);
+				dispatch(getUsers(fetchedUsers));
+			};
+			apiUsers();
+		} catch (error) {
+			console.log(error);
+		}
+	}, [visible]);
+
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [modalText, setModalText] = useState("Content of the modal");
 
@@ -130,12 +161,14 @@ const Users = () => {
 	// end of handle table search..........................
 
 	//handle user change state modal..................
-	const showModal = () => {
+	const showModal = (key) => {
 		setVisible(true);
+		const user = allUsers.filter((user) => user._id === key)[0];
+		console.log(user);
+		setSelectedUser(user);
 	};
 
 	const handleOk = () => {
-		setModalText("The modal will be closed after two seconds");
 		setConfirmLoading(true);
 		setTimeout(() => {
 			setVisible(false);
@@ -144,7 +177,6 @@ const Users = () => {
 	};
 
 	const handleCancel = () => {
-		console.log("Clicked cancel button");
 		setVisible(false);
 	};
 
@@ -155,7 +187,7 @@ const Users = () => {
 			dataIndex: "user",
 			key: "name",
 			render: (_, record) => (
-				<div className='table-image' onClick={showModal}>
+				<div className='table-image' onClick={() => showModal(record.key)}>
 					<Image
 						src='/admin.jpeg'
 						alt='profile'
@@ -235,40 +267,6 @@ const Users = () => {
 			responsive: ["lg"],
 		},
 	];
-	const data = [
-		{
-			key: "1",
-			name: "John Brown",
-			account: 32,
-			payment: 32,
-			email: "john@gmail.com",
-			status: "active",
-		},
-		{
-			key: "2",
-			name: "Jim Green",
-			payment: 42,
-			account: 32,
-			email: "jim@gmail.com",
-			status: "deactive",
-		},
-		{
-			key: "3",
-			name: "Joe Black",
-			payment: 32,
-			account: 32,
-			email: "john@gmail.com",
-			status: "suspended",
-		},
-		{
-			key: "4",
-			name: "Joe brown",
-			payment: 32,
-			account: 32,
-			email: "john@gmail.com",
-			status: "pending",
-		},
-	];
 
 	return (
 		<UserWrapper>
@@ -277,6 +275,17 @@ const Users = () => {
 				dataSource={data}
 				onChange={handleChange}
 				scroll={{ x: "100%" }}
+				onRow={(record, rowIndex) => {
+					return {
+						onClick: (event) => {
+							showModal(record.key);
+						}, // click row
+						//   onDoubleClick: event => {}, // double click row
+						//   onContextMenu: event => {}, // right button click row
+						//   onMouseEnter: event => {}, // mouse enter row
+						//   onMouseLeave: event => {}, // mouse leave row
+					};
+				}}
 			/>
 			<Modal
 				title="User's Status"
@@ -289,7 +298,7 @@ const Users = () => {
 				}}
 				okText={"save"}
 			>
-				<UserCard />
+				<UserCard user={selectedUser} />
 			</Modal>
 		</UserWrapper>
 	);

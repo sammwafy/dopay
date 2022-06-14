@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 // require("../styles/variables.less");
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-import DashboardLayout from "../components/dashboard/Layout/DashboardLayout";
 
 // redux import
 import { wrapper } from "../store/store";
@@ -9,8 +8,8 @@ import { wrapper } from "../store/store";
 import { CookiesProvider } from "react-cookie";
 
 const themes = {
-	dark: "./dark.css",
-	light: "./light.css",
+  dark: "./dark.css",
+  light: "./light.css",
 };
 
 function DoPay({ Component, pageProps }) {
