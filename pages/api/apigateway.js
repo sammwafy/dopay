@@ -2,7 +2,8 @@ import { server } from "../../config";
 
 export default async function handler(req, res) {
 	const APIEND = req.headers["apiend"];
-	console.log(req.headers);
+
+	// login
 	switch (APIEND) {
 		case "login":
 			try {
@@ -19,10 +20,9 @@ export default async function handler(req, res) {
 
 			break;
 
+		// get all users (admin)
 		case "users":
 			try {
-				console.log("userssss");
-
 				let response = await fetch(`${server}/api/microservices/users/users/`, {
 					method: "GET",
 					headers: req.headers,
@@ -30,20 +30,17 @@ export default async function handler(req, res) {
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				res.status(401).send(err);
+				res.status(res.statusCode).send(err);
 			}
 
 			break;
 
+		// update user (admin)
 		case "updateUser":
 			try {
 				let response = await fetch(`${server}/api/microservices/users/users/`, {
 					method: "PUT",
-					headers: {
-						token: req.headers.token,
-						Accept: `application/json`,
-						"Content-Type": `application/json`,
-					},
+					headers: req.headers,
 					body: JSON.stringify(req.body),
 				});
 				const data = await response.json();
@@ -54,6 +51,7 @@ export default async function handler(req, res) {
 
 			break;
 
+		// update bank accounts (admin)
 		case "accounts":
 			try {
 				let response = await fetch(
