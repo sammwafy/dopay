@@ -4,7 +4,7 @@ export const DashboardWrapper = styled.div`
 	padding: 10px;
 	margin: 0 auto;
 	width: 80%;
-	${(props) => `height: calc(100vh - 70px);`}
+	${(props) => `height: calc(100vh - 70px);`};
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;

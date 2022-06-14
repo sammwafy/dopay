@@ -1,7 +1,8 @@
 import Layout from "../Layout/Layout.js";
 import MainBanner from "./landingSections/mainBanner/mainBanner.js";
 
-const LandingHome = () => {
+const LandingHome = () =>{
+	
   return (
     <>
       <section>
@@ -15,6 +16,7 @@ const LandingHome = () => {
       <section>CTA user count</section>
     </>
   );
+
 };
 
 export default LandingHome;
