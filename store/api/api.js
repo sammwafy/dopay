@@ -14,17 +14,19 @@ import { HYDRATE } from "next-redux-wrapper";
 // expired token and regenerates it
 
 const baseQuery = fetchBaseQuery({
-  // no need for baseUrl in nextjs as we utilize the same server
-
-  credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
-    
-    if (token) {
-      headers.set('authorization', `Bearer ${token}`);
-    }
-    return headers;
-  },
+	// no need for baseUrl in nextjs as we utilize the same server
+	credentials: "include",
+	prepareHeaders: (headers) => {
+		const token = document.cookie.replace(
+			/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+			"$1"
+		);
+		if (token) {
+			console.log("token", token);
+			headers.set("authorization", `Bearer ${token}`);
+		}
+		return headers;
+	},
 });
 
 // // support token refresh
@@ -53,15 +55,11 @@ const baseQuery = fetchBaseQuery({
 // we will extend this later in authApiSlice file
 
 export const api = createApi({
-  baseQuery: baseQuery, 
-  extractRehydrationInfo(action, { reducerPath }) {
-    if (action.type === HYDRATE) {
-      return action.payload[reducerPath];
-    }
-  },
-  endpoints: (builder) => ({}),
+	baseQuery: baseQuery, // use the one with refresh token function
+	extractRehydrationInfo(action, { reducerPath }) {
+		if (action.type === HYDRATE) {
+			return action.payload[reducerPath];
+		}
+	},
+	endpoints: (builder) => ({}),
 });
-
-
-
-
