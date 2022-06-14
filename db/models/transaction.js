@@ -3,7 +3,12 @@ const Schema = mongoose.Schema;
 
 const transaction = new Schema({
 	userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-	accountID: { type: Schema.Types.ObjectId, ref: "Account", required: true },
+	accountIdFrom: {
+		type: Schema.Types.ObjectId,
+		ref: "Account",
+		required: true,
+	},
+	accountIdTo: { type: Schema.Types.ObjectId, ref: "Account", required: true },
 	status: {
 		type: String,
 		required: true,

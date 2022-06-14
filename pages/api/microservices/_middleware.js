@@ -4,12 +4,18 @@ export default async function verifyToken(req, res) {
 	const authorization = req.headers.get("authorization");
 	const isLogin = req.headers.get("apiend");
 	if (authorization) {
-		console.log("here");
+		console.log(authorization);
 		const token = authorization.split(" ")[1];
-		const { payload: jwtData } = await jose.jwtVerify(
+		const { payload, protectedHeader } = await jose.jwtVerify(
 			token,
-			new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET)
+			new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET),
+			{
+				issuer: "urn:example:issuer",
+				audience: "urn:example:audience",
+			}
 		);
+		console.log("payload", payload);
+		console.log("protectedHeader", protectedHeader);
 
 		// const token = authHeader;
 		// jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -18,8 +24,8 @@ export default async function verifyToken(req, res) {
 		// 	}
 		// });
 	} else if (isLogin === "login") {
-		return;
 	} else {
-		res.status(401).send("not authorized");
+		// res.status(401).send("not authorized");
+		console.log("error");
 	}
 }

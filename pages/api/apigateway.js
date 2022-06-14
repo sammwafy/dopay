@@ -2,7 +2,7 @@ import { server } from "../../config";
 
 export default async function handler(req, res) {
 	const APIEND = req.headers["apiend"];
-
+	console.log(req.headers);
 	switch (APIEND) {
 		case "login":
 			try {
@@ -21,6 +21,8 @@ export default async function handler(req, res) {
 
 		case "users":
 			try {
+				console.log("userssss");
+
 				let response = await fetch(`${server}/api/microservices/users/users/`, {
 					method: "GET",
 					headers: req.headers,
@@ -28,7 +30,7 @@ export default async function handler(req, res) {
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				res.status(401).send("not authorized");
+				res.status(401).send(err);
 			}
 
 			break;
@@ -37,7 +39,11 @@ export default async function handler(req, res) {
 			try {
 				let response = await fetch(`${server}/api/microservices/users/users/`, {
 					method: "PUT",
-					headers: req.headers,
+					headers: {
+						token: req.headers.token,
+						Accept: `application/json`,
+						"Content-Type": `application/json`,
+					},
 					body: JSON.stringify(req.body),
 				});
 				const data = await response.json();
