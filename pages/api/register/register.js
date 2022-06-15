@@ -1,11 +1,11 @@
-const { User } = require("../../../db/models/user");
+import { User } from "../../../db/models/user";
 const { dbConnect } = require("../../../db/middleware/mongodb");
 
 const bcrypt = require("bcrypt");
 //import * as jose from "jose";
-export default async function login(req, res) {
+export default async function register(req, res) {
   await dbConnect().then(console.log("connected"));
-  const { fullname, email, userPassword } = req.body;
+  const { fullname, email, userPassword, phoneNumber } = req.body;
   const saltRounds = 10;
   const password = await bcrypt.hash(userPassword, saltRounds);
   if (req.method === "POST") {
@@ -13,6 +13,7 @@ export default async function login(req, res) {
       fullname,
       email,
       password,
+      phoneNumber,
     });
     try {
       const savedUser = await newUser.save();

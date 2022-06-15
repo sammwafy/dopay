@@ -1,5 +1,5 @@
-const { User } = require("../../../db/models/user");
-const { dbConnect } = require("../../../db/middleware/mongodb");
+import {User} from "./../../../db/models/user"
+const { dbConnect } = require("./../../../db/middleware/mongodb");
 
 const bcrypt = require("bcrypt");
 import * as jose from "jose";
@@ -16,6 +16,7 @@ export default async function login(req, res) {
         const foundUser = await User.findOne({ email: email }).exec();
 
         if (!foundUser) return res.status(401).send("Unauthorized"); //Unauthorized
+        if(foundUser.status !=="pending"){
         const match = await bcrypt.compare(password, foundUser.password);
         if (match) {
           const accessToken = await new jose.SignJWT({
@@ -30,11 +31,15 @@ export default async function login(req, res) {
 
           // Send authorization roles and access token to user
           res.json({ email, accessToken });
+        
         } else {
           res.status(401).send("Wrong Credentials!");
         }
+      }else{
+        res.send("Pending Approval");
+      }
       } catch (err) {
-        console.log(err);
+        res.status(401).send(err);
       }
     } else {
       res.status(400).json({ message: "Username and password are required." });

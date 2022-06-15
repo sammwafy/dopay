@@ -4,11 +4,10 @@ import {
   Button,
   Checkbox,
   Card,
-  Space,
+  Select,
   Row,
   Col,
   Typography,
-  Alert,
 } from "antd";
 const { Title } = Typography;
 import {
@@ -30,7 +29,7 @@ import { useDispatch } from "react-redux";
 const SignUp = () => {
   const [register, { isLoading }] = useRegisterMutation();
   const dispatch = useDispatch();
- // const [cookies, setCookie, removeCookie] = useCookies(['']);
+  // const [cookies, setCookie, removeCookie] = useCookies(['']);
   const handleSubmit = async (values) => {
     try {
       const userData = await register(values).unwrap();
@@ -43,7 +42,14 @@ const SignUp = () => {
       console.log(err);
     }
   };
-  const password = false;
+  const { Option } = Select;
+  const prefixSelector = (
+    <Form.Item name="prefix" noStyle>
+      <Select style={{ width: 70 }}>
+        <Option value="20">+20</Option>
+      </Select>
+    </Form.Item>
+  );
   return (
     <SignUpWrapper>
       <Row className="signContainer" gutter={100}>
@@ -134,6 +140,21 @@ const SignUp = () => {
               >
                 <Input placeholder="Email" />
               </Form.Item>
+              <Form.Item
+                name="phoneNumber"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your phone number!",
+                  },
+                ]}
+              >
+                <Input
+                  addonBefore={prefixSelector}
+                  style={{ width: "100%" }}
+                  placeholder="Phone Number"
+                />
+              </Form.Item>
               <Row gutter={8}>
                 <Col span={12}>
                   <Form.Item
@@ -163,7 +184,10 @@ const SignUp = () => {
                       },
                       ({ getFieldValue }) => ({
                         validator(_, value) {
-                          if (!value || getFieldValue("userPassword") === value) {
+                          if (
+                            !value ||
+                            getFieldValue("userPassword") === value
+                          ) {
                             return Promise.resolve();
                           }
                           return Promise.reject(

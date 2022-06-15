@@ -7,7 +7,7 @@ export const authApiSlice = api.injectEndpoints({
         url: "/api/apigateway/",
         method: "POST",
         body: { ...credentials },
-        headers: {  'APIEND': 'login'},
+        headers: {'APIEND': 'login'},
       }),
     }),
   }),
