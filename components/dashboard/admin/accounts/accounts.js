@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import DashboardLayout from "../../Layout/DashboardLayout";
+import React, { useState, useRef, useEffect } from "react";
 import { Space, Table, Tag, Input } from "antd";
 import Image from "next/image";
 import { AccountsWrapper } from "./accounts.styled";
@@ -7,20 +6,32 @@ import { Modal, Button, Typography } from "antd";
 import AccountsCard from "../accounts/accountsCard";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
-import { useAccountsMutation } from "../../../../store/api/accountsApiSlice";
+import { useGetAllAccountsMutation } from "../../../../store/api/getAllAccountsApiSlice";
+import { logOut } from "../../../../store/auth/authSlice";
 const { Text } = Typography;
 const Accounts = () => {
 	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
-	const [accounts, { isLoading }] = useAccountsMutation();
+	const [accounts, setAccounts] = useState([]);
+	const [getAllAccounts, { isLoading }] = useGetAllAccountsMutation();
 
-	// useEffect(() => {
-	// 	try {
-	// 		const getAccounts = async () => {
-	// 			const data = await accounts().unwrap();
-	// 		};
-	// 	} catch (error) {}
-	// }, [visible]);
+	useEffect(() => {
+		try {
+			const getAccounts = async () => {
+				const data = await getAllAccounts().unwrap();
+				setAccounts(data);
+				console.log(data);
+			};
+			getAccounts();
+		} catch (error) {}
+	}, [visible]);
+	const data = accounts.map((account, i) => ({
+		key: account.i,
+		userId: account.userId,
+		accountNumber: account._id,
+		balance: account.balance,
+		status: account.status,
+	}));
 
 	//handle filtered by status.................
 	const [filteredInfo, setFilteredInfo] = useState({});
@@ -139,9 +150,6 @@ const Accounts = () => {
 	// end of handle table search..........................
 
 	//handle user change state modal..................
-	const showModal = () => {
-		setVisible(true);
-	};
 
 	const handleOk = () => {
 		setConfirmLoading(true);
@@ -154,7 +162,15 @@ const Accounts = () => {
 	const handleCancel = () => {
 		setVisible(false);
 	};
-
+	//state for selected account
+	const [selectedAccount, setSelectedAccount] = useState(null);
+	const showModal = (key) => {
+		console.log(key);
+		let select = accounts.filter((account) => account._id === key)[0];
+		console.log(select);
+		setSelectedAccount(select);
+		setVisible(true);
+	};
 	//table columns adding search tech.........................
 	const columns = [
 		{
@@ -163,7 +179,7 @@ const Accounts = () => {
 			key: "accountNumber",
 			width: "200",
 			render: (_, record) => (
-				<div onClick={showModal}>
+				<div>
 					<Text>{record.accountNumber}</Text>
 				</div>
 			),
@@ -216,19 +232,16 @@ const Accounts = () => {
 		},
 
 		{
-			title: "User",
-			dataIndex: "user",
-			key: "name",
+			title: "UserID",
+			dataIndex: "userId",
+			key: "userId",
+			width: "200",
 			render: (_, record) => (
-				<div className='table-image' onClick={showModal}>
-					<Image
-						src='/admin.jpeg'
-						alt='profile'
-						width='50'
-						height='50'
-						className='pro'
-					/>
-					<div className='btn-view'>{record.name}</div>
+				<div
+					className='table-image'
+					onClick={() => showModal(record.accountNumber)}
+				>
+					<div className='btn-view'>{record.userId}</div>
 				</div>
 			),
 			responsive: ["md"],
@@ -237,38 +250,8 @@ const Accounts = () => {
 			title: "Balance",
 			dataIndex: "balance",
 			key: "balance",
-			width: "70",
+			width: "100",
 			responsive: ["lg"],
-		},
-	];
-	const data = [
-		{
-			key: "1",
-			name: "John Brown",
-			accountNumber: "3223 1233 1233 1233",
-			balance: "$320000",
-			status: "verified",
-		},
-		{
-			key: "2",
-			name: "Jim Green",
-			accountNumber: "4223 1233 1233 1233",
-			balance: "$3000000",
-			status: "deactive",
-		},
-		{
-			key: "3",
-			name: "Joe Black",
-			accountNumber: "3223 1233 1233 1233",
-			balance: "$320000000",
-			status: "suspended",
-		},
-		{
-			key: "4",
-			name: "Joe brown",
-			accountNumber: "3223 1233 1233 1233",
-			balance: "$3000000002",
-			status: "pending",
 		},
 	];
 	return (
@@ -279,6 +262,18 @@ const Accounts = () => {
 					dataSource={data}
 					onChange={handleChange}
 					scroll={{ x: "100%" }}
+					className='table'
+					onRow={(record, rowIndex) => {
+						return {
+							onClick: (event) => {
+								showModal(record.accountNumber);
+							}, // click row
+							//   onDoubleClick: event => {}, // double click row
+							//   onContextMenu: event => {}, // right button click row
+							//   onMouseEnter: event => {}, // mouse enter row
+							//   onMouseLeave: event => {}, // mouse leave row
+						};
+					}}
 				/>
 			</AccountsWrapper>
 			<Modal
@@ -292,7 +287,7 @@ const Accounts = () => {
 				}}
 				okText={"save"}
 			>
-				<AccountsCard />
+				<AccountsCard account={selectedAccount} />
 			</Modal>
 		</>
 	);

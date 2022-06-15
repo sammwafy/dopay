@@ -41,7 +41,7 @@ const user = new Schema(
 			allowNotification: { type: Boolean, default: true },
 		},
 		notification: { type: [String] },
-		// accounts: [{ type: Schema.Types.ObjectId, ref: "Account" }],
+		accounts: [{ type: Schema.Types.ObjectId, ref: "Accounts" }],
 	},
 	{ timestamps: true }
 );

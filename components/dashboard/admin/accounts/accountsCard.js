@@ -3,19 +3,28 @@ import React, { useState } from "react";
 import { Menu, Dropdown, Space, Typography } from "antd";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { AccountsCardWrapper } from "./accountsCard.styled";
+import { useUpdateAccountStatusMutation } from "../../../../store/api/updateAccountStatusApiSlice";
 const { Text } = Typography;
-const AccountsCard = () => {
-	const [status, setStatus] = useState("pending");
+const AccountsCard = ({ account }) => {
+	const [updateAccountStatus, { isLoading }] = useUpdateAccountStatusMutation();
+	const { _id, userId, status, balance, type } = account;
+	const [stat, setStat] = useState(status);
 
-	const handleSelect = (key) => {
+	const handleSelect = async (key) => {
 		console.log(key);
 		let current = items.filter((e) => e.key === key.key)[0].label;
-		setStatus(current);
+		const newStatus = await updateAccountStatus({
+			_id: account._id,
+			status: current,
+		});
+		console.log(current);
+		console.log(newStatus);
+		setStat(current);
 	};
 	const items = [
 		{
 			key: "1",
-			label: "active",
+			label: "verified",
 		},
 		{
 			key: "2",
@@ -45,7 +54,7 @@ const AccountsCard = () => {
 					<Text strong level={5}>
 						Account Number
 					</Text>
-					<Text>4444 444 444 444</Text>
+					<Text>{_id}</Text>
 				</Space>
 			</div>
 			<div style={{ display: "var(--desktop)" }}>
@@ -53,14 +62,30 @@ const AccountsCard = () => {
 					<Text strong level={5}>
 						Balance
 					</Text>
-					<Text>30000$</Text>
+					<Text>{balance}$</Text>
+				</Space>
+			</div>
+			<div style={{ display: "var(--desktop)" }}>
+				<Space>
+					<Text strong level={5}>
+						userId
+					</Text>
+					<Text>{userId}$</Text>
+				</Space>
+			</div>
+			<div style={{ display: "var(--desktop)" }}>
+				<Space>
+					<Text strong level={5}>
+						Type
+					</Text>
+					<Text>{type}$</Text>
 				</Space>
 			</div>
 			<div className='user-status'>
 				<span>Status</span>
 				<Dropdown overlay={menu}>
 					<Space>
-						{status}
+						{stat}
 						<DownOutlined />
 					</Space>
 				</Dropdown>
