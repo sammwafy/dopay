@@ -5,7 +5,9 @@ export const AccountsWrapper = styled.div`
 	margin: 10px auto;
 	display: flex;
 	width: 100%;
-
+	.table {
+		width: 100%;
+	}
 	.table-image {
 		display: flex;
 		align-items: center;

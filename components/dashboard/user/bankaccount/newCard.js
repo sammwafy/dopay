@@ -2,22 +2,22 @@ import React from "react";
 import { CardWrapper } from "./bankAccount.styled";
 import { Typography, Image } from "antd";
 const { Text, Title } = Typography;
-const NewCard = ({ color }) => {
+const NewCard = ({ color, account }) => {
+	const { balance, _id, userId } = account;
 	return (
 		<CardWrapper color={color}>
-			<Text> bank audi balance </Text>
-			<Title level={3}>1500 $</Title>
+			<Text> {_id}e </Text>
+			<Title level={3}>{balance} $</Title>
 
 			<Image
-
 				src='/columsAccount.svg'
 				alt='logo'
 				preview={false}
 				previewPrefixCls={false}
-				style={{marginTop:'15px'}}
+				style={{ marginTop: "15px" }}
 			/>
 
-			<Text>453535sfffs</Text>
+			<Text>{userId}</Text>
 		</CardWrapper>
 	);
 };

@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { UserCardWrapper } from "./userCard.styled";
 import { Menu, Dropdown, Space, Tag, Typography } from "antd";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
-import { useUsersMutation } from "../../../../store/api/usersApiSlice";
-import { useUpdateUserMutation } from "../../../../store/api/updateUserApiSlice";
+import { useUpdateUserStatusMutation } from "../../../../store/api/updateUserStatusApiSlice";
 const { Text } = Typography;
 const UserCard = ({ user }) => {
-	const [updateUser, { isLoading }] = useUpdateUserMutation();
+	const [updateUserStatus, { isLoading }] = useUpdateUserStatusMutation();
 
 	console.log(user);
 	const { fullname, status, email } = user;
@@ -34,13 +33,15 @@ const UserCard = ({ user }) => {
 
 	const handleSelect = async (key) => {
 		let current = items.filter((e) => e.key === key.key)[0].label;
-		const newStatus = await updateUser({
+		console.log(email);
+		const newStatus = await updateUserStatus({
 			email: email,
 			status: current,
 		});
-		setStat(current);
 		console.log(current);
 		console.log(newStatus);
+		console.log(user);
+		setStat(current);
 	};
 
 	const items = [

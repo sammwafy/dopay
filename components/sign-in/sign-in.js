@@ -9,6 +9,7 @@ import {
 	Col,
 	Typography,
 	Alert,
+	Image,
 } from "antd";
 const { Title } = Typography;
 import {
@@ -31,14 +32,17 @@ const SignIn = () => {
 	const [login, { isLoading }] = useLoginMutation();
 	const dispatch = useDispatch();
 	const [cookies, setCookie, removeCookie] = useCookies([""]);
+
 	const handleSubmit = async (values) => {
+		console.log(values);
 		try {
 			const userData = await login(values).unwrap();
-
+			console.log(userData);
 			dispatch(setCredentials({ ...userData }));
-			const { email, accessToken } = userData;
+			const { email, accessToken, id } = userData;
 			setCookie("email", email);
 			setCookie("token", accessToken);
+			setCookie("id", id);
 		} catch (err) {
 			console.log(err);
 			// if (!err?.originalStatus) {
@@ -76,7 +80,7 @@ const SignIn = () => {
 							}}
 							onFinish={handleSubmit}
 						>
-							<Title level={4} style={{ color: "green", textAlign: "center" }}>
+							{/* <Title level={4} style={{ color: "green", textAlign: "center" }}>
 								Login to your account{" "}
 							</Title>
 							<Row
@@ -119,7 +123,7 @@ const SignIn = () => {
 										display: "inline-block",
 									}}
 								></hr>
-							</div>
+							</div> */}
 							<Form.Item
 								name='email'
 								rules={[
@@ -158,7 +162,7 @@ const SignIn = () => {
 									<Checkbox>Remember me</Checkbox>
 								</Form.Item>
 
-								<a
+								{/* <a
 									style={{
 										float: "right",
 									}}
@@ -166,7 +170,7 @@ const SignIn = () => {
 									href=''
 								>
 									Forgot password
-								</a>
+								</a> */}
 							</Form.Item>
 
 							<Form.Item>
@@ -204,12 +208,13 @@ const SignIn = () => {
 								Ready for the next payment !
 							</p>
 						</div>
-						<img
+						<Image
 							style={{
 								width: "70%",
 							}}
 							src='login.jpg'
-						></img>
+							alt=''
+						/>
 					</div>
 				</Col>
 			</Row>

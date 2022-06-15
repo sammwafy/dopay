@@ -2,26 +2,21 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const accounts = new Schema(
-  {
-    userId: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    balance: {
-      type: Number,
-      required: true,
-    },
-    status: {
-      type: String,
-      default:"pending",
-      required: true,
-    },
-    type: {
-      type: String,
-    },
-  },
-  { timestamps: true }
+	{
+		userId: { type: Schema.Types.ObjectId, ref: "User" },
+		balance: {
+			type: Number,
+			required: true,
+		},
+		status: {
+			type: String,
+			default: "pending",
+		},
+		type: {
+			type: String,
+		},
+	},
+	{ timestamps: true }
 );
 
 mongoose.models = {};
