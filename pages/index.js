@@ -24,11 +24,7 @@ export default function Home() {
     return null;
   }
 
-  return (
-    <Layout>
-      <LandingHome />
-    </Layout>
-  );
+  return <Layout>{/* <LandingHome /> */}</Layout>;
 }
 
 const onChange = () => {};
