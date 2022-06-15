@@ -2,16 +2,20 @@ import React from "react";
 import { CardWrapper, NewAccountWrapper } from "./newAccount.styled";
 import NewAccountCard from "./NewAccountCard";
 import { Image, Typography } from "antd";
-
-import logo from "../../../../public/account.svg";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-const { Text, Title } = Typography;
+const { Title } = Typography;
 const NewAccount = () => {
 	const [myAccounts, setMyAccounts] = useState([
 		{ id: "1", amount: "123445 $", name: "ahly", number: "23840950hfjbvk" },
 		{
 			id: "2",
+			amount: "123445133 $",
+			name: "personal",
+			number: "2384240950hfjbvk",
+		},
+		{
+			id: "3",
 			amount: "123445133 $",
 			name: "personal",
 			number: "2384240950hfjbvk",
@@ -30,7 +34,7 @@ const NewAccount = () => {
 
 			{/* <NewAccountCard color='#2196F3' />
 			<NewAccountCard color='#FFE085' /> */}
-			{myAccounts.length < 3 && (
+			{myAccounts.length <= 2 && (
 				<CardWrapper color='crimson'>
 					<Image
 						src='account.svg'

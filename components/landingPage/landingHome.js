@@ -12,6 +12,7 @@ import ReactFullpage from "@fullpage/react-fullpage-umd";
 const LandingHome = () => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return (
 		<>
 			<section>
@@ -71,14 +72,45 @@ const LandingHome = () => {
     }}
   />;
 >>>>>>> 5c1e3ed853d1e3deb1944110511408b30f983102
+=======
+	<ReactFullpage
+		render={({ state, fullpageApi }) => {
+			return (
+				<LandingWrapper id='LandingPage'>
+					<section data-anchor='mainBanner'>
+						<MainBanner />
+					</section>
+					<section data-anchor='features'>
+						<Features />
+					</section>
+					<section data-anchor='smartDashboard'>
+						<SmartDashboard />
+					</section>
+					<section data-anchor='testimonials'>
+						<Testimonials />
+					</section>
+					<section data-anchor='partners'>
+						<Partners />
+					</section>
+					<section data-anchor='worksOnMobile'>
+						<WorksOnMobile />
+					</section>
+					<section data-anchor='usersCTA'>
+						<UsersCTA />
+					</section>
+				</LandingWrapper>
+			);
+		}}
+	/>;
+>>>>>>> f0a1c0616ef709b30eab60a5d9562b74c9b41bd5
 };
 
 const LandingWrapper = styled.div`
-  section {
-    margin-bottom: 100px;
-  }
-  section:last-child {
-    margin-bottom: 0px;
-  }
+	section {
+		margin-bottom: 100px;
+	}
+	section:last-child {
+		margin-bottom: 0px;
+	}
 `;
 export default LandingHome;

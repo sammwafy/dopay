@@ -7,11 +7,20 @@ import { Modal, Button, Typography } from "antd";
 import AccountsCard from "../accounts/accountsCard";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
+import { useAccountsMutation } from "../../../../store/api/accountsApiSlice";
 const { Text } = Typography;
 const Accounts = () => {
 	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
-	const [modalText, setModalText] = useState("Content of the modal");
+	const [accounts, { isLoading }] = useAccountsMutation();
+
+	// useEffect(() => {
+	// 	try {
+	// 		const getAccounts = async () => {
+	// 			const data = await accounts().unwrap();
+	// 		};
+	// 	} catch (error) {}
+	// }, [visible]);
 
 	//handle filtered by status.................
 	const [filteredInfo, setFilteredInfo] = useState({});
@@ -135,7 +144,6 @@ const Accounts = () => {
 	};
 
 	const handleOk = () => {
-		setModalText("The modal will be closed after two seconds");
 		setConfirmLoading(true);
 		setTimeout(() => {
 			setVisible(false);
@@ -144,7 +152,6 @@ const Accounts = () => {
 	};
 
 	const handleCancel = () => {
-		console.log("Clicked cancel button");
 		setVisible(false);
 	};
 

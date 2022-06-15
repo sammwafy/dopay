@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 // require("../styles/variables.less");
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-import DashboardLayout from "../components/dashboard/Layout/DashboardLayout";
 
 // redux import
 import { wrapper } from "../store/store";

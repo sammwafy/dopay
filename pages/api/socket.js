@@ -1,5 +1,7 @@
 import { Server } from "Socket.IO";
-
+let online = [];
+const addUser = () => {};
+const removeUser = () => {};
 const SocketHandler = (req, res) => {
 	if (res.socket.server.io) {
 		console.log("Socket is already running");
@@ -10,8 +12,11 @@ const SocketHandler = (req, res) => {
 
 		io.on("connection", (socket) => {
 			//listen to client through event "login" then send to all users who logged
-			socket.on("login", (msg) => {
-				io.emit("getNotification", msg);
+
+			io.emit("getNotification", "hello");
+
+			socket.on("disconnect", () => {
+				removeUser(socket.id);
 			});
 		});
 	}

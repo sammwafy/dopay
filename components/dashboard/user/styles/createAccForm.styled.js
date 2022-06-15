@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CreateAccFormStyle = styled.div`
-  width: 40%;
+  
   margin: 0 auto;
   padding: 5px;
   display: flex;
