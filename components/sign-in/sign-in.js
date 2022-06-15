@@ -1,82 +1,82 @@
 import {
-	Form,
-	Input,
-	Button,
-	Checkbox,
-	Card,
-	Space,
-	Row,
-	Col,
-	Typography,
-	Alert,
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  Card,
+  Space,
+  Row,
+  Col,
+  Typography,
+  Alert,
 } from "antd";
 const { Title } = Typography;
 import {
-	UserOutlined,
-	LockOutlined,
-	GooglePlusCircleFilled,
-	FacebookFilled,
-	TwitterOutlined,
+  UserOutlined,
+  LockOutlined,
+  GooglePlusCircleFilled,
+  FacebookFilled,
+  TwitterOutlined,
 } from "@ant-design/icons";
 import { SignInWrapper } from "./styles/signin.styled";
 import {
-	selectCurrentUser,
-	selectCurrentToken,
-	setCredentials,
+  selectCurrentUser,
+  selectCurrentToken,
+  setCredentials,
 } from "../../store/auth/authSlice.js";
 import { useLoginMutation } from "../../store/api/authApiSlice.js";
 import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 const SignIn = () => {
-	const [login, { isLoading }] = useLoginMutation();
-	const dispatch = useDispatch();
-	const [cookies, setCookie, removeCookie] = useCookies([""]);
-	const handleSubmit = async (values) => {
-		try {
-			const userData = await login(values).unwrap();
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies([""]);
+  const handleSubmit = async (values) => {
+    try {
+      const userData = await login(values).unwrap();
 
-			dispatch(setCredentials({ ...userData }));
-			const { email, accessToken } = userData;
-			setCookie("email", email);
-			setCookie("token", accessToken);
-		} catch (err) {
-			console.log(err);
-			// if (!err?.originalStatus) {
-			//   // isLoading: true until timeout occurs
-			//   setErrMsg("No Server Response");
-			// } else if (err.originalStatus === 400) {
-			//   setErrMsg("Missing Username or Password");
-			// } else if (err.originalStatus === 401) {
-			//   setErrMsg("Unauthorized");
-			// } else {
-			//   setErrMsg("Login Failed");
-			// }
-			// errRef.current.focus();
-		}
-	};
+      dispatch(setCredentials({ ...userData }));
+      const { email, accessToken } = userData;
+      setCookie("email", email);
+      setCookie("token", accessToken);
+    } catch (err) {
+      console.log(err);
+      // if (!err?.originalStatus) {
+      //   // isLoading: true until timeout occurs
+      //   setErrMsg("No Server Response");
+      // } else if (err.originalStatus === 400) {
+      //   setErrMsg("Missing Username or Password");
+      // } else if (err.originalStatus === 401) {
+      //   setErrMsg("Unauthorized");
+      // } else {
+      //   setErrMsg("Login Failed");
+      // }
+      // errRef.current.focus();
+    }
+  };
 
-	const password = false;
-	return (
-		<SignInWrapper>
-			<Row className='signContainer' gutter={100}>
-				<Col>
-					<Card
-						bordered={false}
-						style={{
-							height: "auto",
-							border: "solid 1px green",
-							borderRadius: "5px",
-						}}
-					>
-						<Form
-							name='normal_login'
-							className='login-form'
-							initialValues={{
-								remember: true,
-							}}
-							onFinish={handleSubmit}
-						>
-							<Title level={4} style={{ color: "green", textAlign: "center" }}>
+  const password = false;
+  return (
+    <SignInWrapper>
+      <Row className="signContainer" gutter={100}>
+        <Col>
+          <Card
+            bordered={false}
+            style={{
+              height: "auto",
+              border: "solid 1px green",
+              borderRadius: "5px",
+            }}
+          >
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={handleSubmit}
+            >
+              {/* <Title level={4} style={{ color: "green", textAlign: "center" }}>
 								Login to your account{" "}
 							</Title>
 							<Row
@@ -119,101 +119,101 @@ const SignIn = () => {
 										display: "inline-block",
 									}}
 								></hr>
-							</div>
-							<Form.Item
-								name='email'
-								rules={[
-									{
-										type: "email",
-										message: "The E-mail is not valid !",
-									},
-									{
-										required: true,
-										message: "Please input your E-mail!",
-									},
-								]}
-							>
-								<Input
-									prefix={<UserOutlined className='site-form-item-icon' />}
-									placeholder='Email'
-								/>
-							</Form.Item>
-							<Form.Item
-								name='password'
-								rules={[
-									{
-										required: true,
-										message: "Please input your Password!",
-									},
-								]}
-							>
-								<Input
-									prefix={<LockOutlined className='site-form-item-icon' />}
-									type='password'
-									placeholder='Password'
-								/>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name='remember' valuePropName='checked' noStyle>
-									<Checkbox>Remember me</Checkbox>
-								</Form.Item>
+							</div> */}
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    type: "email",
+                    message: "The E-mail is not valid !",
+                  },
+                  {
+                    required: true,
+                    message: "Please input your E-mail!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Email"
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Password!",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Item>
+              <Form.Item>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
 
-								<a
-									style={{
-										float: "right",
-									}}
-									className='login-form-forgot'
-									href=''
-								>
-									Forgot password
-								</a>
-							</Form.Item>
+                <a
+                  style={{
+                    float: "right",
+                  }}
+                  className="login-form-forgot"
+                  href=""
+                >
+                  Forgot password
+                </a>
+              </Form.Item>
 
-							<Form.Item>
-								<Button
-									type='primary'
-									htmlType='submit'
-									className='login-form-button'
-									style={{
-										width: "100%",
-									}}
-								>
-									Log in
-								</Button>
-								{/* {!password && (
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  style={{
+                    width: "100%",
+                  }}
+                >
+                  Log in
+                </Button>
+                {/* {!password && (
                   <Alert message="password incorrect" type="error" showIcon />
                 )} */}
-							</Form.Item>
-						</Form>
-					</Card>
-				</Col>
-				<Col>
-					<div className='rightContent'>
-						<div>
-							<Title style={{ color: "green" }}> Welcome back</Title>
-							<p
-								style={{
-									fontFamily: "Montserrat",
-									fontStyle: "normal",
-									fontWeight: "400",
-									fontSize: "20px",
-									lineHeight: "16px",
-									color: "grey",
-								}}
-							>
-								Ready for the next payment !
-							</p>
-						</div>
-						<img
-							style={{
-								width: "70%",
-							}}
-							src='login.jpg'
-						></img>
-					</div>
-				</Col>
-			</Row>
-		</SignInWrapper>
-	);
+              </Form.Item>
+            </Form>
+          </Card>
+        </Col>
+        <Col>
+          <div className="rightContent">
+            <div>
+              <Title style={{ color: "green" }}> Welcome back</Title>
+              <p
+                style={{
+                  fontFamily: "Montserrat",
+                  fontStyle: "normal",
+                  fontWeight: "400",
+                  fontSize: "20px",
+                  lineHeight: "16px",
+                  color: "grey",
+                }}
+              >
+                Ready for the next payment !
+              </p>
+            </div>
+            <img
+              style={{
+                width: "70%",
+              }}
+              src="login.jpg"
+            ></img>
+          </div>
+        </Col>
+      </Row>
+    </SignInWrapper>
+  );
 };
 export default SignIn;

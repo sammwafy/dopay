@@ -1,15 +1,7 @@
 import styled from "styled-components";
 
-export const PayContainer = styled.div`
-  display: flex;
-  margin: 20px auto;
-  width: 80%;
-  background: white;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
+export const WithdrawRechargeStyle = styled.div`
+  margin: 0 auto;
   .top {
     align-items: center;
     justify-content: center;
