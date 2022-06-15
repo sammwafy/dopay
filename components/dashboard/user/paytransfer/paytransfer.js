@@ -51,13 +51,13 @@ const Paytransfer = () => {
    
 		   
 	 <div className='cards'>
-	 <Image src={dopaycard} alt='logo' width='400' height='250'  onClick={showModal} />
+	 <Image src={dopaycard} alt='logo' width='400' height='280'  onClick={showModal} />
 			    <Modal
 				 title={<Space size='large'> 
 				 <div>
                   <Image src={arrow} alt='logo' width='30' height='30' />
 			     </div>
-			<div ><Title level={4} style={{color:'# 4C4C4C'}} > Transfer Money to a DoPay Account  </Title> </div>
+			<div ><h3 > Transfer Money to a DoPay Account  </h3> </div>
 		   </Space> }
         visible={visible}
         onOk={handleOk}
@@ -69,13 +69,13 @@ const Paytransfer = () => {
       </Modal>
    
    
-   <Image src={bankcard} alt='logo' width='400' height='250' onClick={showBankModal} />
+   <Image src={bankcard} alt='logo' width='400' height='280' onClick={showBankModal} />
    <Modal
 				 title={<Space size='large'> 
 				 <div>
                   <Image src={arrow} alt='logo' width='30' height='30' />
 			     </div>
-			<div ><Title level={4}  >Withdraw To a Bank Account</Title> </div>
+			<div ><h3 >Withdraw To a Bank Account</h3> </div>
 		   </Space> }
 		    
         visible={show}

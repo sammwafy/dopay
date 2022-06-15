@@ -4,9 +4,11 @@ import Image from "next/image";
 import CafImg from "../../../public/caf.svg";
 const { Option } = Select;
 
-const CreateAccForm = () => {
+const CreateAccForm = ({setIsModalVisible ,setShow}) => {
   const onFinish = (values) => {
     console.log("Success:", values);
+    setIsModalVisible(false);
+    setShow(true);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -41,62 +43,17 @@ const CreateAccForm = () => {
             <Radio value="b">Business</Radio>
           </Radio.Group>
         </Form.Item>
+        
+        
+        
         <Form.Item
-          name="select1"
-          label={<h3 className="label">country</h3>}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please select your country!",
-            },
-          ]}
+          name="Amount"
+          label={<h3 className="label">Amount</h3>}
+        
         >
-          <Select placeholder="">
-            <Option value="egypt">egypt</Option>
-            <Option value="usa">U.S.A</Option>
-          </Select>
+          <Input size="large" placeholder="0 $" />
         </Form.Item>
-        <Form.Item
-          name="select2"
-          label={<h3 className="label">bank name</h3>}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please select bank name!",
-            },
-          ]}
-        >
-          <Select placeholder="">
-            <Option value="ahly bank">ahly bank egypt</Option>
-            <Option value="cib">cib</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          name="Account Holder Name"
-          label={<h3 className="label">Account Holder Name</h3>}
-          rules={[
-            {
-              required: true,
-              message: "Please write your name!",
-            },
-          ]}
-        >
-          <Input size="large" placeholder="sameh-hasan" />
-        </Form.Item>
-        <Form.Item
-          name="IBAN"
-          label={<h3 className="label">IBAN</h3>}
-          rules={[
-            {
-              required: true,
-              message: "Please input your company!",
-            },
-          ]}
-        >
-          <Input size="large" placeholder="IBAN NUM" />
-        </Form.Item>
+        
         <Form.Item name="agree" valuePropName="check1">
           <Checkbox>
             I agree to the <span>Terms and Conditions *</span>

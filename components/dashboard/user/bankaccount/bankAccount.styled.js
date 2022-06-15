@@ -17,12 +17,14 @@ export const NewAccountWrapper = styled.div`
 		width:300px;
 		background-color: white;
 		
-		border-radius: 5px;
+		border-radius: 15px;
 		
 		justify-content: center;
 		display: flex;
 		align-items: center;
 		flex-direction:column;
+		
+		
 		
 		.top{
 			width :100%;
@@ -30,6 +32,7 @@ export const NewAccountWrapper = styled.div`
 		align-items: center;
 		justify-content: center;
 		padding:0px 20px;
+		
 		.left{
 			display: flex;
 			flex:1;
@@ -60,14 +63,16 @@ export const CardWrapper = styled.div`
 	border-radius: 40px;
 	background-color: ${(props) => props.color};
 	box-shadow: 0px 9px 50px rgba(0, 0, 0, 0.1);
-	padding: 20px;
+	padding: 30px;
 	
 	.ant-typography {
 		color: white;
 		margin: 0px 10px;
+		
 	}
 	h3.ant-typography {
 		margin-top: 0 !important;
+		margin-bottom: -30px !important;
 	}
 `;
 

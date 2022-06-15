@@ -4,7 +4,7 @@ import BankAccounts from '../../components/dashboard/user/bankaccount/bankAccoun
 const BankAccount = () => {
   return (
     <>
-    <UserDashboardLayout>
+  <UserDashboardLayout>
     <BankAccounts/>
     </UserDashboardLayout>
     </>

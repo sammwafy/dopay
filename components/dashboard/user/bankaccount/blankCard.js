@@ -14,6 +14,7 @@ const BlankCard = ({ showModal }) => {
 				height='50px'
 				width='50px'
 				onClick={showModal}
+				style={{ cursor: "pointer" }}
 			/>
 			<Text onClick={showModal}>Create a new bank account </Text>
 		</BlankCardWrapper>

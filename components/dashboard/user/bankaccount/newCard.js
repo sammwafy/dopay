@@ -9,12 +9,12 @@ const NewCard = ({ color }) => {
 			<Title level={3}>1500 $</Title>
 
 			<Image
+
 				src='/columsAccount.svg'
 				alt='logo'
 				preview={false}
 				previewPrefixCls={false}
-				// height='50px'
-				// width='300px'
+				style={{marginTop:'15px'}}
 			/>
 
 			<Text>453535sfffs</Text>

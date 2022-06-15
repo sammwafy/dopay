@@ -1,9 +1,11 @@
 import React,{useState} from 'react'
-import { WithdrawContainer} from './withdraw.styled'
-import { Button,Form, Input , Typography,Space,Modal} from 'antd';
+import { WithdrawContainer ,Container} from './withdraw.styled'
+import { Button,Form, Input , Typography,Space,Modal ,Select} from 'antd' ;
 import Image from "next/image";
 import arrow from '../../../../public/VectorArrow.svg'
-const { Title } = Typography;
+import WithdrawSuccess from './withdrawSuccess'
+const { Title , Text } = Typography;
+const { Option } = Select;
 const Withdraw = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const onFinish = (values) => {
@@ -29,14 +31,13 @@ const Withdraw = () => {
   };
 
   return (
-    <Space direction='vertical'>
-		  <Space size='large'>
-			  <Image src={arrow} alt='logo' width={50} height={50}/>
-	  <Title level={4}>Withdraw To a Bank Account </Title>
-	  </Space>
+    <Container>
+<div className='top'>
+    <Image src={arrow} alt='logo' width={50} height={50} />
+    <Title level={3} style={{marginLeft:'50px'}}>Withdraw To a Bank Account </Title>
+    </div>
    <WithdrawContainer>
-
-   <Form 
+    <Form 
     layout='vertical'
       name="payForm"
       requiredMark={false}
@@ -47,15 +48,17 @@ const Withdraw = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      className="formClass"
     >
       <Form.Item
+      labelCol={{
+        span: 24,
+        offset:4
+    }}
+  
       
-        label={
-        <div style={{display:'flex', flexDirection:'column',alignItems:"center"}} > 
-        <div ><Title level={3}> Enter Amount </Title> </div>
-       
-          </div> 
-          }
+      
+        label={<h3 className="label"> Enter Amount </h3>}
         name="payMoney"
         rules={[
           {
@@ -67,46 +70,45 @@ const Withdraw = () => {
        
         <Input  bordered={false} style={{borderBottom:'1px solid  #4C4C4C',textAlign:'center',}}  placeholder='$ 0'  />
       </Form.Item>
-
+     
+     
       <Form.Item
-       labelCol={{
-        offset: 9,
-        span: 16,
+        labelCol={{
+          span: 24,
+          offset:10
       }}
-        label={ <div ><Title level={3}> To </Title> </div>}
-        name="user"
-        rules={[
-          {
-            required: true,
-            message: 'Please input user',
-          },
-        ]}
-      >
-        <Input/>
-      </Form.Item>
+      
+      label= {<h3 className="label"> To </h3>}
+      name="bankName"
+      rules={[
+        {
+          required: true,
+          message: 'Plz Enter Bank Name!',
+        },
+      ]}
+    >
+      <Select defaultValue="nationalBank "   style={{ width: 200 }} >
+        <Option value="nationalBank">National Bank Of Egypt </Option>
+        <Option value="misrBank">BANQUE MISR</Option>
+        <Option value=" alexandriaBank  "> Bank of Alexandria </Option>
+        <Option value="faisalBank"> Faisal Islamic Bank of Egypt </Option>
+      </Select>
 
+    </Form.Item>
       
 
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      
-      >
-        <Button type="primary" htmlType="submit">
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className='btn'>
           Send
         </Button>
       </Form.Item>
     </Form>
-    <Modal title="Basic Modal" visible={isModalVisible}  onCancel={handleCancel} footer={null}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+    <Modal  visible={isModalVisible}  onCancel={handleCancel} footer={null}>
+        <WithdrawSuccess/>
       </Modal>
    </WithdrawContainer>
-	</Space>
-
+	
+   </Container>
   )
 }
 

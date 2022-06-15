@@ -10,43 +10,43 @@ import styled from "styled-components";
 import ReactFullpage from "@fullpage/react-fullpage-umd";
 
 const LandingHome = () => {
-  <ReactFullpage
-    render={({ state, fullpageApi }) => {
-      return (
-        <LandingWrapper id="LandingPage">
-          <section data-anchor="mainBanner">
-            <MainBanner />
-          </section>
-          <section data-anchor="features">
-            <Features />
-          </section>
-          <section data-anchor="smartDashboard">
-            <SmartDashboard />
-          </section>
-          <section data-anchor="testimonials">
-            <Testimonials />
-          </section>
-          <section data-anchor="partners">
-            <Partners />
-          </section>
-          <section data-anchor="worksOnMobile">
-            <WorksOnMobile />
-          </section>
-          <section data-anchor="usersCTA">
-            <UsersCTA />
-          </section>
-        </LandingWrapper>
-      );
-    }}
-  />;
+	<ReactFullpage
+		render={({ state, fullpageApi }) => {
+			return (
+				<LandingWrapper id='LandingPage'>
+					<section data-anchor='mainBanner'>
+						<MainBanner />
+					</section>
+					<section data-anchor='features'>
+						<Features />
+					</section>
+					<section data-anchor='smartDashboard'>
+						<SmartDashboard />
+					</section>
+					<section data-anchor='testimonials'>
+						<Testimonials />
+					</section>
+					<section data-anchor='partners'>
+						<Partners />
+					</section>
+					<section data-anchor='worksOnMobile'>
+						<WorksOnMobile />
+					</section>
+					<section data-anchor='usersCTA'>
+						<UsersCTA />
+					</section>
+				</LandingWrapper>
+			);
+		}}
+	/>;
 };
 
 const LandingWrapper = styled.div`
-  section {
-    margin-bottom: 100px;
-  }
-  section:last-child {
-    margin-bottom: 0px;
-  }
+	section {
+		margin-bottom: 100px;
+	}
+	section:last-child {
+		margin-bottom: 0px;
+	}
 `;
 export default LandingHome;
