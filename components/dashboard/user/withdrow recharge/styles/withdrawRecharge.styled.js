@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const WithdrawRechargeStyle = styled.div`
-  margin: 0 auto;
+  margin: 50px auto;
   .top {
     align-items: center;
     justify-content: center;
