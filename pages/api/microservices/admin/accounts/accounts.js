@@ -1,5 +1,5 @@
-const { Account } = require("../../../../db/models/account");
-const { dbConnect } = require("../../../../db/middleware/mongodb");
+const { Account } = require("../../../../../db/models/account");
+const { dbConnect } = require("../../../../../db/middleware/mongodb");
 
 export default async function accounts(req, res) {
 	await dbConnect().then(console.log("connected"));

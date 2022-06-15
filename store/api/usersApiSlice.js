@@ -3,10 +3,9 @@ import { api } from "./api";
 export const usersApiSlice = api.injectEndpoints({
 	endpoints: (builder) => ({
 		users: builder.mutation({
-			query: (credentials) => ({
+			query: () => ({
 				url: "/api/apigateway/",
-				method: "POST",
-				body: { ...credentials },
+				method: "GET",
 				headers: { APIEND: "users" },
 			}),
 		}),

@@ -9,7 +9,10 @@ export default async function handler(req, res) {
 			try {
 				let response = await fetch(`${server}/api/microservices/login/login/`, {
 					method: "POST",
-					headers: req.headers,
+					headers: {
+						Accept: `application/json`,
+						"Content-Type": `application/json`,
+					},
 					body: JSON.stringify(req.body),
 				});
 				const data = await response.json();
@@ -23,14 +26,19 @@ export default async function handler(req, res) {
 		// get all users (admin)
 		case "users":
 			try {
-				let response = await fetch(`${server}/api/microservices/users/users/`, {
-					method: "GET",
-					headers: req.headers,
-				});
+				let response = await fetch(
+					`${server}/api/microservices/admin/users/getAllUsers/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
 				const data = await response.json();
 				res.send(data);
+				console.log(data);
 			} catch (err) {
 				res.status(res.statusCode).send(err);
+				console.log(err);
 			}
 
 			break;
@@ -38,11 +46,14 @@ export default async function handler(req, res) {
 		// update user (admin)
 		case "updateUser":
 			try {
-				let response = await fetch(`${server}/api/microservices/users/users/`, {
-					method: "PUT",
-					headers: req.headers,
-					body: JSON.stringify(req.body),
-				});
+				let response = await fetch(
+					`${server}/api/microservices/admin/users/getAllUsers/`,
+					{
+						method: "PUT",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
@@ -55,7 +66,7 @@ export default async function handler(req, res) {
 		case "accounts":
 			try {
 				let response = await fetch(
-					`${server}/api/microservices/accounts/accounts/`,
+					`${server}/api/microservices/admin/accounts/accounts/`,
 					{
 						method: "GET",
 						headers: req.headers,

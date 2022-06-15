@@ -15,7 +15,7 @@ const Users = () => {
 	const allUsers = useSelector((state) => state.users);
 	console.log(allUsers);
 
-	const data = allUsers.map((user) => ({
+	const data = allUsers?.map((user) => ({
 		key: user._id,
 		name: user.fullname,
 		account: 0,
