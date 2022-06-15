@@ -10,6 +10,7 @@ export default async function verifyToken(req, res) {
 				token,
 				new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET)
 			);
+			console.log(jwtData);
 		} catch (error) {
 			//res.status(401).send(error);
 			console.log(error);
