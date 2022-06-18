@@ -34,11 +34,10 @@ const Features = () => {
         <Col className="content">
           <div>
             <Image src="/imgs/landing/Deco.svg" preview={false} alt="feature" />
-            <h2>Control your money anywhere</h2>
+            <h2>Smart Transaction logs</h2>
           </div>
           <p>
-            Cras convallis lacus orci, tristique tincidunt magna consequat in.
-            In vel pulvinar est.
+          Quisque lacinia purus ut libero facilisis, at vulputate sem maximus.
           </p>
         </Col>
       </Row>

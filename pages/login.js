@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout.js";
+import Layout from "../components/layout/Layout.js";
 import SignIn from "../components/sign-in/sign-in";
 import { useSelector } from 'react-redux'
 

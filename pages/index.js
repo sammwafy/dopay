@@ -25,9 +25,7 @@ export default function Home() {
 	}
 
 	return (
-		<Layout>
 			<LandingHome />
-		</Layout>
 	);
 }
 
