@@ -14,6 +14,12 @@ const NewAccount = () => {
 			name: "personal",
 			number: "2384240950hfjbvk",
 		},
+		{
+			id: "3",
+			amount: "123445133 $",
+			name: "personal",
+			number: "2384240950hfjbvk",
+		},
 	]);
 	const showForm = () => {
 		//show modal logic here
@@ -28,7 +34,7 @@ const NewAccount = () => {
 
 			{/* <NewAccountCard color='#2196F3' />
 			<NewAccountCard color='#FFE085' /> */}
-			{myAccounts.length < 3 && (
+			{myAccounts.length <= 2 && (
 				<CardWrapper color='crimson'>
 					<Image
 						src='account.svg'

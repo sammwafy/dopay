@@ -7,22 +7,22 @@ import LandingHome from "../components/landingPage/landingHome.js";
 import { useRouter } from "next/router";
 
 export default function Home() {
-	const router = useRouter();
-	const handleClick = (e) => {
-		e.preventDefault();
-		router.push(`/admin/users`);
-	};
-	const [isDarkMode, setIsDarkMode] = useState();
-	const { switcher, currentTheme, status, themes } = useThemeSwitcher();
+  const router = useRouter();
+  const handleClick = (e) => {
+    e.preventDefault();
+    router.push(`/admin/users`);
+  };
+  const [isDarkMode, setIsDarkMode] = useState();
+  const { switcher, currentTheme, status, themes } = useThemeSwitcher();
 
-	const toggleTheme = (isChecked) => {
-		setIsDarkMode(isChecked);
-		switcher({ theme: isChecked ? themes.dark : themes.light });
-	};
+  const toggleTheme = (isChecked) => {
+    setIsDarkMode(isChecked);
+    switcher({ theme: isChecked ? themes.dark : themes.light });
+  };
 
-	if (status === "loading") {
-		return null;
-	}
+  if (status === "loading") {
+    return null;
+  }
 
 	return (
 			<LandingHome />

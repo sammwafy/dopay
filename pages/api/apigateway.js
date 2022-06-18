@@ -1,75 +1,243 @@
 import { server } from "../../config";
 
 export default async function handler(req, res) {
-  const APIEND = req.headers["apiend"];
+	const APIEND = req.headers["apiend"];
 
-  // login
-  switch (APIEND) {
-    case "login":
-      try {
-        let response = await fetch(`${server}/api/microservices/login/login/`, {
-          method: "POST",
-          headers: req.headers,
-          body: JSON.stringify(req.body),
-        });
-        const data = await response.json();
-        res.send(data);
-      } catch (err) {
-        res.status(401).send(err);
-      }
+	switch (APIEND) {
+		case "login":
+			try {
+				console.log(req.body);
+				let response = await fetch(`${server}/api/microservices/login/login/`, {
+					method: "POST",
+					headers: req.headers,
+					body: JSON.stringify(req.body),
+				});
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
 
-      break;
-
-  // get all users (admin)
-    case "users":
-      try {
-        let response = await fetch(`${server}/api/microservices/users/users/`, {
-          method: "GET",
-          headers: req.headers,
-        });
-        const data = await response.json();
-        res.send(data);
-      } catch (err) {
-        res.status(res.statusCode).send(err);
-      }
-
-      break;
-
-  // update user (admin)
-    case "updateUser":
-      try {
-        let response = await fetch(`${server}/api/microservices/users/users/`, {
-          method: "PUT",
-          headers: req.headers,
-          body: JSON.stringify(req.body),
-        });
-        const data = await response.json();
-        res.send(data);
-      } catch (err) {
-        console.log(err);
-      }
-
-      break;
-
-  // update bank accounts (admin)
-    case "accounts":
-      try {
-        let response = await fetch(
-          `${server}/api/microservices/accounts/accounts/`,
-          {
-            method: "GET",
-            headers: req.headers,
-          }
-        );
-        const data = await response.json();
-        res.send(data);
-      } catch (err) {
-        console.log(err);
-      }
-
-      break;
-
-    default:
-      return null;
-  }
+			break;
+		case "register":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/register/register/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "getAllAccounts":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/getAllAccounts/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "getAllUsers":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/getAllUsers/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "getNewUsers":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/getNewUsers/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "rechargingAmount":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/rechargingAmount/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "transactionsLastMonth":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/transactionsLastMonth/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "transferAmount":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/transferAmount/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "withDrawAmount":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/withDrawAmount/`,
+					{
+						method: "GET",
+						headers: req.headers,
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "updateUserStatus":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/updateUserStatus/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "updateAccountStatus":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/admin/updateAccountStatus/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "createNewAccount":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/createNewAccount/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "editUserProfile":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/editUserProfile/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		case "getUserAccounts":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/getUserAccounts/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		//get user transactions waiting for function complete
+		case "totalMoneyInAccounts":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/totalMoneyInAccounts/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
+		default:
+			return null;
+	}
 }

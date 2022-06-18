@@ -8,14 +8,14 @@ import { SearchOutlined } from "@ant-design/icons";
 
 import { UserWrapper } from "./users.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { useUsersMutation } from "../../../../store/api/usersApiSlice";
 import { getUsers } from "../../../../store/users/usersSlice";
+import { useGetAllUsersMutation } from "../../../../store/api/getAllUsersApiSlice";
 const Users = () => {
 	const [selectedUser, setSelectedUser] = useState(null);
 	const allUsers = useSelector((state) => state.users);
 	console.log(allUsers);
 
-	const data = allUsers.map((user) => ({
+	const data = allUsers?.map((user) => ({
 		key: user._id,
 		name: user.fullname,
 		account: 0,
@@ -24,14 +24,14 @@ const Users = () => {
 		status: user.status,
 	}));
 
-	const [users, { isLoading }] = useUsersMutation();
+	const [getAllUsers, { isLoading }] = useGetAllUsersMutation();
 	const dispatch = useDispatch();
 
 	const [visible, setVisible] = useState(false);
 	useEffect(() => {
 		try {
 			const apiUsers = async () => {
-				const fetchedUsers = await users().unwrap();
+				const fetchedUsers = await getAllUsers().unwrap();
 				console.log(fetchedUsers);
 				dispatch(getUsers(fetchedUsers));
 			};

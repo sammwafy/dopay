@@ -21,6 +21,7 @@ const Pay = ({setVisible}) => {
   return (
     <Wrapper>
     <Form 
+    className='formClass'
     layout='vertical'
       name="payForm"
       requiredMark={false}
@@ -33,13 +34,11 @@ const Pay = ({setVisible}) => {
       autoComplete="off"
     >
       <Form.Item
-      
-        label={
-        <div style={{display:'flex', flexDirection:'column',alignItems:"center"}} > 
-        <div ><Title level={3}> Enter Amount </Title> </div>
-       
-          </div> 
-          }
+       labelCol={{
+        offset: 5,
+        span: 16,
+      }}
+        label={<h3 className='label'>Enter Amount</h3>}
         name="payMoney"
         rules={[
           {
@@ -54,10 +53,10 @@ const Pay = ({setVisible}) => {
 
       <Form.Item
        labelCol={{
-        offset: 9,
+        offset: 10,
         span: 16,
       }}
-        label={ <div ><Title level={3}> To </Title> </div>}
+        label={ <h3 className='label'>To</h3>}
         name="user"
         rules={[
           {
@@ -72,13 +71,10 @@ const Pay = ({setVisible}) => {
       
 
       <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
+        
       
       >
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" className='btn'>
           Send
         </Button>
       </Form.Item>

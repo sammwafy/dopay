@@ -1,13 +1,11 @@
 import React from "react";
-import { BlankCardWrapper } from './bankAccount.styled'
+import { BlankCardWrapper } from "./bankAccount.styled";
 import { Typography, Image } from "antd";
 const { Text, Title } = Typography;
 
-
-const BlankCard = ({showModal}) => {
+const BlankCard = ({ showModal }) => {
 	return (
-		
-			< BlankCardWrapper>
+		<BlankCardWrapper>
 			<Image
 				src='/plus.svg'
 				alt='logo'
@@ -15,12 +13,11 @@ const BlankCard = ({showModal}) => {
 				previewPrefixCls={false}
 				height='50px'
 				width='50px'
-                onClick={showModal}
-                	
+				onClick={showModal}
+				style={{ cursor: "pointer" }}
 			/>
-<Text onClick={showModal} >Create a new bank account </Text>
-		</ BlankCardWrapper>
-		
+			<Text onClick={showModal}>Create a new bank account </Text>
+		</BlankCardWrapper>
 	);
 };
 
