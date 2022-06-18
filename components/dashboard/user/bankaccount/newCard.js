@@ -3,7 +3,7 @@ import { CardWrapper } from "./bankAccount.styled";
 import { Typography, Image } from "antd";
 const { Text, Title } = Typography;
 const NewCard = ({ color, account }) => {
-	const { balance, _id, userId } = account;
+	const { balance, _id } = account;
 	return (
 		<CardWrapper color={color}>
 			<Text> {_id}e </Text>
@@ -17,7 +17,7 @@ const NewCard = ({ color, account }) => {
 				style={{ marginTop: "15px" }}
 			/>
 
-			<Text>{userId}</Text>
+			<Text>{account.userId.email}</Text>
 		</CardWrapper>
 	);
 };

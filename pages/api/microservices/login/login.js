@@ -20,6 +20,7 @@ export default async function login(req, res) {
 						const accessToken = await new jose.SignJWT({
 							UserInfo: {
 								email: foundUser.email,
+								role: foundUser.isAdmin,
 							},
 						})
 							.setProtectedHeader({ alg: "HS256" })
@@ -28,12 +29,16 @@ export default async function login(req, res) {
 							.sign(new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET));
 
 						// Send authorization roles and access token to user
-						res.json({ email, accessToken, id: foundUser._id });
+						res.json({
+							email,
+							accessToken,
+							id: foundUser._id,
+						});
 					} else {
 						res.status(401).send("Wrong Credentials!");
 					}
 				} else {
-					res.send("Pending Approval");
+					res.json("Thank you for joining us waiting for approval");
 				}
 			} catch (err) {
 				res.status(401).send(err);
