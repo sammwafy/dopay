@@ -1,14 +1,33 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { Menu, Dropdown, Space, Typography } from "antd";
+import { Menu, Dropdown, Space, Typography, Tag } from "antd";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { AccountsCardWrapper } from "./accountsCard.styled";
 import { useUpdateAccountStatusMutation } from "../../../../store/api/updateAccountStatusApiSlice";
 const { Text } = Typography;
 const AccountsCard = ({ account }) => {
 	const [updateAccountStatus, { isLoading }] = useUpdateAccountStatusMutation();
+	console.log(isLoading);
 	const { _id, userId, status, balance, type } = account;
 	const [stat, setStat] = useState(status);
+	let color;
+	switch (stat) {
+		case "pending":
+			color = "black";
+			break;
+		case "verified":
+			color = "green";
+			break;
+		case "deactive":
+			color = "gray";
+			break;
+		case "rejected":
+			color = "red";
+			break;
+		default:
+			color = "";
+			break;
+	}
 
 	const handleSelect = async (key) => {
 		console.log(key);
@@ -32,7 +51,7 @@ const AccountsCard = ({ account }) => {
 		},
 		{
 			key: "3",
-			label: "suspended",
+			label: "rejected",
 		},
 	];
 
@@ -85,8 +104,10 @@ const AccountsCard = ({ account }) => {
 				<span>Status</span>
 				<Dropdown overlay={menu}>
 					<Space>
-						{stat}
-						<DownOutlined />
+						<Tag color={color}>
+							{stat || ""}
+							<DownOutlined />
+						</Tag>
 					</Space>
 				</Dropdown>
 			</div>

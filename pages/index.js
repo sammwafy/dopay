@@ -4,7 +4,6 @@ import { useThemeSwitcher } from "react-css-theme-switcher";
 import { useState } from "react";
 import Layout from "../components/layout/Layout"
 import LandingHome from "../components/landingPage/landingHome.js";
-import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();

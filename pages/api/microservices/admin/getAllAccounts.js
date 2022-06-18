@@ -4,11 +4,9 @@ export default async function getAllAccounts(req, res) {
 	await dbConnect().then(console.log("connected"));
 	try {
 		let accounts;
-		accounts = await Accounts.find();
+		accounts = await Accounts.find().populate("userId");
 		res.status(200).json(accounts);
-		console.log("accounts", accounts);
 	} catch (err) {
 		res.status(500).json(err);
-		console.log(err);
 	}
 }

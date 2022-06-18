@@ -1,10 +1,7 @@
-import React from 'react'
+import Transactions from "../../components/dashboard/user/transactions/transactions";
 
+const TransactionPage = () => {
+	return <Transactions />;
+};
 
-const Transactions = () => {
-  return (
-    <div>Transactions</div>
-  )
-}
-
-export default Transactions
+export default TransactionPage;

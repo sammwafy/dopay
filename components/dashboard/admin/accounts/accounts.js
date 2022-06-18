@@ -27,7 +27,7 @@ const Accounts = () => {
 	}, [visible]);
 	const data = accounts.map((account, i) => ({
 		key: account.i,
-		userId: account.userId,
+		userId: account.userId.email,
 		accountNumber: account._id,
 		balance: account.balance,
 		status: account.status,

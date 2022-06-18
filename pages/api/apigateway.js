@@ -6,7 +6,6 @@ export default async function handler(req, res) {
 	switch (APIEND) {
 		case "login":
 			try {
-				console.log(req.body);
 				let response = await fetch(`${server}/api/microservices/login/login/`, {
 					method: "POST",
 					headers: req.headers,
@@ -15,6 +14,7 @@ export default async function handler(req, res) {
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
+				res.send(err);
 				console.log(err);
 			}
 
@@ -136,6 +136,7 @@ export default async function handler(req, res) {
 				);
 				const data = await response.json();
 				res.send(data);
+				console.log(data);
 			} catch (err) {
 				console.log(err);
 			}
@@ -168,6 +169,7 @@ export default async function handler(req, res) {
 				);
 				const data = await response.json();
 				res.send(data);
+				console.log("data", data);
 			} catch (err) {
 				console.log(err);
 			}
@@ -241,3 +243,8 @@ export default async function handler(req, res) {
 			return null;
 	}
 }
+<nav>
+	<ul>
+		<li></li>
+	</ul>
+</nav>;

@@ -81,7 +81,6 @@ const BankAccounts = () => {
 		};
 		getMyAccounts();
 	}, []);
-	console.log(myAccounts);
 	const showModal = () => {
 		setIsModalVisible(true);
 	};
@@ -95,7 +94,7 @@ const BankAccounts = () => {
 	};
 	return (
 		<NewAccountWrapper>
-			<Space size='large'>
+			<Space size='large' wrap>
 				{myAccounts.map((account, i) => (
 					<NewCard account={account} color='#FF6F00' key={i} />
 				))}
@@ -111,7 +110,7 @@ const BankAccounts = () => {
 					<CreateAccForm setIsModalVisible={setIsModalVisible} />
 				</Modal>
 			</Space>
-			<Space size='large'>
+			<Space size='large' wrap>
 				{myAccounts.map((account, i) => (
 					<div className='chart' key={i}>
 						<div className='top'>
