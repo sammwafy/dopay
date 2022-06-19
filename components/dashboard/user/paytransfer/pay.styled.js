@@ -25,3 +25,8 @@ export const PayContainer = styled.div`
     justify-content: center;
   }
 `;
+
+
+export const Wrapper = styled.div`
+
+`

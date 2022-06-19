@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Dashboard from "../../components/dashboard/admin/dashboard/Dashboard";
-import { getLayout } from "../../components/dashboard/Layout/DashboardLayout";
+import { getLayout } from "../../components/dashboard/Layout/dashboardLayout";
 import { useCookies } from "react-cookie";
 import SignIn from "../../components/sign-in/sign-in";
 import Router from "next/router";

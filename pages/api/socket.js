@@ -1,4 +1,4 @@
-import { Server } from "Socket.IO";
+import { Server } from "socket.io";
 let online = [];
 const addUser = () => {};
 const removeUser = () => {};

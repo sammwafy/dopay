@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout.js";
+import Layout from "../components/layout/Layout.js";
 import SignUp from "../components/sign-up/sign-up";
 
 const Login = () => {
