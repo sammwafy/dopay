@@ -20,7 +20,7 @@ export default async function login(req, res) {
 						const accessToken = await new jose.SignJWT({
 							UserInfo: {
 								email: foundUser.email,
-								role: foundUser.isAdmin,
+								isAdmin: foundUser.isAdmin,
 							},
 						})
 							.setProtectedHeader({ alg: "HS256" })

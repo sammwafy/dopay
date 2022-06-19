@@ -1,6 +1,6 @@
 import DashboardLayout, {
 	getLayout,
-} from "../../components/dashboard/Layout/DashboardLayout";
+} from "../../components/dashboard/Layout/dashboardLayout";
 
 const setting = () => {
 	return <div>setting</div>;

@@ -1,16 +1,17 @@
+import { WithdrawRechargeStyle } from "./styles/withdrawRecharge.styled";
 import React, { useState } from "react";
 import { Typography, Space, Modal } from "antd";
-import { PayContainer } from "./pay.styled";
 import Image from "next/image";
 import arrow from "../../../../public/VectorArrow.svg";
-import bankcard from "../../../../public/bankcard.svg";
-import dopaycard from "../../../../public/dopaycard.svg";
-import Pay from "./pay";
-import PaySuccess from "./paySuccess";
-import Transfer from "./transfer";
+import Withdraw from "../../../../public/withdraw.svg";
+import Reacharge from "../../../../public/recharge.svg";
+import Pay from "../paytransfer/pay";
+import PaySuccess from "../paytransfer/paySuccess";
+import Transfer from "../paytransfer/transfer";
+
 const { Title } = Typography;
 
-const Paytransfer = () => {
+const WithdrawRecharge = () => {
   const [visible, setVisible] = useState(false);
   const [show, setShow] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -40,23 +41,41 @@ const Paytransfer = () => {
   };
 
   return (
-    <PayContainer>
+    <WithdrawRechargeStyle>
       <div className="top">
-        <Title level={3}> Payments & Transfer </Title>
+        <Title level={3}> Withdraw & Recharge </Title>
       </div>
 
       <div className="cards">
         <Image
-          src={dopaycard}
+          src={Withdraw}
           alt="logo"
           width="400"
           height="280"
           onClick={showModal}
         />
-
+        <Modal
+          title={
+            <Space size="large">
+              <div>
+                <Image src={arrow} alt="logo" width="30" height="30" />
+              </div>
+              <div>
+                <h3> Transfer Money to a DoPay Account </h3>
+              </div>
+            </Space>
+          }
+          visible={visible}
+          onOk={handleOk}
+          confirmLoading={confirmLoading}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          {modalText}
+        </Modal>
 
         <Image
-          src={bankcard}
+          src={Reacharge}
           alt="logo"
           width="400"
           height="280"
@@ -82,8 +101,7 @@ const Paytransfer = () => {
           {modalBank}
         </Modal>
       </div>
-    </PayContainer>
+    </WithdrawRechargeStyle>
   );
 };
-
-export default Paytransfer;
+export default WithdrawRecharge;

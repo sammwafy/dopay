@@ -1,6 +1,6 @@
 import React from "react";
 import Accounts from "../../components/dashboard/admin/accounts/accounts";
-import { getLayout } from "../../components/dashboard/Layout/DashboardLayout";
+import { getLayout } from "../../components/dashboard/Layout/dashboardLayout";
 
 const accounts = () => {
 	return <Accounts />;

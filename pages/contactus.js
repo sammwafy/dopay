@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout.js";
+import Layout from "../components/layout/Layout.js";
 import ContactUs from "../components/contactUs/ContactUs.js";
 
 const contactus = () => {

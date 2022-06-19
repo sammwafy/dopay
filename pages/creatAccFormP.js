@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout.js";
+import Layout from "../components/layout/Layout.js";
 import CreateAccForm from "../components/dashboard/user/CreateAccForm";
 
 const creatAccFormP = () => {
