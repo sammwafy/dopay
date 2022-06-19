@@ -10,8 +10,8 @@ const DashboardPage = () => {
 
 	useEffect(() => {
 		// if user is not authenticated, redirect to login page
-		console.log("here");
-		if (!cookies.role) Router.push("/user");
+
+		Router.push("/login");
 	});
 
 	return <Dashboard />;

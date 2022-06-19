@@ -52,7 +52,6 @@ export default async function handler(req, res) {
 			break;
 		case "getAllUsers":
 			try {
-
 				let response = await fetch(
 					`${server}/api/microservices/admin/getAllUsers/`,
 					{
@@ -61,10 +60,9 @@ export default async function handler(req, res) {
 					}
 				);
 				const data = await response.json();
-        
 				res.status(200).json(data);
 			} catch (err) {
-				console.log('error is',err);
+				console.log("error is", err);
 			}
 			break;
 		case "getNewUsers":
@@ -245,8 +243,3 @@ export default async function handler(req, res) {
 			return null;
 	}
 }
-<nav>
-	<ul>
-		<li></li>
-	</ul>
-</nav>;
