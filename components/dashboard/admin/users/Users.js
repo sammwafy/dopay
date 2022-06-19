@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Space, Table, Tag, Input } from "antd";
 import Image from "next/image";
 import { UserWrapper } from "./users.styled";
@@ -8,6 +8,33 @@ import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 
 const Users = () => {
+
+	useEffect(() => {
+		try {
+			const test = async () => {
+				let response = await fetch(`http://localhost:3000/api/userRoutes`, {
+					method: "POST",
+					headers: {
+						//token: req.headers.token,
+						Accept: `application/json`,
+						"Content-Type": `application/json`,
+					},
+					body: JSON.stringify({
+						"userID": "1234",
+						"accID": "1234"
+					}),
+				});
+				const data = await response.json();
+				console.log(data)
+				//res.send(data);
+			}
+			test();
+		} catch (err) {
+			console.log(err);
+		}
+	}, [])
+
+
 	const [visible, setVisible] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [modalText, setModalText] = useState("Content of the modal");
