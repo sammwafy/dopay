@@ -7,7 +7,7 @@ export default async function register(req, res) {
 	await dbConnect().then(console.log("connected"));
 	const { fullname, email, userPassword, phoneNumber } = req.body;
 	const checkEmail = await User.findOne({ email: email });
-	if (checkEmail) {
+	if (!checkEmail) {
 		const saltRounds = 10;
 		const password = await bcrypt.hash(userPassword, saltRounds);
 		if (req.method === "POST") {
