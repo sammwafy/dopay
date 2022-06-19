@@ -1,17 +1,20 @@
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { getLayout } from "../../components/dashboard/Layout/DashboardLayout";
+import Dashboard from "../../components/dashboard/admin/dashboard/Dashboard";
+import { getLayout } from "../../components/dashboard/Layout/dashboardLayout";
+import { useCookies } from "react-cookie";
+import SignIn from "../../components/sign-in/sign-in";
+import Router from "next/router";
+const DashboardPage = () => {
+	const [cookies, setCookie] = useCookies([""]);
+	console.log(cookies.role);
 
-const Index = () => {
-	const router = useRouter();
+	useEffect(() => {
+		// if user is not authenticated, redirect to login page
+		console.log("here");
+		if (!cookies.role) Router.push("/user");
+	});
 
-	// useEffect(() => {
-	// 	setTimeout(() => {
-	// 		router.push({ pathname: "admin/users" });
-	// 	}, 4000);
-	// }, []);
-
-	return <div>index</div>;
+	return <Dashboard />;
 };
-Index.getLayout = getLayout;
-export default Index;
+DashboardPage.getLayout = getLayout;
+export default DashboardPage;

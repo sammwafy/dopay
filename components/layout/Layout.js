@@ -1,15 +1,21 @@
 import { Layout as LayoutANT } from "antd";
-const { Header, Footer, Sider, Content } = LayoutANT;
+import Footer from "./footer.js";
+import MainHeader from "./mainHeader.js";
+const { Sider, Content, Header } = LayoutANT;
 
 const Layout = ({ children, noContainer }) => {
   return (
-    <LayoutANT>
-      <Header>Header</Header>
+    <>
+      <header>{<MainHeader />}</header>
+
       <Content>
         <div className={noContainer ? null : "container"}>{children}</div>
       </Content>
-      <Footer>Footer</Footer>
-    </LayoutANT>
+
+      <footer>
+        <Footer />
+      </footer>
+    </>
   );
 };
 export const getLayout = (page) => <Layout>{page}</Layout>;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
 import SideBar from "../admin/sidebar/SideBar";
-import Nav from "../admin/nav/Nav";
+import Nav from "../admin/nav/nav";
 const { Header, Footer, Sider, Content } = Layout;
 
 const DashboardLayout = ({ children }) => {
@@ -22,7 +22,7 @@ const DashboardLayout = ({ children }) => {
 				>
 					<Nav showDrawer={showDrawer} setShowDrawer={setShowDrawer} />
 				</Header>
-				<Content style={{ overflow: "scroll" }}>{children}</Content>
+				<Content style={{ overflow: "scroll",}}>{children}</Content>
 			</Layout>
 		</Layout>
 	);

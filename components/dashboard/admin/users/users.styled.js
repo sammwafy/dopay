@@ -15,7 +15,7 @@ export const UserWrapper = styled.div`
 		transition: font-size 2s;
 		&:hover {
 			.btn-view {
-				font-size: larger;
+				font-size: 12px;
 			}
 		}
 
