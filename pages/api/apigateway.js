@@ -1,4 +1,6 @@
 import { server } from "../../config";
+const { updateNotifications } = require("../api/userRoutes");
+
 
 export default async function handler(req, res) {
 	const APIEND = req.headers["apiend"];
@@ -30,6 +32,10 @@ export default async function handler(req, res) {
 					}
 				);
 				const data = await response.json();
+				if (data.fullname && data._id) {
+					updateNotifications({ accID: data.fullname, userID: data._id });
+				}
+				console.log({ data })
 				res.send(data);
 			} catch (err) {
 				console.log(err);
@@ -61,10 +67,10 @@ export default async function handler(req, res) {
 					}
 				);
 				const data = await response.json();
-        
+
 				res.status(200).json(data);
 			} catch (err) {
-				console.log('error is',err);
+				console.log('error is', err);
 			}
 			break;
 		case "getNewUsers":
