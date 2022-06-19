@@ -2,7 +2,7 @@ import { Button, Space, DatePicker, Card, Switch } from "antd";
 import { CiCircleFilled } from "@ant-design/icons";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 import { useState } from "react";
-import Layout, { getLayout } from "../components/Layout/Layout.js";
+import Layout from "../components/layout/Layout"
 import LandingHome from "../components/landingPage/landingHome.js";
 
 export default function Home() {
@@ -19,9 +19,7 @@ export default function Home() {
 	}
 
 	return (
-		<Layout>
 			<LandingHome />
-		</Layout>
 	);
 }
 
