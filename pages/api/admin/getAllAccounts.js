@@ -6,9 +6,7 @@ export default async function getAllAccounts(req, res) {
     let accounts;
     accounts = await Accounts.find();
     res.status(200).json(accounts);
-    console.log("accounts",accounts)
   } catch (err) {
     res.status(500).json(err);
-    console.log(err)
   }
 }
