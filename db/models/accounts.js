@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 const accounts = new Schema(
   {
     userId: {
-      type: String,
-      required: true,
-      unique: true,
+      type: Schema.Types.ObjectId,
+       ref: "User", 
+       required: true 
     },
     balance: {
       type: Number,

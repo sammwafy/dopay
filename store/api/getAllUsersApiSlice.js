@@ -1,16 +1,16 @@
 import { api } from "./api";
 
 export const getAllUsersApiSlice = api.injectEndpoints({
-   endpoints: (builder) => ({
+  endpoints: (builder) => ({
     getAllUsers: builder.mutation({
-      query: (credentials) => ({
+      query: () => ({
         url: "/api/apigateway/",
-        method: "POST",
-        body: { ...credentials },
-        headers: {  'APIEND': 'getAllUsers'},
+        method: "GET",
+        // body: { ...credentials },
+        headers: { APIEND: "getAllUsers", "Content-Type": "application/json " },
       }),
     }),
   }),
 });
 
-export const {useGetAllUsersrMutation } = getAllUsersApiSlice;
+export const { useGetAllUsersMutation } = getAllUsersApiSlice;

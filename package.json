@@ -25,12 +25,17 @@
     "next": "12.1.6",
     "next-plugin-antd-less": "^1.8.0",
     "next-redux-wrapper": "^7.0.5",
-    "pageable": "^0.6.8",
     "react": "18.1.0",
     "react-cookie": "^4.1.1",
     "react-css-theme-switcher": "^0.3.0",
     "react-dom": "18.1.0",
+    "react-highlight-words": "^0.18.0",
+    "react-page-scroller": "^2.2.1",
     "react-redux": "^8.0.2",
+    "react-reveal": "^1.2.2",
+    "recharts": "^2.1.10",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
