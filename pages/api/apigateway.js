@@ -222,6 +222,22 @@ export default async function handler(req, res) {
 				console.log(err);
 			}
 			break;
+		case "getUserTransactions":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/getUserTransactions/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
+			break;
 		//get user transactions waiting for function complete
 		case "totalMoneyInAccounts":
 			try {
