@@ -21,8 +21,13 @@ const baseQuery = fetchBaseQuery({
 			/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
 			"$1"
 		);
+		const userID = document.cookie.replace(
+			/(?:(?:^|.*;\s*)userID\s*\=\s*([^;]*).*$)|^.*$/,
+			"$1"
+		);
 		if (token) {
 			headers.set("authorization", `Bearer ${token}`);
+			headers.set("userID", userID);
 			headers.set("Content-Type", 'application/json ');
 		}
 		return headers;
