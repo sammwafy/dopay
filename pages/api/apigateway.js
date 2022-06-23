@@ -60,6 +60,7 @@ export default async function handler(req, res) {
 					}
 				);
 				const data = await response.json();
+
 				res.status(200).json(data);
 			} catch (err) {
 				console.log("error is", err);
@@ -80,13 +81,14 @@ export default async function handler(req, res) {
 				console.log(err);
 			}
 			break;
-		case "rechargingAmount":
+		case "rechargeAmount":
 			try {
 				let response = await fetch(
-					`${server}/api/microservices/admin/rechargingAmount/`,
+					`${server}/api/microservices/user/rechargeMoney/`,
 					{
-						method: "GET",
+						method: "POST",
 						headers: req.headers,
+						body: JSON.stringify(req.body),
 					}
 				);
 				const data = await response.json();
@@ -121,22 +123,6 @@ export default async function handler(req, res) {
 				);
 				const data = await response.json();
 				res.send(data);
-			} catch (err) {
-				console.log(err);
-			}
-			break;
-		case "withDrawAmount":
-			try {
-				let response = await fetch(
-					`${server}/api/microservices/admin/withDrawAmount/`,
-					{
-						method: "GET",
-						headers: req.headers,
-					}
-				);
-				const data = await response.json();
-				res.send(data);
-				console.log(data);
 			} catch (err) {
 				console.log(err);
 			}
@@ -222,22 +208,6 @@ export default async function handler(req, res) {
 				console.log(err);
 			}
 			break;
-		case "getUserTransactions":
-			try {
-				let response = await fetch(
-					`${server}/api/microservices/user/getUserTransactions/`,
-					{
-						method: "POST",
-						headers: req.headers,
-						body: JSON.stringify(req.body),
-					}
-				);
-				const data = await response.json();
-				res.send(data);
-			} catch (err) {
-				console.log(err);
-			}
-			break;
 		//get user transactions waiting for function complete
 		case "totalMoneyInAccounts":
 			try {
@@ -255,7 +225,28 @@ export default async function handler(req, res) {
 				console.log(err);
 			}
 			break;
+		case "withdrawAmount":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/withdrawAmount`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+
+				res.send(data);
+			} catch (err) {
+				console.log(err);
+			}
 		default:
 			return null;
 	}
 }
+<nav>
+	<ul>
+		<li></li>
+	</ul>
+</nav>;

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const WithdrawContainer = styled.div`
 display:flex;
 margin: 20px auto;
+padding: 20px 0;
 width:80%;
 height: 100%;
 flex-direction: column;
@@ -29,7 +30,11 @@ justify-content:center;
   .btn {
     margin: 0 auto;
   }
-
+.ant-modal-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 `;
 

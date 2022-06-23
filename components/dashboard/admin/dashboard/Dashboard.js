@@ -4,20 +4,10 @@ import { PieChart, Pie } from "recharts";
 import Image from "next/image";
 import titleImg from "../../../../public/rightColumnImg.svg";
 import { useEffect, useState } from "react";
-import { useWithDrawAmountMutation } from "../../../../store/api/withDrawAmountApiSlice";
+
 
 const Dashboard = () => {
-	const [withDrawAmount, { isLoading }] = useWithDrawAmountMutation();
-	//widget state collection
-	const [withdraw, setWithdraw] = useState("");
-	useEffect(() => {
-		const getWithdraw = async () => {
-			let res = await withDrawAmount();
-			setWithdraw(res);
-			console.log(res);
-		};
-		getWithdraw();
-	}, []);
+
 	const data = [
 		{
 			name: "Page A",

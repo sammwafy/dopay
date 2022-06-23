@@ -21,6 +21,7 @@ export default async function login(req, res) {
 							UserInfo: {
 								email: foundUser.email,
 								isAdmin: foundUser.isAdmin,
+                id: foundUser.id,
 							},
 						})
 							.setProtectedHeader({ alg: "HS256" })

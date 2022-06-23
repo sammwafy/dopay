@@ -5,8 +5,8 @@ const accounts = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-       ref: "User", 
-       required: true 
+      ref: "User",
+      required: true,
     },
     balance: {
       type: Number,
@@ -14,13 +14,13 @@ const accounts = new Schema(
     },
     status: {
       type: String,
-      default:"pending",
+      default: "pending",
       required: true,
     },
     type: {
       type: String,
     },
-   tranactionsId: [{ type: Schema.Types.ObjectId, ref: "Transactions" }],
+    tranactionsId: [{ type: Schema.Types.ObjectId, ref: "Transactions" }],
   },
   { timestamps: true }
 );

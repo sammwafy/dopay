@@ -1,4 +1,3 @@
-import { Transactions } from "../../../db/models/transactions";
 import { Accounts } from "../../../db/models/accounts";
 const { dbConnect } = require("../../../db/middleware/mongodb");
 export default async function getUserTransactions(req, res) {
