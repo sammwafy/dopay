@@ -14,7 +14,7 @@ const transactions = new Schema(
 		toAccountId: {
 			type: String,
 		},
-		ammount: {
+		amount: {
 			type: Number,
 			required: true,
 		},

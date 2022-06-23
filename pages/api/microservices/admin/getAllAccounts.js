@@ -5,7 +5,7 @@ export default async function getAllAccounts(req, res) {
 	try {
 		let accounts;
 		accounts = await Accounts.find().populate("userId");
-		res.status(200).json(accounts);
+		res.status(200).end(JSON.stringify(accounts));
 	} catch (err) {
 		res.status(500).json(err);
 	}

@@ -14,13 +14,14 @@ export default async function login(req, res) {
 				const foundUser = await User.findOne({ email: email }).exec();
 
 				if (!foundUser) return res.status(401).send("Unauthorized"); //Unauthorized
-				if (foundUser.status !== "pending") {
+				if (foundUser.status !== "pending" && foundUser.status !== "deactive") {
 					const match = await bcrypt.compare(password, foundUser.password);
 					if (match) {
 						const accessToken = await new jose.SignJWT({
 							UserInfo: {
 								email: foundUser.email,
 								isAdmin: foundUser.isAdmin,
+                id: foundUser.id,
 							},
 						})
 							.setProtectedHeader({ alg: "HS256" })

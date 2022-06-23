@@ -15,14 +15,16 @@ const Users = () => {
 	const allUsers = useSelector((state) => state.users);
 	console.log(allUsers);
 
-	const data = allUsers?.map((user) => ({
-		key: user._id,
-		name: user.fullname,
-		account: 0,
-		payment: 0,
-		email: user.email,
-		status: user.status,
-	}));
+	const data =
+		allUsers.length > 0 &&
+		allUsers?.map((user) => ({
+			key: user._id,
+			name: user.fullname,
+			account: 0,
+			payment: 0,
+			email: user.email,
+			status: user.status,
+		}));
 
 	const [getAllUsers, { isLoading }] = useGetAllUsersMutation();
 	const dispatch = useDispatch();
