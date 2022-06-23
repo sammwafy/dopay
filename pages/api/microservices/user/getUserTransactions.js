@@ -10,4 +10,3 @@ export default async function getUserTransactions(req, res) {
     res.status(500).end(JSON.stringify(err));
   }
 }
-
