@@ -2,7 +2,7 @@
   "presets": [
     ["next/babel"],
     [
-      "@nrwl/next/babel",
+      "next/babel",
       {
         "preset-env": {
           "exclude": ["@babel/plugin-transform-regenerator"]
