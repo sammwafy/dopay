@@ -5,7 +5,6 @@ import { Transactions } from "../../../../db/models/transactions.js";
 export default async function withdrawAmount(req, res) {
   await dbConnect().then(console.log("connected"));
   const token = req.headers["authorization"];
-
   try {
     const value = Number(req.body.value);
     const parsedToken = JSON.parse(atob(token.split('.')[1]));

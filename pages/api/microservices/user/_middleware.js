@@ -12,12 +12,7 @@ export default async function verifyToken(req) {
 				token,
 				new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET)
 			);
-			console.log("id in token ", jwtData.UserInfo.id);
-			console.log("id in cookies ", userID);
-			console.log(jwtData);
-			if (userID !== jwtData?.UserInfo?.id) {
-				throw new Error("you are not allowed!");
-			}
+
 			NextResponse.next();
 		} catch (error) {
 			return new Response(JSON.stringify({ error: error.message }), {

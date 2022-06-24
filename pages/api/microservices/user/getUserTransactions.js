@@ -1,6 +1,5 @@
 import { Transactions } from "../../../../db/models/transactions.js";
-import { Accounts } from "../../../db/models/accounts";
-const { dbConnect } = require("../../../db/middleware/mongodb");
+const { dbConnect } = require("../../../../db/middleware/mongodb");
 export default async function getUserTransactions(req, res) {
   await dbConnect().then(console.log("connected"));
   const token = req.headers["authorization"];
