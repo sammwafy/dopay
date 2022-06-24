@@ -283,14 +283,19 @@ const Transactions = () => {
 
 	//get data from backend
 	const [UserTransactions, { isLoading }] = useUserTransactionsMutation();
-	const [transactions, setTransactions] = useState(null);
+	const [transactions, setTransactions] = useState([]);
 	console.log(transactions);
 	useEffect(() => {
 		try {
 			const getTransactions = async () => {
 				const response = await UserTransactions();
 				console.log(response);
-				setTransactions(response);
+				// const trans =
+				// 	response &&
+				// 	response?.reduce((acc, e) => {
+				// 		acc.concat(e.transactionsId);
+				// 	}, []);
+				// setTransactions(trans);
 			};
 			getTransactions();
 		} catch (error) {
