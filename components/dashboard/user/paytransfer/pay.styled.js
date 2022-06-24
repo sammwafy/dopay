@@ -27,6 +27,8 @@ export const PayContainer = styled.div`
 `;
 
 
-export const Wrapper = styled.div`
-
+export const PayWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `

@@ -5,10 +5,11 @@ import { Transactions } from "../../../../db/models/transactions.js";
 
 export default async function rechargeAmount(req, res) {
   await dbConnect().then(console.log("connected"));
-  console.log(req.body);
+  const token = req.headers["authorization"];
   try {
     const value = Number(req.body.value);
-    const userid = req.headers["userid"];
+    const parsedToken = JSON.parse(atob(token.split('.')[1]));
+    const userid = parsedToken.UserInfo.id
 
     const recharge = await Accounts.findOneAndUpdate(
       // {
