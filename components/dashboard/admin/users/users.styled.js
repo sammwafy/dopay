@@ -5,7 +5,11 @@ export const UserWrapper = styled.div`
 	margin: 10px auto;
 	display: flex;
 	width: 100%;
-
+	.tableRow {
+		&:hover {
+			cursor: pointer;
+		}
+	}
 	.table-image {
 		display: flex;
 		align-items: center;

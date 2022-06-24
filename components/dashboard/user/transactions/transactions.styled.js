@@ -8,4 +8,9 @@ export const TransactionWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	.tableRow {
+		&:hover {
+			cursor: pointer;
+		}
+	}
 `;

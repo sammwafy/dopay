@@ -25,6 +25,7 @@ const Accounts = () => {
 			getAccounts();
 		} catch (error) {}
 	}, [visible]);
+
 	const data = accounts.map((account, i) => ({
 		key: account.i,
 		userId: account.userId.email,
@@ -273,6 +274,9 @@ const Accounts = () => {
 							//   onMouseEnter: event => {}, // mouse enter row
 							//   onMouseLeave: event => {}, // mouse leave row
 						};
+					}}
+					rowClassName={(record, rowIndex) => {
+						return "tableRow";
 					}}
 				/>
 			</AccountsWrapper>

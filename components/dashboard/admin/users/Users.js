@@ -25,7 +25,7 @@ const Users = () => {
 			email: user.email,
 			status: user.status,
 		}));
-
+	console.log(data);
 	const [getAllUsers, { isLoading }] = useGetAllUsersMutation();
 	const dispatch = useDispatch();
 
@@ -287,6 +287,9 @@ const Users = () => {
 						//   onMouseEnter: event => {}, // mouse enter row
 						//   onMouseLeave: event => {}, // mouse leave row
 					};
+				}}
+				rowClassName={(record, rowIndex) => {
+					return "tableRow";
 				}}
 			/>
 			<Modal

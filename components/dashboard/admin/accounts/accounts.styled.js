@@ -8,6 +8,11 @@ export const AccountsWrapper = styled.div`
 	.table {
 		width: 100%;
 	}
+	.tableRow {
+		&:hover {
+			cursor: pointer;
+		}
+	}
 	.table-image {
 		display: flex;
 		align-items: center;
