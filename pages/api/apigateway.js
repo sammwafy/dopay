@@ -241,6 +241,24 @@ export default async function handler(req, res) {
       } catch (err) {
         console.log(err);
       }
+      break;
+    case "pay":
+      try {
+        let response = await fetch(
+          `${server}/api/microservices/user/payToAccount`,
+          {
+            method: "POST",
+            headers: req.headers,
+            body: JSON.stringify(req.body),
+          }
+        );
+        const data = await response.json();
+
+        res.send(data);
+      } catch (err) {
+        console.log(err);
+      }
+      break;
     default:
       return null;
   }

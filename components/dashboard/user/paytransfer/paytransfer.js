@@ -11,32 +11,27 @@ import Transfer from "./transfer";
 const { Title } = Typography;
 
 const Paytransfer = () => {
-  const [visible, setVisible] = useState(false);
-  const [show, setShow] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState(<Pay setVisible={setVisible} />);
-  const [modalBank, setModalBank] = useState(<Transfer setShow={setShow} />);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isTransfer, setIsTransfer] = useState(false);
+  const [isPay, setIsPay] = useState(false);
 
-  const showModal = () => {
-    setVisible(true);
+  const showTransfer = () => {
+    setIsPay(false);
+    setIsTransfer(true);
+    setIsModalVisible(true);
   };
-  const showBankModal = () => {
-    setShow(true);
+  const showPay = () => {
+    setIsTransfer(false);
+    setIsPay(true);
+    setIsModalVisible(true);
   };
 
   const handleOk = () => {
-    setModalText(<PaySuccess />);
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
-    setVisible(false);
-    setShow(false);
+    setIsModalVisible(false);
   };
 
   return (
@@ -51,37 +46,25 @@ const Paytransfer = () => {
           alt="logo"
           width="400"
           height="280"
-          onClick={showModal}
+          onClick={showTransfer}
         />
-
 
         <Image
           src={bankcard}
           alt="logo"
           width="400"
           height="280"
-          onClick={showBankModal}
+          onClick={showPay}
         />
-        <Modal
-          title={
-            <Space size="large">
-              <div>
-                <Image src={arrow} alt="logo" width="30" height="30" />
-              </div>
-              <div>
-                <h3>Withdraw To a Bank Account</h3>{" "}
-              </div>
-            </Space>
-          }
-          visible={show}
-          onOk={handleOk}
-          confirmLoading={confirmLoading}
-          onCancel={handleCancel}
-          footer={null}
-        >
-          {modalBank}
-        </Modal>
       </div>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        {isPay ? <Pay /> : isTransfer ? <Transfer /> : null}
+      </Modal>
     </PayContainer>
   );
 };
