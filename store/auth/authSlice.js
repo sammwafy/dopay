@@ -4,20 +4,12 @@
  */
 
 import { createSlice } from "@reduxjs/toolkit";
+import { getCookie } from 'cookies-next';
 
 // get the initial state from cookies if the redux store is destroied i.e on refresh
-let token;
-let userID;
-if (typeof window !== "undefined") {
-   token= document.cookie.replace(
-    /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-   userID = document.cookie.replace(
-    /(?:(?:^|.*;\s*)userID\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-  }
+const token = getCookie('token');
+const userID = getCookie('id');
+
 
 const authSlice = createSlice({
 	name: "auth",

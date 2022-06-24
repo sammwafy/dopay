@@ -20,6 +20,9 @@ const accounts = new Schema(
     type: {
       type: String,
     },
+    name: {
+      type: String,
+    },
     tranactionsId: [{ type: Schema.Types.ObjectId, ref: "Transactions" }],
   },
   { timestamps: true }

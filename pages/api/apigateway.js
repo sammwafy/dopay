@@ -112,21 +112,7 @@ export default async function handler(req, res) {
         console.log(err);
       }
       break;
-    case "transferAmount":
-      try {
-        let response = await fetch(
-          `${server}/api/microservices/admin/transferAmount/`,
-          {
-            method: "GET",
-            headers: req.headers,
-          }
-        );
-        const data = await response.json();
-        res.send(data);
-      } catch (err) {
-        console.log(err);
-      }
-      break;
+
     case "updateUserStatus":
       try {
         let response = await fetch(
@@ -197,9 +183,8 @@ export default async function handler(req, res) {
         let response = await fetch(
           `${server}/api/microservices/user/getUserAccounts/`,
           {
-            method: "POST",
+            method: "GET",
             headers: req.headers,
-            body: JSON.stringify(req.body),
           }
         );
         const data = await response.json();
@@ -259,6 +244,24 @@ export default async function handler(req, res) {
         console.log(err);
       }
       break;
+    case "transfer":
+      try {
+        let response = await fetch(
+          `${server}/api/microservices/user/transferToAccount`,
+          {
+            method: "POST",
+            headers: req.headers,
+            body: JSON.stringify(req.body),
+          }
+        );
+        const data = await response.json();
+
+        res.send(data);
+      } catch (err) {
+        console.log(err);
+      }
+      break;
+
     default:
       return null;
   }

@@ -50,7 +50,7 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
         {
           key: "4",
           danger: true,
-          label: "a danger item",
+          label: "",
         },
       ]}
     />

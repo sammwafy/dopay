@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { Typography, Space, Modal } from "antd";
+import { Typography, Space, Modal, Image } from "antd";
 import { PayContainer } from "./pay.styled";
-import Image from "next/image";
-import arrow from "../../../../public/VectorArrow.svg";
-import bankcard from "../../../../public/bankcard.svg";
-import dopaycard from "../../../../public/dopaycard.svg";
+
 import Pay from "./pay";
 import PaySuccess from "./paySuccess";
 import Transfer from "./transfer";
 const { Title } = Typography;
 
-const Paytransfer = () => {
+const Paytransfer = ({accounts}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isTransfer, setIsTransfer] = useState(false);
   const [isPay, setIsPay] = useState(false);
@@ -41,20 +38,22 @@ const Paytransfer = () => {
       </div>
 
       <div className="cards">
-        <Image
-          src={dopaycard}
+        {/* <Image
+          src="/imgs/dopaycard1.svg"
           alt="logo"
-          width="400"
-          height="280"
+          width="280px"
+          height="170px"
           onClick={showTransfer}
-        />
+          preview={false}
+        /> */}
 
         <Image
-          src={bankcard}
+          src="/imgs/bankcard1.svg"
           alt="logo"
-          width="400"
-          height="280"
+          width="280px"
+          height="170px"
           onClick={showPay}
+          preview={false}
         />
       </div>
       <Modal
@@ -63,7 +62,7 @@ const Paytransfer = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {isPay ? <Pay /> : isTransfer ? <Transfer /> : null}
+        {isPay ? <Pay accounts={accounts}/> : isTransfer ? <Transfer accounts={accounts}/> : null}
       </Modal>
     </PayContainer>
   );
