@@ -173,7 +173,7 @@ export default async function handler(req, res) {
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				console.log(err);
+				res.send(err);
 			}
 			break;
 		case "editUserProfile":
@@ -189,7 +189,7 @@ export default async function handler(req, res) {
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				console.log(err);
+				res.send(err);
 			}
 			break;
 		case "getUserAccounts":
@@ -205,7 +205,23 @@ export default async function handler(req, res) {
 				const data = await response.json();
 				res.send(data);
 			} catch (err) {
-				console.log(err);
+				res.send(err);
+			}
+			break;
+		case "getUserTransactions":
+			try {
+				let response = await fetch(
+					`${server}/api/microservices/user/getUserTransactions/`,
+					{
+						method: "POST",
+						headers: req.headers,
+						body: JSON.stringify(req.body),
+					}
+				);
+				const data = await response.json();
+				res.send(data);
+			} catch (err) {
+				res.send(err);
 			}
 			break;
 		//get user transactions waiting for function complete

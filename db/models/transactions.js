@@ -8,11 +8,14 @@ const transactions = new Schema(
 			required: true,
 		},
 		fromAccountId: {
-			type: String,
+			type: Schema.Types.ObjectId,
+			ref: "Accounts",
 			required: true,
 		},
 		toAccountId: {
-			type: String,
+			type: Schema.Types.ObjectId,
+			ref: "Accounts",
+			required: true,
 		},
 		amount: {
 			type: Number,

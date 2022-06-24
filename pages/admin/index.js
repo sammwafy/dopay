@@ -10,8 +10,7 @@ const DashboardPage = () => {
 
 	useEffect(() => {
 		// if user is not authenticated, redirect to login page
-
-		Router.push("/login");
+		// Router.push("/login");
 	});
 
 	return <Dashboard />;
