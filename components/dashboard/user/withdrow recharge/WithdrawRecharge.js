@@ -1,10 +1,9 @@
 import { WithdrawRechargeStyle } from "./styles/withdrawRecharge.styled";
 import React, { useState } from "react";
-import { Typography, Space, Modal } from "antd";
-import Image from "next/image";
+import { Typography, Space, Modal, Image } from "antd";
 import arrow from "../../../../public/VectorArrow.svg";
-import Withdraw from "../../../../public/withdraw.svg";
-import Reacharge from "../../../../public/recharge.svg";
+// import Withdraw from "../../../../public/withdraw.svg";
+// import Reacharge from "../../../../public/recharge.svg";
 import Pay from "../paytransfer/pay";
 import PaySuccess from "../paytransfer/paySuccess";
 import Transfer from "../paytransfer/transfer";
@@ -48,11 +47,12 @@ const WithdrawRecharge = () => {
 
       <div className="cards">
         <Image
-          src={Withdraw}
+          src="/recharge.svg"
           alt="logo"
           width="400"
           height="280"
           onClick={showModal}
+          preview={false}
         />
         <Modal
           title={
@@ -75,11 +75,12 @@ const WithdrawRecharge = () => {
         </Modal>
 
         <Image
-          src={Reacharge}
+          src="/withdraw.svg"
           alt="logo"
           width="400"
           height="280"
           onClick={showBankModal}
+          preview={false}
         />
         <Modal
           title={

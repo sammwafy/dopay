@@ -7,7 +7,7 @@ import { useUpdateAccountStatusMutation } from "../../../../store/api/updateAcco
 const { Text } = Typography;
 const AccountsCard = ({ account }) => {
 	const [updateAccountStatus, { isLoading }] = useUpdateAccountStatusMutation();
-	console.log(isLoading);
+	// console.log(isLoading);
 	const { _id, userId, status, balance, type } = account;
 	const [stat, setStat] = useState(status);
 	let color;
@@ -73,7 +73,7 @@ const AccountsCard = ({ account }) => {
 					<Text strong level={5}>
 						Account Number
 					</Text>
-					<Text>{_id}</Text>
+					<Text>{JSON.stringify(_id)}</Text>
 				</Space>
 			</div>
 			<div style={{ display: "var(--desktop)" }}>
@@ -89,7 +89,7 @@ const AccountsCard = ({ account }) => {
 					<Text strong level={5}>
 						userId
 					</Text>
-					<Text>{userId}$</Text>
+					<Text>{userId.email}$</Text>
 				</Space>
 			</div>
 			<div style={{ display: "var(--desktop)" }}>
@@ -97,7 +97,7 @@ const AccountsCard = ({ account }) => {
 					<Text strong level={5}>
 						Type
 					</Text>
-					<Text>{type}$</Text>
+					<Text>{type}</Text>
 				</Space>
 			</div>
 			<div className='user-status'>

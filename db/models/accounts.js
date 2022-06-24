@@ -2,21 +2,27 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const accounts = new Schema(
-	{
-		userId: { type: Schema.Types.ObjectId, ref: "User" },
-		balance: {
-			type: Number,
-			required: true,
-		},
-		status: {
-			type: String,
-			default: "pending",
-		},
-		type: {
-			type: String,
-		},
-	},
-	{ timestamps: true }
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    balance: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "pending",
+      required: true,
+    },
+    type: {
+      type: String,
+    },
+    tranactionsId: [{ type: Schema.Types.ObjectId, ref: "Transactions" }],
+  },
+  { timestamps: true }
 );
 
 mongoose.models = {};

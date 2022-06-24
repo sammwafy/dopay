@@ -1,28 +1,25 @@
-import React, { useState } from "react";
-import { WithdrawContainer, Container } from "./withdraw.styled";
 import { Button, Form, Input, Typography, Space, Modal, Select } from "antd";
 import Image from "next/image";
 import arrow from "../../../../public/VectorArrow.svg";
-import WithdrawSuccess from "./withdrawSuccess";
-import { useWithdrawAmountMutation } from "../../../../store/api/withdrawAmountApiSlice.js";
+import { useRechargeAmountMutation } from "../../../../store/api/rechargeAmountApiSlice";
+import { Container, RechargeWrapper } from "./styles/recharge.styled.js";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
-const Withdraw = () => {
-  const [withDrawAmount, { isLoading }] = useWithdrawAmountMutation();
+const Recharge = () => {
+  const [rechargeAmount, { isLoading }] = useRechargeAmountMutation();
 
-  const onFinish = async (withdraw) => {
+  const onFinish = async (recharge) => {
     const current = new Date();
-    const response = await withDrawAmount({...withdraw,date:current}).unwrap();
-    console.log(response);
+    const response = await rechargeAmount({...recharge,date:current}).unwrap();
     if (!response.error) {
       Modal.success({
-        title: "Withdraw Successfully",
-        content: `you have successfully withdrawn $${withdraw.value}`,
+        title: "recharge Successfully",
+        content: `you have successfully added $ ${recharge.value} to your account`,
       });
     } else {
       Modal.error({
-        title: "Withdraw Failed",
+        title: "recharge Failed",
         content: response.error,
       });
     }
@@ -37,10 +34,10 @@ const Withdraw = () => {
       <div className="top">
         <Image src={arrow} alt="logo" width={50} height={50} />
         <Title level={3} style={{ marginLeft: "50px" }}>
-          Withdraw To a Bank Account
+          Recharge Money
         </Title>
       </div>
-      <WithdrawContainer>
+      <RechargeWrapper>
         <Form
           layout="vertical"
           name="payForm"
@@ -107,9 +104,9 @@ const Withdraw = () => {
             </Button>
           </Form.Item>
         </Form>
-      </WithdrawContainer>
+      </RechargeWrapper>
     </Container>
   );
 };
 
-export default Withdraw;
+export default Recharge;

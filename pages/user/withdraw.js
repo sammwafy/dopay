@@ -1,17 +1,8 @@
-
-import Withdraw from './../../components/dashboard/user/withdraw/withdraw';
-import UserDashboardLayout from "../../components/dashboard/Layout/userDashboardLayout"
+import Withdraw from "./../../components/dashboard/user/withdraw/withdraw";
+import { getLayout } from "../../components/dashboard/Layout/userDashboardLayout";
 
 const Withdrawpage = () => {
-    return (
-      <>
-      <UserDashboardLayout>
-         <Withdraw/>
-          </UserDashboardLayout>
-      </>
-      
-
-    )
-  }
-  
-  export default Withdrawpage
+  return <Withdraw />;
+};
+Withdrawpage.getLayout = getLayout;
+export default Withdrawpage;
