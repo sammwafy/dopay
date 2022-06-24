@@ -7,7 +7,7 @@ export default async function getUserTransactions(req, res) {
   try {
     const parsedToken = JSON.parse(atob(token.split(".")[1]));
     const userid = parsedToken.UserInfo.id;
-    const transactions = await Transactions.find({ userId: userid });
+    const transactions = await Transactions.find({ userId: userid }, {userId: 0});
     res.status(200).end(JSON.stringify(transactions));
   } catch (err) {
     res.status(500).end(JSON.stringify(err));
