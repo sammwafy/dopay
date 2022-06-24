@@ -6,7 +6,7 @@ import { useUserAccountsMutation } from "../../store/api/getUserAccountsApiSlice
 import Loading from "../../components/loading/loading.js";
 
 const Pay = () => {
-  const [getUserAccounts, { isLoading }] = useUserAccountsMutation();
+  const [getUserAccounts, { isLoading }] = useUserAccountsMutation;
   const [userAccounts, setUserAccounts] = useState([]);
 
   useEffect(() => {
