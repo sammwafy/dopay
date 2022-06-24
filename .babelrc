@@ -1,0 +1,20 @@
+{
+  "presets": [
+    ["next/babel"],
+    [
+      "@nrwl/next/babel",
+      {
+        "preset-env": {
+          "exclude": ["@babel/plugin-transform-regenerator"]
+        },
+        "transform-runtime": {
+          "regenerator": false
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["import", { "libraryName": "antd", "style": true }],
+    ["styled-components", { "ssr": true }]
+  ]
+}
