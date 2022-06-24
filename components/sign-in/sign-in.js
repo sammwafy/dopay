@@ -14,17 +14,17 @@ import {
 } from "antd";
 const { Title } = Typography;
 import {
-  UserOutlined,
-  LockOutlined,
-  GooglePlusCircleFilled,
-  FacebookFilled,
-  TwitterOutlined,
+	UserOutlined,
+	LockOutlined,
+	GooglePlusCircleFilled,
+	FacebookFilled,
+	TwitterOutlined,
 } from "@ant-design/icons";
 import { SignInWrapper } from "./styles/signin.styled";
 import {
-  selectCurrentUser,
-  selectCurrentToken,
-  setCredentials,
+	selectCurrentUser,
+	selectCurrentToken,
+	setCredentials,
 } from "../../store/auth/authSlice.js";
 import { useLoginMutation } from "../../store/api/authApiSlice.js";
 import { useDispatch } from "react-redux";
