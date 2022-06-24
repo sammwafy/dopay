@@ -67,6 +67,7 @@ export default async function transferToAccount(req, res) {
    
       const makeTransaction = await Transactions.create({
         type: "transfer",
+        userId :userid,
         fromAccountId: userid,
         toAccountId: req.body.toAccountId,
         amount: value,

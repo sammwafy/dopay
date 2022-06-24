@@ -44,6 +44,7 @@ export default async function PayToAccount(req, res) {
       const makeTransaction = await Transactions.create({
         type: "pay",
         fromAccountId: userid,
+        userId :userid,
         toAccountId: req.body.toAccountId,
         toAccountHolderName: req.body.accountHolderName,
         toBankName: req.body.bankName,

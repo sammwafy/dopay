@@ -67,6 +67,7 @@ export default async function rechargeAmount(req, res) {
       await Transactions.create({
         type: "recharge",
         fromAccountId: "NA",
+        userId :userid,
         toAccountId: recharge._id,
         amount: value,
         dateIssued: req.body.date,

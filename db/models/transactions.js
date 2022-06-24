@@ -1,10 +1,14 @@
-import mongoose from "mongoose";
+import mongoose, { SchemaTypes } from "mongoose";
 const Schema = mongoose.Schema;
 
 const transactions = new Schema(
   {
     type: {
       type: String,
+      required: true,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
       required: true,
     },
     fromAccountId: {

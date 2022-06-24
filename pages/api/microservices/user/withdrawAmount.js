@@ -44,6 +44,7 @@ export default async function withdrawAmount(req, res) {
       const makeTransaction = await Transactions.create({
         type: "withdraw",
         fromAccountId: userid,
+        userId :userid,
         amount: value,
         dateIssued: req.body.date,
       });
