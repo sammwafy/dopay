@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout.js";
-import ContactUs from "../components/contactUs/ContactUs.js";
+import ContactUs from "../components/contactUs/contactUs.js";
 
 const contactus = () => {
   return (
