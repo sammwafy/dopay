@@ -67,7 +67,7 @@ const BankAccounts = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [myAccounts, setMyAccounts] = useState([]);
   const [UserAccounts, { isLoading }] = useUserAccountsMutation();
-console.log(myAccounts);
+  console.log(myAccounts);
   useEffect(() => {
     const getMyAccounts = async () => {
       try {
@@ -94,9 +94,10 @@ console.log(myAccounts);
   return (
     <NewAccountWrapper>
       <Space size="large" wrap>
-        {myAccounts.map((account, i) => (
-          <NewCard account={account} color="#FF6F00" key={i} />
-        ))}
+        {myAccounts.length > 0 &&
+          myAccounts.map((account, i) => (
+            <NewCard account={account} color="#FF6F00" key={i} />
+          ))}
 
         {myAccounts.length < 3 && <BlankCard showModal={showModal} />}
 
@@ -110,45 +111,46 @@ console.log(myAccounts);
         </Modal>
       </Space>
       <Space size="large" wrap>
-        {myAccounts.map((account, i) => (
-          <div className="chart" key={i}>
-            <div className="top">
-              <div className="left">
-                <Title level={5}>Account</Title>
-                <Text>453535sfffs</Text>
+        {myAccounts.length > 0 &&
+          myAccounts.map((account, i) => (
+            <div className="chart" key={i}>
+              <div className="top">
+                <div className="left">
+                  <Title level={5}>Account</Title>
+                  <Text>453535sfffs</Text>
+                </div>
+                <div className="right">
+                  <Image
+                    src="/arrow_upward.svg"
+                    alt="logo"
+                    preview={false}
+                    previewPrefixCls={false}
+                    // height='50px'
+                    // width='300px'
+                  />
+                  <Text>1.10% Since last week </Text>
+                </div>
               </div>
-              <div className="right">
-                <Image
-                  src="/arrow_upward.svg"
-                  alt="logo"
-                  preview={false}
-                  previewPrefixCls={false}
-                  // height='50px'
-                  // width='300px'
+              <AreaChart
+                width={200}
+                height={130}
+                data={data}
+                margin={{
+                  top: 5,
+                  right: 0,
+                  left: 0,
+                  bottom: 5,
+                }}
+              >
+                <Area
+                  type="monotone"
+                  dataKey="uv"
+                  stroke="#8884d8"
+                  fill="#2196F3"
                 />
-                <Text>1.10% Since last week </Text>
-              </div>
+              </AreaChart>
             </div>
-            <AreaChart
-              width={200}
-              height={130}
-              data={data}
-              margin={{
-                top: 5,
-                right: 0,
-                left: 0,
-                bottom: 5,
-              }}
-            >
-              <Area
-                type="monotone"
-                dataKey="uv"
-                stroke="#8884d8"
-                fill="#2196F3"
-              />
-            </AreaChart>
-          </div>
-        ))}
+          ))}
       </Space>
     </NewAccountWrapper>
   );
