@@ -1,5 +1,5 @@
-import { Transactions } from "../../../db/models/transactions";
-const { dbConnect } = require("../../../db/middleware/mongodb");
+import { Transactions } from "../../../../db/models/transactions";
+const { dbConnect } = require("../../../../db/middleware/mongodb");
 export default async function transactionsLastMonth(req, res) {
   await dbConnect().then(console.log("connected"));
   const date = new Date();

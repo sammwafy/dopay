@@ -1,5 +1,5 @@
-import { Accounts } from "../../../db/models/accounts";
-const { dbConnect } = require("../../../db/middleware/mongodb");
+import { Accounts } from "../../../../db/models/accounts";
+const { dbConnect } = require("../../../../db/middleware/mongodb");
 export default async function totalMoneyInAccounts(req, res) {
   await dbConnect().then(console.log("connected"));
   try {

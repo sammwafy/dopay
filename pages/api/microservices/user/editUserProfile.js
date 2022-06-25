@@ -1,5 +1,5 @@
-import { User } from "../../../db/models/user";
-const { dbConnect } = require("../../../db/middleware/mongodb");
+import { User } from "../../../../db/models/user";
+const { dbConnect } = require("../../../../db/middleware/mongodb");
 export default async function editUserProfile(req, res) {
   await dbConnect().then(console.log("connected"));
   try {
