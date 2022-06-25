@@ -1,9 +1,8 @@
 const { dbConnect } = require("../../../../db/middleware/mongodb");
-import { TrophyTwoTone } from "@ant-design/icons";
 import { Accounts } from "../../../../db/models/accounts.js";
 import { Transactions } from "../../../../db/models/transactions.js";
 
-export default async function rechargeAmount(req, res) {
+export default async function PayToAccount(req, res) {
   await dbConnect().then(console.log("connected"));
   const token = req.headers["authorization"];
   try {
@@ -11,28 +10,7 @@ export default async function rechargeAmount(req, res) {
     const parsedToken = JSON.parse(atob(token.split('.')[1]));
     const userid = parsedToken.UserInfo.id
 
-    const recharge = await Accounts.findOneAndUpdate(
-      // {
-      //   _id: req.body.id,
-      // },
-      // [
-      //   {
-      //     $set: {
-      //       balance: {
-      //         $cond: {
-      //           if: {
-      //             $gte: ["balance", value],
-      //           },
-      //           then: {
-      //             $subtract: ["$balance", 50],
-      //           },
-      //           else: "$$REMOVE",
-      //         },
-      //       },
-      //     },
-      //   },
-      // ]
-
+    const pay = await Accounts.findOneAndUpdate(
       {
         _id: req.body.id,
       },
@@ -46,39 +24,41 @@ export default async function rechargeAmount(req, res) {
                     case: {
                       $and: [
                         { $eq: ["$status", "verified"] },
-                        { $eq: ["$userId", {$toObjectId: userid}] },
+                        { $eq: ["$userId", { $toObjectId: userid }] },
+                        { $gte: ["$balance", value] },
                       ],
                     },
-
                     then: {
-                      $add: ["$balance", value],
+                      $subtract: ["$balance", value],
                     },
                   },
                 ],
-
               },
             },
           },
         },
       ]
     );
-    console.log(recharge);
-    if (recharge) {
-      await Transactions.create({
-        type: "recharge",
-        fromAccountId: "NA",
+    
+   
+      const makeTransaction = await Transactions.create({
+        type: "pay",
+        fromAccountId: userid,
         userId :userid,
-        toAccountId: recharge._id,
+        toAccountId: req.body.toAccountId,
+        toAccountHolderName: req.body.accountHolderName,
+        toBankName: req.body.bankName,
         amount: value,
         dateIssued: req.body.date,
       });
-    }
-    res.status(200).end(JSON.stringify({ success: "recharge is successfull" }));
+      console.log('paid');
+    
+    res.status(200).end(JSON.stringify({ success: "payment is successfull" }));
   } catch (err) {
     if (err.code == 40066) {
       return res.status(500).end(
         JSON.stringify({
-          error: "recharge cannot be performed !",
+          error: "the current balance is lower than the payment amount",
         })
       );
     }

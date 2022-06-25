@@ -4,15 +4,21 @@
  */
 
 import { createSlice } from "@reduxjs/toolkit";
+import { getCookie } from 'cookies-next';
+
+// get the initial state from cookies if the redux store is destroied i.e on refresh
+const token = getCookie('token');
+const userID = getCookie('id');
+
 
 const authSlice = createSlice({
 	name: "auth",
-	initialState: { email: null, token: null },
+	initialState: { id: userID || null, token: token || null },
 
 	reducers: {
 		setCredentials: (state, action) => {
-			const { email, accessToken } = action.payload;
-			state.email = email;
+			const { id, accessToken } = action.payload;
+			state.id = id;
 			state.token = accessToken;
 		},
 		logOut: (state, action) => {

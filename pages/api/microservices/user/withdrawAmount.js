@@ -1,36 +1,16 @@
 const { dbConnect } = require("../../../../db/middleware/mongodb");
-import { TrophyTwoTone } from "@ant-design/icons";
 import { Accounts } from "../../../../db/models/accounts.js";
 import { Transactions } from "../../../../db/models/transactions.js";
-import CreateTransaction from "../../utils/createTransaction.js";
 
 export default async function withdrawAmount(req, res) {
   await dbConnect().then(console.log("connected"));
-
+  const token = req.headers["authorization"];
   try {
     const value = Number(req.body.value);
+    const parsedToken = JSON.parse(atob(token.split('.')[1]));
+    const userid = parsedToken.UserInfo.id
+    
     const withdraw = await Accounts.findOneAndUpdate(
-      // {
-      //   _id: req.body.id,
-      // },
-      // [
-      //   {
-      //     $set: {
-      //       balance: {
-      //         $cond: {
-      //           if: {
-      //             $gte: ["balance", value],
-      //           },
-      //           then: {
-      //             $subtract: ["$balance", 50],
-      //           },
-      //           else: "$$REMOVE",
-      //         },
-      //       },
-      //     },
-      //   },
-      // ]
-
       {
         _id: req.body.id,
       },
@@ -42,7 +22,11 @@ export default async function withdrawAmount(req, res) {
                 branches: [
                   {
                     case: {
-                      $gte: ["$balance", value],
+                      $and: [
+                        { $eq: ["$status", "verified"] },
+                        { $eq: ["$userId", { $toObjectId: userid }] },
+                        { $gte: ["$balance", value] },
+                      ],
                     },
                     then: {
                       $subtract: ["$balance", value],
@@ -56,10 +40,10 @@ export default async function withdrawAmount(req, res) {
       ]
     );
     if (withdraw) {
-      
       const makeTransaction = await Transactions.create({
-        type: 'withdraw',
-        fromAccountId: withdraw.userId,
+        type: "withdraw",
+        fromAccountId: userid,
+        userId :userid,
         amount: value,
         dateIssued: req.body.date,
       });

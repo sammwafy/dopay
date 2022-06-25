@@ -1,17 +1,35 @@
 import { Button, Form, Input, Typography, Space, Modal, Select } from "antd";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import arrow from "../../../../public/VectorArrow.svg";
+import { useUserAccountsMutation } from "../../../../store/api/getUserAccountsApiSlice.js";
 import { useRechargeAmountMutation } from "../../../../store/api/rechargeAmountApiSlice";
+import Loading from "../../../loading/loading.js";
 import { Container, RechargeWrapper } from "./styles/recharge.styled.js";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 const Recharge = () => {
   const [rechargeAmount, { isLoading }] = useRechargeAmountMutation();
+  const [getUserAccounts, { isLoading: isLoadingAccounts }] = useUserAccountsMutation();
+
+  const [accounts, setAccounts] = useState([]);
+  useEffect(() => {
+    const fetchAccount = async () => {
+      const data = await getUserAccounts().unwrap();
+      setAccounts(
+        data.map((account) => ({ name: account.name, id: account._id }))
+      );
+    };
+    fetchAccount();
+  }, []);
 
   const onFinish = async (recharge) => {
     const current = new Date();
-    const response = await rechargeAmount({...recharge,date:current}).unwrap();
+    const response = await rechargeAmount({
+      ...recharge,
+      date: current,
+    }).unwrap();
     if (!response.error) {
       Modal.success({
         title: "recharge Successfully",
@@ -37,74 +55,80 @@ const Recharge = () => {
           Recharge Money
         </Title>
       </div>
-      <RechargeWrapper>
-        <Form
-          layout="vertical"
-          name="payForm"
-          requiredMark={false}
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          className="formClass"
-        >
-          <Form.Item
-            labelCol={{
-              span: 24,
-              offset: 4,
+      {isLoadingAccounts || isLoading ? (
+        <Loading />
+      ) : (
+        <RechargeWrapper>
+          <Form
+            layout="vertical"
+            name="payForm"
+            requiredMark={false}
+            initialValues={{
+              ["id"]: "choose an account",
             }}
-            label={<h3 className="label"> Enter Amount </h3>}
-            name="value"
-            rules={[
-              {
-                required: true,
-                message: "Please input Money Amount!",
-              },
-            ]}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            className="formClass"
           >
-            <Input
-              bordered={false}
-              style={{
-                borderBottom: "1px solid  #4C4C4C",
-                textAlign: "center",
+            <Form.Item
+              labelCol={{
+                span: 24,
+                offset: 4,
               }}
-              placeholder="$ 0"
-            />
-          </Form.Item>
+              label={<h3 className="label"> Enter Amount </h3>}
+              name="value"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input Money Amount!",
+                },
+              ]}
+            >
+              <Input
+                bordered={false}
+                style={{
+                  borderBottom: "1px solid  #4C4C4C",
+                  textAlign: "center",
+                }}
+                placeholder="$ 0"
+              />
+            </Form.Item>
 
-          <Form.Item
-            labelCol={{
-              span: 24,
-              offset: 10,
-            }}
-            label={<h3 className="label"> To </h3>}
-            name="id"
-            rules={[
-              {
-                required: true,
-                message: "Plz Enter Bank Name!",
-              },
-            ]}
-          >
-            <Select defaultValue="nationalBank " style={{ width: 200 }}>
-              <Option value="BANQUE MISR">BANQUE MISR</Option>
-              <Option value="62aa7943c1e914b30db64c2c">
-                National Bank Of Egypt
-              </Option>
-              <Option value=" alexandriaBank"> Bank of Alexandria </Option>
-              <Option value="faisalBank"> Faisal Islamic Bank of Egypt </Option>
-            </Select>
-          </Form.Item>
+            <Form.Item
+              labelCol={{
+                span: 24,
+                offset: 10,
+              }}
+              label={<h3 className="label"> To </h3>}
+              name="id"
+              rules={[
+                {
+                  required: true,
+                  message: "Plz Enter Bank Name!",
+                },
+              ]}
+            >
+              <Select style={{ width: 200 }}>
+                {accounts &&
+                  accounts.map((account, i) => {
+                    return (
+                      <Option key={i} value={account.id}>
+                        {account.name}
+                      </Option>
+                    );
+                  })}
+              </Select>
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" className="btn">
-              Send
-            </Button>
-          </Form.Item>
-        </Form>
-      </RechargeWrapper>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="btn">
+                Send
+              </Button>
+            </Form.Item>
+          </Form>
+        </RechargeWrapper>
+      )}
     </Container>
   );
 };

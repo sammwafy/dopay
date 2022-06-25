@@ -44,7 +44,7 @@ const UserNav = ({ showDrawer, setShowDrawer }) => {
 				{
 					key: "4",
 					danger: true,
-					label: "a danger item",
+					label: "",
 				},
 			]}
 		/>
@@ -64,7 +64,7 @@ const UserNav = ({ showDrawer, setShowDrawer }) => {
 					onClick={() => setShowDrawer(true)}
 				/>
 			)}
-			<div style={{ display: "var(--desktab)" }} className='logo'>
+			{/* <div style={{ display: "var(--desktab)" }} className='logo'>
 				<Image src={logo} alt='logo' width='100' height='60' />
 			</div>
 
@@ -72,7 +72,7 @@ const UserNav = ({ showDrawer, setShowDrawer }) => {
 				<BellOutlined
 					style={{ fontSize: "30px", color: "black", display: "var(--mobile)" }}
 				/>
-			</Badge>
+			</Badge> */}
 
 			<Dropdown
 				overlay={menu}

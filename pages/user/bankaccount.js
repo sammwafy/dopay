@@ -1,14 +1,7 @@
-import React from 'react'
-import UserDashboardLayout from "../../components/dashboard/Layout/userDashboardLayout"
-import BankAccounts from '../../components/dashboard/user/bankaccount/bankAccount'
+import { getLayout } from "../../components/dashboard/Layout/userDashboardLayout.js";
+import BankAccounts from "../../components/dashboard/user/bankaccount/bankAccount";
 const BankAccount = () => {
-  return (
-    <>
-  <UserDashboardLayout>
-    <BankAccounts/>
-    </UserDashboardLayout>
-    </>
-  )
-}
-
-export default BankAccount
+  return <BankAccounts />;
+};
+BankAccount.getLayout = getLayout;
+export default BankAccount;

@@ -50,7 +50,7 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
         {
           key: "4",
           danger: true,
-          label: "a danger item",
+          label: "",
         },
       ]}
     />
@@ -110,7 +110,7 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
         <Image src={logo} alt="logo" width="100" height="60" />
       </div>
 
-      <Dropdown
+      {/* <Dropdown
         overlay={notificationMenu}
         style={{ display: "var(--mobile)" }}
         trigger={["click"]}
@@ -124,7 +124,7 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
             }}
           />
         </Badge>
-      </Dropdown>
+      </Dropdown> */}
 
       <Dropdown
         overlay={menu}

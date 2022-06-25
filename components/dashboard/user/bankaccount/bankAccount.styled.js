@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NewAccountWrapper = styled.div`
 	display: flex;
-	gap: 10px;
+	gap: 25px;
 	margin: 10px auto;
 	width: 90%;
 	flex-wrap: wrap;
@@ -55,16 +55,14 @@ export const CardWrapper = styled.div`
 	border-radius: 40px;
 	background-color: ${(props) => props.color};
 	box-shadow: 0px 9px 50px rgba(0, 0, 0, 0.1);
-	padding: 30px;
+	padding: 4px 30px;
 
 	.ant-typography {
 		color: white;
 		margin: 0px 10px;
 	}
-	h3.ant-typography {
-		margin-top: 0 !important;
-		margin-bottom: -30px !important;
-	}
+
+
 `;
 
 export const BlankCardWrapper = styled.div`

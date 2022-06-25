@@ -8,8 +8,9 @@ export const PayContainer = styled.div`
   border-radius: 5px;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   flex-wrap: wrap;
-
+  padding: 20px 0;
   .top {
     align-items: center;
     justify-content: center;
@@ -23,10 +24,16 @@ export const PayContainer = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+
+    .ant-image {
+      cursor: pointer;
+      margin: 0 25px;
+    }
   }
 `;
 
-
-export const Wrapper = styled.div`
-
-`
+export const PayWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

@@ -1,42 +1,34 @@
 import React, { useState } from "react";
-import { Typography, Space, Modal } from "antd";
+import { Typography, Space, Modal, Image } from "antd";
 import { PayContainer } from "./pay.styled";
-import Image from "next/image";
-import arrow from "../../../../public/VectorArrow.svg";
-import bankcard from "../../../../public/bankcard.svg";
-import dopaycard from "../../../../public/dopaycard.svg";
+
 import Pay from "./pay";
 import PaySuccess from "./paySuccess";
 import Transfer from "./transfer";
 const { Title } = Typography;
 
-const Paytransfer = () => {
-  const [visible, setVisible] = useState(false);
-  const [show, setShow] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState(<Pay setVisible={setVisible} />);
-  const [modalBank, setModalBank] = useState(<Transfer setShow={setShow} />);
+const Paytransfer = ({accounts}) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isTransfer, setIsTransfer] = useState(false);
+  const [isPay, setIsPay] = useState(false);
 
-  const showModal = () => {
-    setVisible(true);
+  const showTransfer = () => {
+    setIsPay(false);
+    setIsTransfer(true);
+    setIsModalVisible(true);
   };
-  const showBankModal = () => {
-    setShow(true);
+  const showPay = () => {
+    setIsTransfer(false);
+    setIsPay(true);
+    setIsModalVisible(true);
   };
 
   const handleOk = () => {
-    setModalText(<PaySuccess />);
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
-    setVisible(false);
-    setShow(false);
+    setIsModalVisible(false);
   };
 
   return (
@@ -46,42 +38,32 @@ const Paytransfer = () => {
       </div>
 
       <div className="cards">
-        <Image
-          src={dopaycard}
+        {/* <Image
+          src="/imgs/dopaycard1.svg"
           alt="logo"
-          width="400"
-          height="280"
-          onClick={showModal}
-        />
-
+          width="280px"
+          height="170px"
+          onClick={showTransfer}
+          preview={false}
+        /> */}
 
         <Image
-          src={bankcard}
+          src="/imgs/bankcard1.svg"
           alt="logo"
-          width="400"
-          height="280"
-          onClick={showBankModal}
+          width="280px"
+          height="170px"
+          onClick={showPay}
+          preview={false}
         />
-        <Modal
-          title={
-            <Space size="large">
-              <div>
-                <Image src={arrow} alt="logo" width="30" height="30" />
-              </div>
-              <div>
-                <h3>Withdraw To a Bank Account</h3>{" "}
-              </div>
-            </Space>
-          }
-          visible={show}
-          onOk={handleOk}
-          confirmLoading={confirmLoading}
-          onCancel={handleCancel}
-          footer={null}
-        >
-          {modalBank}
-        </Modal>
       </div>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        {isPay ? <Pay accounts={accounts}/> : isTransfer ? <Transfer accounts={accounts}/> : null}
+      </Modal>
     </PayContainer>
   );
 };

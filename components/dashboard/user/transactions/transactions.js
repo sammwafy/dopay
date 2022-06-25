@@ -1,10 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TransactionWrapper } from "./transactions.styled";
-import { Button, Input, Modal, Space, Table, Tag, Typography } from "antd";
+import {
+	Button,
+	Input,
+	message,
+	Modal,
+	Space,
+	Table,
+	Tag,
+	Typography,
+} from "antd";
 import TransactionCard from "./transactionCard";
 import Image from "next/image";
 import { FileOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
+import { useUserTransactionsMutation } from "../../../../store/api/getUserTransactionsApiSlice";
 const { Text, Title } = Typography;
 const Transactions = () => {
 	const [visible, setVisible] = useState(false);
@@ -270,6 +280,28 @@ const Transactions = () => {
 			print: "pending",
 		},
 	];
+
+	//get data from backend
+	const [UserTransactions, { isLoading }] = useUserTransactionsMutation();
+	const [transactions, setTransactions] = useState([]);
+	console.log(transactions);
+	useEffect(() => {
+		try {
+			const getTransactions = async () => {
+				const response = await UserTransactions();
+				console.log(response);
+				// const trans =
+				// 	response &&
+				// 	response?.reduce((acc, e) => {
+				// 		acc.concat(e.transactionsId);
+				// 	}, []);
+				// setTransactions(trans);
+			};
+			getTransactions();
+		} catch (error) {
+			message.info(error.message);
+		}
+	}, []);
 	return (
 		<>
 			<TransactionWrapper>

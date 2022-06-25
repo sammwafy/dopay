@@ -17,7 +17,7 @@ const NewCard = ({ color, account }) => {
 				style={{ marginTop: "15px" }}
 			/>
 
-			<Text>{account.userId.email}</Text>
+			{/* <Text>hi</Text> */}
 		</CardWrapper>
 	);
 };
