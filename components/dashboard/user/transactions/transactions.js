@@ -18,6 +18,38 @@ import { useUserTransactionsMutation } from "../../../../store/api/getUserTransa
 const { Text, Title } = Typography;
 const Transactions = () => {
 	const [visible, setVisible] = useState(false);
+	//selected trans state
+	const [selectedTrans, setSelectedTrans] = useState(null);
+
+	//get data from backend
+	const [UserTransactions, { isLoading }] = useUserTransactionsMutation();
+	const [transactions, setTransactions] = useState([]);
+	console.log(transactions);
+
+	useEffect(() => {
+		try {
+			const getTransactions = async () => {
+				const response = await UserTransactions();
+				console.log(response);
+				setTransactions(response);
+			};
+			getTransactions();
+		} catch (error) {
+			message.info(error.message);
+		}
+	}, []);
+	const data =
+		transactions?.data?.length > 0 &&
+		transactions?.data?.map((trans, i) => ({
+			key: trans._id,
+			from: trans.fromAccountId,
+			to: trans.toAccountId,
+			date: trans.dateIssued,
+			amount: trans.amount,
+			type: trans.type,
+		}));
+	console.log(data);
+
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [modalText, setModalText] = useState("Content of the modal");
 
@@ -177,19 +209,13 @@ const Transactions = () => {
 			render: (_, { type }) => {
 				let color;
 				switch (type) {
-					case "refused":
-						color = "black";
-						break;
-					case "Amount Add":
+					case "recharge":
 						color = "green";
 						break;
-					case "deactive":
-						color = "";
-						break;
-					case "received":
+					case "pay":
 						color = "yellow";
 						break;
-					case "Payment":
+					case "withdraw":
 						color = "brown";
 						break;
 					default:
@@ -223,24 +249,31 @@ const Transactions = () => {
 			onFilter: (value, record) => record.type === value,
 		},
 		{
-			title: "Description",
-			dataIndex: "description",
-			key: "description",
+			title: "From",
+			dataIndex: "from",
+			key: "from",
 			width: "70",
 			responsive: ["lg"],
 		},
 		{
-			title: "Print",
-			dataIndex: "print",
-			key: "print",
+			title: "To",
+			dataIndex: "to",
+			key: "to",
 			width: "70",
-			render: (_, record) => (
-				<div onClick={showModal}>
-					<FileOutlined />
-				</div>
-			),
 			responsive: ["lg"],
 		},
+		// {
+		// 	title: "Print",
+		// 	dataIndex: "print",
+		// 	key: "print",
+		// 	width: "70",
+		// 	render: (_, record) => (
+		// 		<div onClick={showModal}>
+		// 			<FileOutlined />
+		// 		</div>
+		// 	),
+		// 	responsive: ["lg"],
+		// },
 		{
 			title: "Amount",
 			dataIndex: "amount",
@@ -249,59 +282,7 @@ const Transactions = () => {
 			responsive: ["lg"],
 		},
 	];
-	const data = [
-		{
-			key: "1",
-			description: "John Brown",
-			date: "3223 1233 1233 1233",
-			amount: "$320000",
-			type: "refused",
-		},
-		{
-			key: "2",
-			description: "Jim Green",
-			date: "4223 1233 1233 1233",
-			amount: "$3000000",
-			type: "Payment",
-		},
-		{
-			key: "3",
-			description: "Joe Black",
-			date: "3223 1233 1233 1233",
-			amount: "$320000000",
-			type: "deactive",
-		},
-		{
-			key: "4",
-			description: "Joe brown",
-			date: "3223 1233 1233 1233",
-			amount: "$3000000002",
-			type: "received",
-			print: "pending",
-		},
-	];
 
-	//get data from backend
-	const [UserTransactions, { isLoading }] = useUserTransactionsMutation();
-	const [transactions, setTransactions] = useState([]);
-	console.log(transactions);
-	useEffect(() => {
-		try {
-			const getTransactions = async () => {
-				const response = await UserTransactions();
-				console.log(response);
-				// const trans =
-				// 	response &&
-				// 	response?.reduce((acc, e) => {
-				// 		acc.concat(e.transactionsId);
-				// 	}, []);
-				// setTransactions(trans);
-			};
-			getTransactions();
-		} catch (error) {
-			message.info(error.message);
-		}
-	}, []);
 	return (
 		<>
 			<TransactionWrapper>
@@ -327,6 +308,9 @@ const Transactions = () => {
 							//   onMouseEnter: event => {}, // mouse enter row
 							//   onMouseLeave: event => {}, // mouse leave row
 						};
+					}}
+					rowClassName={(record, rowIndex) => {
+						return "tableRow";
 					}}
 				/>
 			</TransactionWrapper>
