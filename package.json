@@ -44,5 +44,8 @@
     "babel-plugin-import": "^1.13.5",
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6"
+  },
+  "resolutions": {
+    "cssnano-preset-simple": "3.0.0"
   }
 }
