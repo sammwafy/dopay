@@ -4,9 +4,6 @@ import React from "react";
 import translogo from "../../../../public/transaction.svg";
 const { Text, Title } = Typography;
 const TransactionCard = () => {
-	const onFinish = (values) => {
-		console.log("Received values of form: ", values);
-	};
 	return (
 		<div
 			style={{
