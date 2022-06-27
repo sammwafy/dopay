@@ -1,9 +1,7 @@
 import * as jose from "jose";
 
-import { NextRequest } from "next/server";
-
-export async function middleware(NextRequest) {
-  if (NextRequest.nextUrl.pathname.startsWith("/user")) {
+export async function middleware(req) {
+  if (req.nextUrl.pathname.startsWith("/user")) {
     const authorization = req.headers.get("authorization");
     const userID = req.headers.get("userID");
 
@@ -31,7 +29,7 @@ export async function middleware(NextRequest) {
     }
   }
 
-  if (NextRequest.nextUrl.pathname.startsWith("/admin")) {
+  if (req.nextUrl.pathname.startsWith("/admin")) {
     const authorization = req.headers.get("authorization");
 
     if (authorization) {
