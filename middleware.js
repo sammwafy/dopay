@@ -1,7 +1,7 @@
 import * as jose from "jose";
 import { NextResponse } from "next/server.js";
 
-export async function middleware(req) {
+export async function middleware(req,res) {
   if (req.nextUrl.pathname.startsWith("/user")) {
     const authorization = req.headers.get("authorization");
     const userID = req.headers.get("userID");
@@ -16,17 +16,11 @@ export async function middleware(req) {
 
         NextResponse.next();
       } catch (error) {
-        return new Response(JSON.stringify({ error: error.message }), {
-          status: 401,
-        });
+        res.status(401).end(JSON.stringify({ error: error.message }));
       }
     } else {
-      return new Response(
-        JSON.stringify({ error: "you have to login first !" }),
-        {
-          status: 401,
-        }
-      );
+      res.status(401).end(JSON.stringify({ error: "you have to login first !" }));
+
     }
   }
 
@@ -40,26 +34,17 @@ export async function middleware(req) {
           token,
           new TextEncoder().encode(process.env.ACCESS_TOKEN_SECRET)
         );
-        console.log(jwtData);
+
         if (jwtData?.UserInfo?.isAdmin) {
           NextResponse.next();
         } else {
-          throw new Error("you need to be admin to access this");
+          res.status(401).end(JSON.stringify({ error: "you need to be admin to access this" }));
         }
       } catch (error) {
-        console.log("from catch: ", error);
-
-        return new Response(JSON.stringify({ error: error.message }), {
-          status: 401,
-        });
+        res.status(401).end(JSON.stringify({ error: error.message }));
       }
     } else {
-      return new Response(
-        JSON.stringify({ error: "you have to login first !" }),
-        {
-          status: 401,
-        }
-      );
+      res.status(401).end(JSON.stringify({ error: "you have to login first !" }));
     }
   }
 }
