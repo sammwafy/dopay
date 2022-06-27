@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Space, Table, Tag, Input } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import { AccountsWrapper } from "./accounts.styled";
 import { Modal, Button, Typography } from "antd";
 import AccountsCard from "../accounts/accountsCard";

@@ -1,7 +1,7 @@
 import { DashboardWrapper } from "./dashboard.styled";
 import { BarChart, Bar, Cell, Tooltip } from "recharts";
 import { PieChart, Pie } from "recharts";
-import Image from "next/image";
+import { Image } from "antd";
 import titleImg from "../../../../public/rightColumnImg.svg";
 import { useEffect, useState } from "react";
 

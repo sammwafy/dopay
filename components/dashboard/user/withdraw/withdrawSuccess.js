@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Image from "next/image";
+import { Image } from "antd";
 import done from '../../../../public/Done.svg'
 import { Typography ,Space } from 'antd';
 

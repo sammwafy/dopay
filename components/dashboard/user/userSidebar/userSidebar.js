@@ -1,5 +1,5 @@
 /** @format */
-import Image from "next/image";
+import { Image } from "antd";
 import React, { useState } from "react";
 import {
   DashSide,

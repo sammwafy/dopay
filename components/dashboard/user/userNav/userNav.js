@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Image } from "antd";
 import React, { useState } from "react";
 import { DashNav } from "./userNav.styled";
 import {
@@ -81,7 +81,7 @@ const UserNav = ({ showDrawer, setShowDrawer }) => {
 			>
 				<div className='profile'>
 					<Image
-						src='/admin.jpeg'
+						src='/admin.jpg'
 						alt='logo'
 						width='50'
 						height='50'

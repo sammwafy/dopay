@@ -1,5 +1,5 @@
 import { Divider, Space, Typography } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import React from "react";
 import translogo from "../../../../public/transaction.svg";
 const { Text, Title } = Typography;

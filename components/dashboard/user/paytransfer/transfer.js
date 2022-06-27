@@ -1,5 +1,5 @@
 import { Button, Form, Input, Select, Typography, message, Modal } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import label from "../../../../public/label.svg";
 import PaySuccess from "./paySuccess";
 import { PayWrapper } from "./pay.styled";

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Image } from "antd";
 import React, { useState } from "react";
 import { Menu, Dropdown, Space, Typography, Tag } from "antd";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
@@ -60,7 +60,7 @@ const AccountsCard = ({ account }) => {
 		<AccountsCardWrapper>
 			<div className='user-img'>
 				<Image
-					src='/admin.jpeg'
+					src='/admin.jpg'
 					alt='user'
 					width='100'
 					height='100'

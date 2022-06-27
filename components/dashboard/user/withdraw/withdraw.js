@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { WithdrawContainer, Container } from "./withdraw.styled";
 import { Button, Form, Input, Typography, Space, Modal, Select } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import arrow from "../../../../public/VectorArrow.svg";
 import WithdrawSuccess from "./withdrawSuccess";
 import { useWithdrawAmountMutation } from "../../../../store/api/withdrawAmountApiSlice.js";

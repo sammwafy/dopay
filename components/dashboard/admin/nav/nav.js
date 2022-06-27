@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { DashNav } from "./nav.styled";
 import {
   BellOutlined,
@@ -7,7 +6,7 @@ import {
   MenuOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
-import { Menu, Dropdown, Badge, Button } from "antd";
+import { Menu, Dropdown, Badge, Button,Image } from "antd";
 import Link from "next/link";
 import logo from "../../../../public/logo.svg";
 import io from "socket.io-client";
@@ -133,7 +132,7 @@ const Nav = ({ showDrawer, setShowDrawer }) => {
       >
         <div className="profile">
           <Image
-            src="/admin.jpeg"
+            src="/admin.jpg"
             alt="logo"
             width="50"
             height="50"

@@ -11,7 +11,7 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 import { PieChart, Pie, Sector } from "recharts";
-import Image from "next/image";
+import { Image } from "antd";
 import titleImg from "../../../../public/rightColumnImg.svg";
 import { AreaChart, Area,} from 'recharts';
 import chart from "../../../../public/chart.svg";

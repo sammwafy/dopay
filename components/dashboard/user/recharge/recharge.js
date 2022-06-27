@@ -1,5 +1,5 @@
 import { Button, Form, Input, Typography, Space, Modal, Select } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import { useEffect, useState } from "react";
 import arrow from "../../../../public/VectorArrow.svg";
 import { useUserAccountsMutation } from "../../../../store/api/getUserAccountsApiSlice.js";

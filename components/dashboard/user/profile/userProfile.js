@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Tabs, Radio, Space ,Y} from 'antd';
 const { TabPane } = Tabs;
 import { Button, Form, Input ,Row,Col} from 'antd';
-import Image from 'next/image'
+import { Image } from "antd";
 import {Typography,Divider} from "antd"
 
-import logo from "../../../../public/admin.jpeg";
+import logo from "../../../../public/admin.jpg";
 import styled from "styled-components"
 import { Container } from './userProfile.styled';
 

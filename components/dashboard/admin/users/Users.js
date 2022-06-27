@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Space, Tag, Input, Table } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import { Button, Modal } from "antd";
 import UserCard from "../usercard/UserCard";
 import Highlighter from "react-highlight-words";
@@ -191,7 +191,7 @@ const Users = () => {
 			render: (_, record) => (
 				<div className='table-image' onClick={() => showModal(record.key)}>
 					<Image
-						src='/admin.jpeg'
+						src='/admin.jpg'
 						alt='profile'
 						width='50'
 						height='50'

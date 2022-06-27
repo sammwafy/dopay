@@ -11,7 +11,7 @@ import {
 	Typography,
 } from "antd";
 import TransactionCard from "./transactionCard";
-import Image from "next/image";
+import { Image } from "antd";
 import { FileOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import { useUserTransactionsMutation } from "../../../../store/api/getUserTransactionsApiSlice";

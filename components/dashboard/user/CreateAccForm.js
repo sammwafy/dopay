@@ -1,6 +1,6 @@
 import { CreateAccFormStyle } from "./styles/createAccForm.styled";
 import { Form, Input, Select, Checkbox, Button, Radio } from "antd";
-import Image from "next/image";
+import { Image } from "antd";
 import CafImg from "../../../public/caf.svg";
 import { useCreateNewAccountMutation } from "../../../store/api/createNewAccountApiSlice";
 import { useCookies } from "react-cookie";
