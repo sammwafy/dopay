@@ -1,4 +1,5 @@
 import * as jose from "jose";
+import { NextResponse } from "next/server.js";
 
 export async function middleware(req) {
   if (req.nextUrl.pathname.startsWith("/user")) {
