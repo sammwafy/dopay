@@ -1,13 +1,13 @@
 import * as jose from "jose";
-import { NextResponse } from "next/server.js";
 
-export async function middleware(req,res) {
-  if (req.nextUrl.pathname.startsWith("/user")) {
-    const authorization = req.headers.get("authorization");
-    const userID = req.headers.get("userID");
+import { NextResponse, NextRequest } from "next/server.js";
+
+export async function middleware(NextRequest) {
+  if (NextRequest.nextUrl.pathname.startsWith("/user")) {
+    const authorization = NextRequest.cookies.get("token");
 
     if (authorization) {
-      const token = authorization.split(" ")[1];
+      const token = authorization
       try {
         const { payload: jwtData } = await jose.jwtVerify(
           token,
@@ -16,19 +16,35 @@ export async function middleware(req,res) {
 
         NextResponse.next();
       } catch (error) {
-        res.status(401).end(JSON.stringify({ error: error.message }));
+        return NextResponse.redirect(
+          new URL(`/login?error=${error}}`, NextRequest.url)
+        );
+        // return new Response(JSON.stringify({ error: error.message }), {
+        //   status: 401,
+        // });
       }
-    } else {
-      res.status(401).end(JSON.stringify({ error: "you have to login first !" }));
-
     }
+    // else {
+    //   return NextResponse.redirect(
+    //     new URL(`/login?error=you have to login first`, NextRequest.url)
+    //   );
+
+    //   // return new Response(
+    //   //   JSON.stringify({ error: "you have to login first !" }),
+    //   //   {
+    //   //     status: 401,
+    //   //   }
+    //   // );
+    // }
   }
 
-  if (req.nextUrl.pathname.startsWith("/admin")) {
-    const authorization = req.headers.get("authorization");
+  if (NextRequest.nextUrl.pathname.startsWith("/admin")) {
+    // NextRequest.headers.forEach((value, key) => console.log("header:", key, 'value:', value));
+    const authorization = NextRequest.cookies.get("token");
 
     if (authorization) {
-      const token = authorization.split(" ")[1];
+      const token = authorization;
+
       try {
         const { payload: jwtData } = await jose.jwtVerify(
           token,
@@ -37,14 +53,25 @@ export async function middleware(req,res) {
 
         if (jwtData?.UserInfo?.isAdmin) {
           NextResponse.next();
-        } else {
-          res.status(401).end(JSON.stringify({ error: "you need to be admin to access this" }));
         }
       } catch (error) {
-        res.status(401).end(JSON.stringify({ error: error.message }));
+        return NextResponse.redirect(
+          new URL(`/login?error=${error.message}`, NextRequest.url)
+        );
+        // return new Response(JSON.stringify({ error: error.message }), {
+        //   status: 401,
+        // });
       }
     } else {
-      res.status(401).end(JSON.stringify({ error: "you have to login first !" }));
+      return NextResponse.redirect(
+        new URL(`/login?error=you have to login first`, NextRequest.url)
+      );
+      // return new Response(
+      //   JSON.stringify({ error: "you have to login first !" }),
+      //   {
+      //     status: 401,
+      //   }
+      // );
     }
   }
 }

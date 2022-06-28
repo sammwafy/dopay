@@ -14,17 +14,17 @@ import {
 } from "antd";
 const { Title } = Typography;
 import {
-	UserOutlined,
-	LockOutlined,
-	GooglePlusCircleFilled,
-	FacebookFilled,
-	TwitterOutlined,
+  UserOutlined,
+  LockOutlined,
+  GooglePlusCircleFilled,
+  FacebookFilled,
+  TwitterOutlined,
 } from "@ant-design/icons";
 import { SignInWrapper } from "./styles/signin.styled";
 import {
-	selectCurrentUser,
-	selectCurrentToken,
-	setCredentials,
+  selectCurrentUser,
+  selectCurrentToken,
+  setCredentials,
 } from "../../store/auth/authSlice.js";
 import { useLoginMutation } from "../../store/api/authApiSlice.js";
 import { useDispatch } from "react-redux";
@@ -47,10 +47,9 @@ const SignIn = () => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
       const userData = await login(values).unwrap();
-      console.log(userData);
+
       dispatch(setCredentials({ ...userData }));
       const { email, accessToken, id, role } = userData;
       setCookie("token", accessToken);
@@ -60,7 +59,6 @@ const SignIn = () => {
         Router.push("/user");
       }
     } catch (err) {
-      console.log(err);
       setVisible(true);
       setMsg(err.data);
       // if (!err?.originalStatus) {
