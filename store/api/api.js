@@ -26,7 +26,6 @@ const baseQuery = fetchBaseQuery({
 			"$1"
 		);
 		if (token) {
-      console.log('we are setting the authorization from api RTK');
 			headers.set("authorization", `Bearer ${token}`);
 			headers.set("userID", `${userID}`);
 			headers.set("Content-Type", "application/json ");

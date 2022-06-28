@@ -53,11 +53,6 @@ const SignIn = () => {
       dispatch(setCredentials({ ...userData }));
       const { email, accessToken, id, role } = userData;
       setCookie("token", accessToken);
-      if (role) {
-        Router.push("/admin");
-      } else {
-        Router.push("/user");
-      }
     } catch (err) {
       setVisible(true);
       setMsg(err.data);
